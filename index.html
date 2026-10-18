@@ -165,7 +165,6 @@ body{transition:background-color .5s,color .5s}
 /* freddo, industriale */
 .w-cold .cv-num{font-variation-settings:"wdth" 55,"wght" 200;letter-spacing:0;color:var(--mute)}
 .w-cold .cv-mid{gap:22px}
-.w-cold .cv-mid::after{content:"";display:block;width:1px;height:min(26vh,240px);background:var(--rule);margin-top:10px}
 .w-cold .cv-who{font-size:clamp(46px,11vw,132px);line-height:.9}
 .w-cold .cv-line{font-size:14.5px;line-height:1.65;color:var(--mute);font-style:normal;font-family:var(--f-mono);max-width:42ch}
 .w-cold .cover::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--signal);opacity:.35;animation:scan 11s linear infinite;z-index:0}
@@ -786,7 +785,7 @@ t20:{n:"Maturità",d:"Archi, sintetizzatori e tempo che passa",bpm:98,key:43,mod
 ep:{n:"Eco",d:"Tutte le epoche in un respiro",bpm:84,vol:.6,key:45,mode:"min",dr:"none",bs:"drone",ld:"arp",pd:"lush"}
 };
 const MUS=(function(){
-  let ac=null,master,bus,dsend,rsend,an,noise,timer=null,P=null,pid=null,step=0,nextT=0,bar=0,prog=[0,5,2,6],R=Math.random,bassPat=[],motif=[],arpSeq=[],stabSteps=[],bellSteps=[],token=0,DIST=null;
+  let ac=null,master,bus,dsend,rsend,an,noise,timer=null,P=null,pid=null,step=0,nextT=0,bar=0,progA=[0,5,2,6,0,5,2,4],progB=[0,3,5,4,0,3,5,4],R=Math.random,bassA=[],bassB=[],motA=[],motB=[],motA2=[],arpA=[],arpB=[],stabA=[],stabB=[],bellSteps=[],token=0,DIST=null;
   const MODES={min:[0,2,3,5,7,8,10],dor:[0,2,3,5,7,9,10],maj:[0,2,4,5,7,9,11],phr:[0,1,3,5,7,8,10]};
   const PROGS={min:[[0,5,2,6],[0,3,5,4],[0,6,5,6],[0,5,3,4],[0,2,5,6]],maj:[[0,4,5,3],[0,5,3,4],[0,3,4,4],[0,2,3,4]]};
   const DR={none:{},
@@ -867,10 +866,7 @@ const MUS=(function(){
     notes.forEach(m=>[-7,7].forEach(dt=>{const o=ac.createOscillator();o.type=cfg.w;o.frequency.value=mf(m);o.detune.value=dt;o.connect(f);o.start(t);o.stop(t+dur+1)}));
   }
   function chord(deg){const sc=MODES[P.mode];return [0,2,4].map(k=>{const d=deg+k;return P.key+sc[d%7]+12*Math.floor(d/7)})}
-  function build(seed){
-    R=rng(seed);
-    const progs=PROGS[P.mode==="maj"?"maj":"min"];prog=progs[Math.floor(R()*progs.length)];
-    bassPat=[];
+  function mkBass(){const out=[];
     for(let s=0;s<16;s++){let n={on:false,tone:0,oct:0,acc:0,slide:false,len:1};const bt=P.bs;
       if(bt==="seq8"){n.on=s%2===0;n.tone=(s===6||s===14)&&R()<.6?2:0}
       else if(bt==="seq16"||bt==="dist"){n.on=true;n.tone=s===0?0:(R()<.72?0:2);n.oct=s>0&&R()<.22?1:0}
@@ -879,30 +875,50 @@ const MUS=(function(){
       else if(bt==="melodic"){n.on=s%2===0;n.tone=[0,1,2,1,2,1,0,2][(s/2)|0];n.oct=1;n.len=2}
       else if(bt==="acid"){n.on=s===0||R()<.72;n.tone=R()<.6?0:(R()<.5?1:2);n.oct=R()<.2?1:0;n.acc=R()<.3?1:0;n.slide=R()<.22}
       else if(bt==="sub"){n.on=s===0||s===10;n.len=s===0?6:4}
-      bassPat.push(n)}
-    motif=[];
-    const slow=P.ld==="saw";
-    for(let s=0;s<32;s+=slow?4:2){if(R()<(slow?.55:.42))motif.push({s,tone:Math.floor(R()*3),up:R()<.2?12:0,len:slow?3+Math.floor(R()*2):1+Math.floor(R()*2)})}
-    if(!motif.length)motif.push({s:0,tone:0,up:0,len:2});
-    const shapes=[[0,1,2,3],[0,1,2,3,2,1],[0,2,1,3],[3,2,1,0]];arpSeq=shapes[Math.floor(R()*shapes.length)];
-    stabSteps=R()<.5?[2,6,10,14]:[3,7,11];
+      out.push(n)}
+    return out}
+  function mkMotif(){const m=[],slow=P.ld==="saw";
+    for(let s=0;s<64;s+=slow?4:2){const ph=s>>4;const dens=(slow?.55:.42)*(ph===3?.6:1);
+      if(R()<dens)m.push({s,tone:Math.floor(R()*3),up:R()<.2?12:0,len:slow?3+Math.floor(R()*2):1+Math.floor(R()*2)})}
+    for(let s=0;s<32;s++){const n=m.find(x=>x.s===s);if(n&&R()<.6&&!m.some(x=>x.s===s+32))m.push({...n,s:s+32})}
+    if(!m.length)m.push({s:0,tone:0,up:0,len:2});return m}
+  function build(seed){
+    R=rng(seed);
+    const progs=PROGS[P.mode==="maj"?"maj":"min"];const ia=Math.floor(R()*progs.length),ib=(ia+1+Math.floor(R()*(progs.length-1)))%progs.length;
+    const pa=progs[ia],pb=progs[ib];
+    progA=pa.concat([pa[0],pa[1],pa[2],pa[3]===4?5:4]);progB=pb.concat([pb[0],pb[1],pb[2],4]);
+    bassA=mkBass();bassB=mkBass();bassB.forEach((n,s)=>{if(n.on&&(s===6||s===11||s===14))n.oct=n.oct?0:1});
+    motA=mkMotif();motB=mkMotif();motA2=motA.map(n=>n.s>=32?{...n,tone:(n.tone+1)%3,up:R()<.3?12:n.up}:n);
+    const shapes=[[0,1,2,3],[0,1,2,3,2,1],[0,2,1,3],[3,2,1,0]];const ka=Math.floor(R()*shapes.length);arpA=shapes[ka];arpB=shapes[(ka+1+Math.floor(R()*3))%shapes.length];
+    stabA=R()<.5?[2,6,10,14]:[3,7,11];stabB=stabA.length===4?[3,6,11,14]:[2,7,10,13];
     bellSteps=[0,6,10].concat(R()<.5?[13]:[]);
   }
+  /* Forma di 64 battute: A (0–19, giro di 8) · B (20–35, secondo giro) · pausa (36–43) · A variata (44–63) */
+  function sect(c){return c<20?"A":c<36?"B":c<44?"D":"A2"}
   function playStep(s,t){
-    const sd=60/P.bpm/4,b=bar,ch=chord(prog[b%4]);
+    const sd=60/P.bpm/4,b=bar,c=b%64,sc=sect(c);
+    const deg=sc==="B"?progB[(c-20)%8]:sc==="D"?progA[(c-36)%8]:sc==="A2"?progA[(c-44)%8]:progA[c%8];
+    const ch=chord(deg);
     if(s===0){if(P.pd!=="none")pad(t,ch.map(m=>m+12),sd*16,P.pd);if(P.bs==="drone"){pad(t,[ch[0],ch[0]+7],sd*16,"dark");bass(t,ch[0]-12,sd*15,"sub",0,null)}}
-    const D=DR[P.dr]||{},on=c=>c&&c[s]!==".";
-    const drums=P.dr!=="none"&&b>=2&&(b%16)<14;
-    if(drums){if(on(D.k)&&!(P.dr==="break"&&b%8===7))kick(t,1);if(on(D.s))snare(t,.9,P.dr==="big"?.45:.15);if(on(D.c))clap(t,.8);if(on(D.h))hat(t,s%2?.5:1,false);if(on(D.o))hat(t,.8,true);if(on(D.m))metal(t,1)}
-    if(P.bs!=="drone"&&b>=1){const n=bassPat[s];if(n.on){const m=ch[n.tone]+12*n.oct-12;const prev=bassPat[(s+15)%16];const typ=P.bs==="acid"?"acid":P.bs==="dist"?"dist":P.bs==="sub"?"sub":P.bs==="pulse"?"square":"saw";bass(t,m,sd*n.len*.92,typ,n.acc,n.slide&&prev.on?ch[prev.tone]+12*prev.oct-12:null)}}
-    const leadOn=P.dr==="none"?b>=1:(b>=4&&(b%16)<12);
+    const D=DR[P.dr]||{},on=k=>k&&k[s]!==".";
+    if(P.dr!=="none"&&b>=2){
+      if(sc!=="D"&&c!==19){
+        if(on(D.k)&&!(P.dr==="break"&&b%8===7))kick(t,1);
+        const fill=c%8===7&&s>=12&&D.s;
+        if(fill)snare(t,.45+.12*(s-12),.15);else if(on(D.s))snare(t,.9,P.dr==="big"?.45:.15);
+        if(on(D.c))clap(t,.8);if(on(D.h))hat(t,s%2?.5:1,false);if(on(D.o))hat(t,.8,true);if(on(D.m))metal(t,1)}
+      else if(sc==="D"&&c>=42){if(on(D.k))kick(t,c===43?1:.7);if(c===43&&s%2===0)hat(t,.3+s/24,false)}}
+    if(P.bs!=="drone"&&b>=1&&!(sc==="D"&&c<40)){const pat=sc==="B"?bassB:bassA;let n=pat[s];
+      if(c%8===7&&s>=12&&P.bs!=="sub")n={on:true,tone:(s-12)%3,oct:1,acc:1,slide:false,len:1};
+      if(n.on){const m=ch[n.tone]+12*n.oct-12;const prev=pat[(s+15)%16];const typ=P.bs==="acid"?"acid":P.bs==="dist"?"dist":P.bs==="sub"?"sub":P.bs==="pulse"?"square":"saw";bass(t,m,sd*n.len*.92,typ,n.acc,n.slide&&prev.on?ch[prev.tone]+12*prev.oct-12:null)}}
+    const leadOn=P.dr==="none"?b>=1:(b>=4&&!(c>=16&&c<20));
     if(!leadOn)return;
-    if(P.ld==="arp"){const every=P.a16?1:2;if(s%every===0){const k=arpSeq[((s/every)|0)%arpSeq.length];const m=(k<3?ch[k]:ch[0]+12)+24;lead(t,m,sd*every*.8,"arp",P.dr==="none"?.7:1)}}
-    else if(P.ld==="sq"||P.ld==="tri"||P.ld==="saw"){const pos=(b%2)*16+s;motif.forEach(n=>{if(n.s===pos)lead(t,ch[n.tone]+24+n.up,sd*n.len,P.ld,1)})}
-    else if(P.ld==="bell"){if(bellSteps.includes(s))lead(t,ch[(s+b)%3]+24,1,"bell",.9)}
-    else if(P.ld==="stab"){if(stabSteps.includes(s))ch.forEach(m=>lead(t,m+12,sd*.9,"pluck",.55))}
-    else if(P.ld==="pluck"){if(R()<.33)lead(t,ch[Math.floor(R()*3)]+24,sd,"pluck",.9)}
-    else if(P.ld==="blip"){if(R()<(P.dr==="none"?.09:.13)){const sc=MODES[P.mode];lead(t,P.key+36+sc[Math.floor(R()*7)],.2,"blip",1)}}
+    if(P.ld==="arp"){const every=P.a16?1:2;if(s%every===0){const sq=sc==="B"?arpB:arpA;const k=sq[((s/every)|0)%sq.length];const m=(k<3?ch[k]:ch[0]+12)+24;lead(t,m,sd*every*.8,"arp",P.dr==="none"||sc==="D"?.7:1)}}
+    else if(P.ld==="sq"||P.ld==="tri"||P.ld==="saw"){const mot=sc==="B"?motB:sc==="A2"?motA2:motA;const pos=(c%4)*16+s;mot.forEach(n=>{if(n.s===pos)lead(t,ch[n.tone]+24+n.up,sd*n.len,P.ld,sc==="D"?.75:1)})}
+    else if(P.ld==="bell"){if(bellSteps.includes(s)||(sc==="B"&&s===3))lead(t,ch[(s+b)%3]+24+(sc==="A2"&&s===10?12:0),1,"bell",.9)}
+    else if(P.ld==="stab"){if((sc==="B"?stabB:stabA).includes(s))ch.forEach(m=>lead(t,m+12,sd*.9,"pluck",sc==="D"?.4:.55))}
+    else if(P.ld==="pluck"){if(R()<(sc==="B"?.4:.33))lead(t,ch[Math.floor(R()*3)]+24+(sc==="A2"&&R()<.25?12:0),sd,"pluck",.9)}
+    else if(P.ld==="blip"){if(R()<(P.dr==="none"?.09:.13)){const m2=MODES[P.mode];lead(t,P.key+36+m2[Math.floor(R()*7)],.2,"blip",1)}}
   }
   function tick(){const la=document.hidden?1.6:.16;while(nextT<ac.currentTime+la){playStep(step%16,nextT);const sd=60/P.bpm/4;nextT+=sd;step++;if(step%16===0)bar++}}
   function set(id){pid=id;P=PATCH[id]||PATCH.t00;build(S.findIndex(e=>e.id===id)*7919+13);if(MUS._dl)MUS._dl.delayTime.value=Math.min(1.5,60/P.bpm*.75)}
