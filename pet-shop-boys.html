@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cutive&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@75..112.5,300..700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
 <style>
 /* Layout: oscilloscopio a doppia traccia. CH1 = la musica (l'unico segnale a colori), CH2 = il paese (grigio).
    Navigazione: una tappa alla volta, tutto in una sola scheda. */
@@ -334,62 +333,36 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .foot a{color:var(--ink)}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 
-/* ---------- splash: una pagina di televideo su un televisore a tubo, circa 1981 ---------- */
-.sp{position:fixed;inset:0;z-index:9999;background:#000;color:#fff;display:grid;place-items:center;overflow:hidden;font-family:"VT323",ui-monospace,monospace;-webkit-font-smoothing:none;
-  --tx-r:#FF2A2A;--tx-g:#2AFF4F;--tx-y:#FFF22A;--tx-b:#2A3BFF;--tx-m:#FF2AE8;--tx-c:#2AF4FF;--tx-w:#F4F4F4}
+/* ---------- splash: il fascio di un oscilloscopio vettoriale scrive il titolo nel buio ---------- */
+.sp{position:fixed;inset:0;z-index:9999;background:#020203;color:#e9f7ff;overflow:hidden;font-family:"Martian Mono",ui-monospace,monospace}
 .sp[hidden]{display:none}
-.sp-tube{position:relative;width:min(100vw,calc(100dvh*1.25));height:100dvh;display:flex;flex-direction:column;justify-content:center;padding:max(18px,env(safe-area-inset-top)) clamp(14px,4vw,48px) max(18px,env(safe-area-inset-bottom));
-  font-size:clamp(17px,min(4.6vw,3.4dvh),34px);line-height:1.12;transform-origin:50% 50%;animation:tvon .7s cubic-bezier(.2,.7,.2,1) both}
-.sp-tube::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:3;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.34) 0 1px,transparent 1px 3px)}
-.sp-tube::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:4;background:radial-gradient(ellipse 120% 95% at 50% 50%,transparent 58%,rgba(0,0,0,.55) 82%,#000 100%);animation:flick 4.5s steps(1) infinite}
-.sp-in{position:relative;z-index:2;display:grid;gap:.42em;text-shadow:.06em 0 rgba(255,0,60,.55),-.06em 0 rgba(0,200,255,.45),0 0 .35em rgba(255,255,255,.25)}
-.sp-hd{display:flex;justify-content:space-between;gap:.6em;white-space:nowrap;color:var(--tx-w)}
-.sp-hd b{font-weight:400;color:var(--tx-y)}
-.sp-hd .pg{display:inline-block;min-width:3ch}
-.sp-band{background:var(--tx-b);color:var(--tx-w);padding:.08em .5ch;display:flex;justify-content:space-between}
-.sp-band span:last-child{color:var(--tx-y)}
-.sp-cv{display:block;width:100%;height:auto;image-rendering:pixelated;margin:.25em 0 .1em}
-.sp-l{white-space:pre-wrap}
-.c-y{color:var(--tx-y)}.c-c{color:var(--tx-c)}.c-g{color:var(--tx-g)}.c-m{color:var(--tx-m)}.c-r{color:var(--tx-r)}.c-w{color:var(--tx-w)}
-.sp-seq{display:grid;grid-template-columns:repeat(16,1fr);gap:.28ch;margin:.15em 0}
-.sp-seq i{display:block;height:.62em;background:#123a18;outline:1px solid #0b2410}
-.sp-seq i.on{background:var(--tx-g);box-shadow:0 0 .5em var(--tx-g)}
-.sp-seq i.acc{background:#3a3610}.sp-seq i.acc.on{background:var(--tx-y);box-shadow:0 0 .5em var(--tx-y)}
-.sp-go{all:unset;cursor:pointer;color:var(--tx-w);display:block;text-align:center;padding:.2em 0;animation:tflash 1.1s steps(1) infinite}
-.sp-go:focus-visible{outline:2px solid var(--tx-c);outline-offset:4px}
-.sp-fx{display:grid;grid-template-columns:repeat(4,1fr);gap:.5ch;margin-top:.3em}
-.sp-fx button{all:unset;cursor:pointer;text-align:center;padding:.18em .2ch;color:#000;font-size:.82em;line-height:1.1;text-shadow:none}
-.sp-fx button:focus-visible{outline:2px solid #fff;outline-offset:2px}
-.sp-fx .r{background:var(--tx-r)}.sp-fx .g{background:var(--tx-g)}.sp-fx .y{background:var(--tx-y)}.sp-fx .c{background:var(--tx-c)}
-.sp-hint{color:#8a8a8a;font-size:.72em;text-align:center}
-.sp.off .sp-tube{animation:tvoff .55s cubic-bezier(.6,0,.9,.4) forwards}
-.sp.off{animation:spfade .2s .5s forwards}
-@keyframes tvon{0%{transform:scale(1,.004);filter:brightness(6)}45%{transform:scale(1,.004);filter:brightness(6)}75%{transform:scale(1,1.04);filter:brightness(2)}100%{transform:none;filter:none}}
-@keyframes tvoff{0%{transform:none;filter:none}55%{transform:scale(1,.006);filter:brightness(5)}100%{transform:scale(0,.006);filter:brightness(8)}}
-@keyframes spfade{to{opacity:0}}
-@keyframes tflash{0%{opacity:1}50%{opacity:0}}
-@keyframes flick{0%{opacity:1}3%{opacity:.86}4%{opacity:1}61%{opacity:.93}62%{opacity:1}}
-@media (max-width:560px){.sp-fx{grid-template-columns:repeat(2,1fr)}.sp-hd .dt{display:none}.sp-hint{display:none}}
-@media (max-aspect-ratio:4/5){.sp-in{gap:clamp(.42em,2.4dvh,1.6em)}.sp-cv{margin:.6em 0 .5em}.sp-seq i{height:1em}.sp-fx button{padding:.45em .2ch}}
+.sp canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sp::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 85% 75% at 50% 46%,transparent 55%,rgba(0,0,0,.75) 100%),repeating-linear-gradient(to bottom,rgba(255,255,255,.018) 0 1px,transparent 1px 3px)}
+.sp-ui{position:absolute;left:0;right:0;bottom:max(26px,env(safe-area-inset-bottom));display:grid;justify-items:center;gap:18px;padding:0 20px;opacity:0;transform:translateY(10px);transition:opacity .9s ease,transform .9s ease;z-index:2}
+.sp.ready .sp-ui{opacity:1;transform:none}
+.sp-pw{all:unset;cursor:pointer;position:relative;width:92px;height:92px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 38%,#2a2f36,#0b0d10 70%);box-shadow:0 0 0 2px #3a414b,0 0 0 9px #0d0f12,0 0 0 10px #262b31,0 14px 40px rgba(0,0,0,.8),inset 0 2px 0 rgba(255,255,255,.08)}
+.sp-pw svg{width:38px;height:38px;stroke:#ff3d9a;stroke-width:2.4;fill:none;stroke-linecap:round;filter:drop-shadow(0 0 6px #ff3d9a) drop-shadow(0 0 14px rgba(255,61,154,.6));animation:pwglow 2.2s ease-in-out infinite}
+.sp-pw::after{content:"";position:absolute;inset:-16px;border-radius:50%;border:1px solid rgba(255,61,154,.35);animation:pwring 2.2s ease-out infinite}
+.sp-pw:focus-visible{outline:2px solid #6ff6e8;outline-offset:14px}
+.sp-pl{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#9aa6b2;text-align:center}
+.sp-pl b{color:#e9f7ff;font-weight:600}
+.sp-alt{display:flex;gap:22px;font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+.sp-alt button{all:unset;cursor:pointer;color:#6d7883;border-bottom:1px solid #2b3138;padding-bottom:3px}
+.sp-alt button:hover,.sp-alt button:focus-visible{color:#e9f7ff;border-color:#e9f7ff}
+.sp.off{animation:spout .45s .55s ease forwards}
+.sp.off .sp-ui{opacity:0;transition:opacity .25s}
+@keyframes spout{to{opacity:0}}
+@keyframes pwglow{0%,100%{opacity:.75}50%{opacity:1}}
+@keyframes pwring{0%{transform:scale(.85);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+@media (max-height:620px){.sp-pw{width:70px;height:70px}.sp-ui{gap:12px}}
 </style>
-<div class="sp" id="splash" role="dialog" aria-modal="true" aria-label="Synth Britannia, pagina d'apertura" hidden>
-  <div class="sp-tube"><div class="sp-in">
-    <div class="sp-hd" aria-hidden="true"><span>P<span class="pg" id="spPg">100</span></span><b>SYNTH BRITANNIA</b><span class="dt" id="spDt"></span><span id="spCk">00:00:00</span></div>
-    <div class="sp-band"><span>1975 &rarr; 2026</span><span>UK</span></div>
-    <canvas class="sp-cv" id="spCv" width="106" height="32" role="img" aria-label="Synth Britannia"></canvas>
-    <div class="sp-l c-y">CINQUANT'ANNI DI SYNTH POP BRITANNICO</div>
-    <div class="sp-l c-c">23 TAPPE &middot; 4 ATTI &middot; UNA COLONNA SONORA</div>
-    <div class="sp-seq" id="spSeq" aria-hidden="true"></div>
-    <div class="sp-l c-m">Sheffield &middot; Basildon &middot; Manchester &middot; Londra</div>
-    <button class="sp-go" id="spGo" type="button">&#9654; PREMI PER ACCENDERE</button>
-    <div class="sp-fx">
-      <button class="r" type="button" data-sp="audio">INIZIA CON L'AUDIO</button>
-      <button class="g" type="button" data-sp="index">INDICE</button>
-      <button class="y" type="button" data-sp="quiet">SENZA AUDIO</button>
-      <button class="c" type="button" data-sp="t01">TAPPA 01</button>
-    </div>
-    <div class="sp-hint">Digita 100&ndash;123 per andare a una pagina</div>
-  </div></div>
+<div class="sp" id="splash" role="dialog" aria-modal="true" aria-label="Synth Britannia, cinquant'anni di synth pop britannico" hidden>
+  <canvas id="spCv" aria-hidden="true"></canvas>
+  <div class="sp-ui">
+    <button class="sp-pw" id="spGo" type="button" aria-label="Accendi: entra con la colonna sonora"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v8"/><path d="M6.3 6.6a8 8 0 1 0 11.4 0"/></svg></button>
+    <div class="sp-pl"><b>Accendi</b> · con la colonna sonora</div>
+    <div class="sp-alt"><button type="button" data-sp="quiet">Entra senza audio</button><button type="button" data-sp="index">Indice</button></div>
+  </div>
 </div>
 <header class="hero" id="hero">
   <canvas id="heroScope" aria-hidden="true"></canvas>
@@ -1204,49 +1177,82 @@ pending=location.hash?"anchor":"none";
   if(seen||deep||window.__noSplash)return;
   sp.hidden=false;document.documentElement.style.overflow="hidden";
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  /* titolo a mosaico: font 5x7, ogni pixel è un blocco di televideo «separato» */
-  const F={S:["01111","10000","10000","01110","00001","00001","11110"],Y:["10001","10001","01010","00100","00100","00100","00100"],N:["10001","11001","10101","10011","10001","10001","10001"],T:["11111","00100","00100","00100","00100","00100","00100"],H:["10001","10001","10001","11111","10001","10001","10001"],B:["11110","10001","10001","11110","10001","10001","11110"],R:["11110","10001","10001","11110","10100","10010","10001"],I:["01110","00100","00100","00100","00100","00100","01110"],A:["01110","10001","10001","11111","10001","10001","10001"]};
   const cv=document.getElementById("spCv"),cx=cv.getContext("2d");
-  const cols=["#FF2A2A","#FF2AE8","#FFF22A","#2AFF4F","#2AF4FF","#F4F4F4","#2AF4FF"];
-  const px=[];function word(w,ox,oy){[...w].forEach((ch,k)=>F[ch].forEach((row,y)=>[...row].forEach((b,x)=>{if(b==="1")px.push([ox+k*6+x,oy+y,y])})))}
-  const w1="SYNTH",w2="BRITANNIA",total=w2.length*6-1;word(w1,Math.round((total-(w1.length*6-1))/2),0);word(w2,0,9);
-  const U=2;cv.width=total*U;cv.height=16*U;
-  function cell(x,y,c){cx.fillStyle=c;cx.fillRect(x*U,y*U,U-.5,U-.5)}
-  const order=px.map((p,i)=>[Math.random(),i]).sort((a,b)=>a[0]-b[0]).map(a=>a[1]);
-  let k=0;function draw(){const n=reduce?order.length:Math.min(order.length,k+9);for(;k<n;k++){const p=px[order[k]];cell(p[0],p[1],cols[p[2]])}if(k<order.length)requestAnimationFrame(draw)}
-  setTimeout(draw,reduce?0:700);
-  /* sequencer a 16 passi */
-  const seq=document.getElementById("spSeq");const acc=[0,4,8,12];for(let i=0;i<16;i++){const b=document.createElement("i");if(acc.includes(i))b.className="acc";seq.appendChild(b)}
-  let st=0;const seqT=setInterval(()=>{const c=seq.children;for(let i=0;i<16;i++)c[i].classList.toggle("on",i===st);st=(st+1)%16},125);
-  /* intestazione: numero di pagina che scorre, data e orologio */
-  const pg=document.getElementById("spPg"),ck=document.getElementById("spCk"),dt=document.getElementById("spDt");
-  const days=["Dom","Lun","Mar","Mer","Gio","Ven","Sab"],mon=["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
-  function clock(){const d=new Date();ck.textContent=d.toTimeString().slice(0,8);dt.textContent=`${days[d.getDay()]} ${d.getDate()} ${mon[d.getMonth()]}`}clock();const ckT=setInterval(clock,1000);
-  let roll=reduce?0:14;const rollT=setInterval(()=>{if(roll-->0)pg.textContent=String(100+Math.floor(Math.random()*899));else{pg.textContent="100";clearInterval(rollT)}},70);
-  /* uscita: il televisore si spegne su una riga e poi su un punto */
+  let W=0,H=0,D=1;
+  function size(){D=Math.min(2,devicePixelRatio||1);W=innerWidth;H=innerHeight;cv.width=W*D;cv.height=H*D;cx.setTransform(D,0,0,D,0,0);cx.fillStyle="#020203";cx.fillRect(0,0,W,H)}
+  size();addEventListener("resize",size);
+  /* carattere vettoriale a tratto singolo, come gli schermi a fascio della fine degli anni '70 (griglia 4×6) */
+  const G={S:[[[4,1],[3,0],[1,0],[0,1],[0,2],[1,3],[3,3],[4,4],[4,5],[3,6],[1,6],[0,5]]],Y:[[[0,0],[2,3],[4,0]],[[2,3],[2,6]]],N:[[[0,6],[0,0],[4,6],[4,0]]],T:[[[0,0],[4,0]],[[2,0],[2,6]]],H:[[[0,0],[0,6]],[[4,0],[4,6]],[[0,3],[4,3]]],
+    B:[[[0,6],[0,0],[3,0],[4,1],[4,2],[3,3],[0,3]],[[3,3],[4,4],[4,5],[3,6],[0,6]]],R:[[[0,6],[0,0],[3,0],[4,1],[4,2],[3,3],[0,3]],[[2,3],[4,6]]],I:[[[1,0],[3,0]],[[2,0],[2,6]],[[1,6],[3,6]]],A:[[[0,6],[0,2],[2,0],[4,2],[4,6]],[[0,4],[4,4]]]};
+  let strokes=[],totalLen=0;
+  function layout(){
+    strokes=[];totalLen=0;const portrait=W<H*1.05;
+    const lines=portrait?["SYNTH","BRITANNIA"]:["SYNTH BRITANNIA"];
+    const maxChars=Math.max(...lines.map(l=>l.length));const adv=6;
+    const u=Math.min((W*.84)/(maxChars*adv-2),(H*(portrait?.15:.2))/6);
+    const lineH=u*9.5;const top=H*.4-(lines.length*lineH-u*3.5)/2;
+    lines.forEach((ln,li)=>{const x0=(W-(ln.length*adv-2)*u)/2,y0=top+li*lineH;
+      [...ln].forEach((ch,ci)=>{(G[ch]||[]).forEach(pl=>{const pts=pl.map(([x,y])=>[x0+(ci*adv+x)*u,y0+y*u]);let len=0;for(let i=1;i<pts.length;i++)len+=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);strokes.push({pts,len,line:li,start:totalLen});totalLen+=len})})});
+    return u}
+  let U=layout();addEventListener("resize",()=>{U=layout()});
+  /* display fluorescente a 7 segmenti per gli anni */
+  const SEG={0:"abcdef",1:"bc",2:"abged",3:"abgcd",4:"fgbc",5:"afgcd",6:"afgedc",7:"abc",8:"abcdefg",9:"abcfgd"};
+  function digit(x,y,s,d,on){const w=s*.6,h=s,t=s*.11;const P={a:[x+t,y,w-2*t,t],b:[x+w-t,y+t,t,h/2-1.5*t],c:[x+w-t,y+h/2+t/2,t,h/2-1.5*t],d:[x+t,y+h-t,w-2*t,t],e:[x,y+h/2+t/2,t,h/2-1.5*t],f:[x,y+t,t,h/2-1.5*t],g:[x+t,y+h/2-t/2,w-2*t,t]};
+    for(const k in P){const lit=SEG[d].includes(k);cx.fillStyle=lit?on:"rgba(111,246,232,.06)";cx.fillRect(...P[k])}}
+  const t0=performance.now();let ready=false,exitT=0,raf=0;
+  const WRITE=reduce?1:3200,START=reduce?0:900;
+  const C1="#ff3d9a",C2="#6ff6e8";
+  function frame(now){
+    const t=now-t0;
+    cx.globalCompositeOperation="source-over";cx.fillStyle=exitT?"rgba(2,2,3,.35)":"rgba(2,2,3,.22)";cx.fillRect(0,0,W,H);
+    cx.globalCompositeOperation="lighter";
+    /* figura di Lissajous sullo sfondo: due oscillatori quasi accordati */
+    const R=Math.min(W,H)*.44,cxm=W/2,cym=H*.42,ph=t/1900,fr=3+.5*Math.sin(t/9000),lv=Math.min(1,t/2500);cx.beginPath();
+    for(let i=0;i<=720;i++){const a=i/720*Math.PI*2;const x=cxm+R*Math.sin(fr*a+ph),y=cym+R*.62*Math.sin(2*a);i?cx.lineTo(x,y):cx.moveTo(x,y)}
+    cx.strokeStyle=`rgba(150,90,255,${.03*lv})`;cx.lineWidth=7;cx.stroke();cx.strokeStyle=`rgba(190,140,255,${.085*lv})`;cx.lineWidth=1.3;cx.stroke();
+    /* il titolo: il fascio percorre i tratti uno dopo l'altro */
+    let k=reduce?1:Math.max(0,Math.min(1,(t-START)/WRITE));if(exitT)k=1;
+    const ease=k<1?1-Math.pow(1-k,1.6):1,drawn=ease*totalLen;let head=null;
+    const col=(s)=>s.line===0&&strokes.some(x=>x.line===1)?C1:(s.line===1?C2:(s.start<totalLen*.33?C1:C2));
+    let shrink=0;if(exitT){shrink=Math.min(1,(now-exitT)/520);shrink=shrink*shrink}
+    const jit=()=>(Math.random()-.5)*.6;
+    for(const s of strokes){if(s.start>drawn)break;const lim=Math.min(s.len,drawn-s.start);let acc=0;cx.beginPath();
+      for(let i=0;i<s.pts.length;i++){let [x,y]=s.pts[i];
+        if(i>0){const [px,py]=s.pts[i-1];const seg=Math.hypot(x-px,y-py);if(acc+seg>lim){const f=(lim-acc)/seg;x=px+(x-px)*f;y=py+(y-py)*f;acc=lim}else acc+=seg}
+        if(shrink){x+=(cxm-x)*shrink;y+=(cym-y)*shrink}
+        x+=jit();y+=jit();i?cx.lineTo(x,y):cx.moveTo(x,y);head=[x,y];if(acc>=lim&&i>0)break}
+      const c=col(s);const fl=.85+Math.random()*.15;
+      cx.strokeStyle=c;cx.globalAlpha=.07*fl;cx.lineWidth=U*1.1;cx.stroke();cx.globalAlpha=.16*fl;cx.lineWidth=U*.55;cx.lineCap="round";cx.lineJoin="round";cx.stroke();
+      cx.globalAlpha=.55*fl;cx.lineWidth=U*.2;cx.stroke();
+      cx.globalAlpha=fl;cx.strokeStyle="#ffffff";cx.lineWidth=Math.max(1,U*.06);cx.stroke();cx.globalAlpha=1}
+    /* il punto del fascio */
+    if(head&&(k<1||exitT)){const g=cx.createRadialGradient(head[0],head[1],0,head[0],head[1],U*1.4);g.addColorStop(0,"rgba(255,255,255,.95)");g.addColorStop(.25,"rgba(255,160,220,.45)");g.addColorStop(1,"rgba(255,61,154,0)");cx.fillStyle=g;cx.beginPath();cx.arc(head[0],head[1],U*1.4,0,Math.PI*2);cx.fill()}
+    if(t<START&&!exitT){const p=.5+.5*Math.sin(t/90);const g=cx.createRadialGradient(cxm,cym,0,cxm,cym,8+p*6);g.addColorStop(0,"#fff");g.addColorStop(1,"rgba(255,61,154,0)");cx.fillStyle=g;cx.beginPath();cx.arc(cxm,cym,14,0,Math.PI*2);cx.fill()}
+    /* display: gli anni scorrono dal 1975 al 2026 */
+    cx.globalCompositeOperation="source-over";
+    const yk=reduce?1:Math.max(0,Math.min(1,(t-START-WRITE*.35)/(WRITE*.9)));const year=Math.round(1975+(2026-1975)*(1-Math.pow(1-yk,2)));
+    const ds=Math.max(26,Math.min(46,W*.06)),dy=strokes.length?Math.max(...strokes.flatMap(s=>s.pts.map(p=>p[1])))+U*4:H*.6;
+    if(t>START&&!exitT){const s=String(year),gw=ds*.6+ds*.18,x0=W/2-(gw*4-ds*.18)/2;cx.shadowColor=C2;cx.shadowBlur=14;
+      for(let i=0;i<4;i++)digit(x0+i*gw,dy,ds,s[i],C2);cx.shadowBlur=0;
+      cx.font=`500 ${Math.max(10,ds*.28)}px "Martian Mono",monospace`;cx.textAlign="center";cx.fillStyle=yk>=1?"rgba(233,247,255,.75)":"rgba(233,247,255,.25)";
+      if(W<600){cx.fillText("CINQUANT’ANNI DI SYNTH POP",W/2,dy+ds+ds*.75);cx.fillText("BRITANNICO · 23 TAPPE",W/2,dy+ds+ds*1.25)}else cx.fillText("CINQUANT’ANNI DI SYNTH POP BRITANNICO · 23 TAPPE",W/2,dy+ds+ds*.75)}
+    if(exitT){const f=Math.min(1,(now-exitT)/520);if(f>.85){cx.fillStyle=`rgba(255,255,255,${(f-.85)/.15*.9})`;cx.fillRect(0,0,W,H)}}
+    if(!ready&&(k>=1||t>START+WRITE*.6)){ready=true;sp.classList.add("ready")}
+    raf=requestAnimationFrame(frame)}
+  raf=requestAnimationFrame(frame);
   let done=false;
   function close(then){if(done)return;done=true;try{sessionStorage.setItem("sb-splash","1")}catch(e){}
-    clearInterval(seqT);clearInterval(ckT);clearInterval(rollT);removeEventListener("keydown",keys);
-    sp.classList.add("off");setTimeout(()=>{sp.hidden=true;document.documentElement.style.overflow="";if(then)then()},reduce?150:720)}
+    removeEventListener("keydown",keys);exitT=performance.now();sp.classList.add("off");
+    setTimeout(()=>{cancelAnimationFrame(raf);sp.hidden=true;document.documentElement.style.overflow="";if(then)then()},reduce?120:1000)}
   async function act(a){
     if(a==="audio"){close();if(!MUS.playing){try{await MUS.play(S[cur].id)}catch(e){}syncUI()}}
     else if(a==="quiet")close();
     else if(a==="index")close(()=>toggleIndex(true));
-    else if(/^t\d\d$/.test(a))close(()=>go(a));
   }
   sp.addEventListener("click",ev=>{const b=ev.target.closest("[data-sp]");if(b){act(b.dataset.sp);return}if(ev.target.closest("#spGo"))act("audio")});
-  /* come al televideo: si digita il numero di pagina. 100 = prologo, 101–123 = tappe */
-  let typed="";
-  function keys(ev){
-    if(ev.key==="Enter"){ev.preventDefault();act("audio");return}
-    if(ev.key==="Escape"){act("quiet");return}
-    if(!/^[0-9]$/.test(ev.key))return;typed+=ev.key;pg.textContent=(typed+"___").slice(0,3);
-    if(typed.length===3){const n=+typed;typed="";const list=S.filter(e=>e.kind==="ep"||e.kind==="flash");
-      if(n===100)setTimeout(()=>act("audio"),300);
-      else if(n>100&&n-100<=list.length){const id=list[n-101].id;setTimeout(()=>close(()=>go(id)),300)}
-      else setTimeout(()=>{pg.textContent="100"},600)}}
+  function keys(ev){if(ev.key==="Enter"){ev.preventDefault();act("audio")}else if(ev.key==="Escape")act("quiet")}
   addEventListener("keydown",keys);
-  setTimeout(()=>{try{document.getElementById("spGo").focus({preventScroll:true})}catch(e){}},reduce?0:800);
+  setTimeout(()=>{try{document.getElementById("spGo").focus({preventScroll:true})}catch(e){}},reduce?0:1800);
 })();
 route();
 requestAnimationFrame(loop);
