@@ -755,6 +755,7 @@ function render(i){
     </div>
   </article><div class="wrap">${nextLink(i)}</div>`;
   const txt=`Synth Britannia · ${stepLabel(e)} · ${e.who}\n`+e.tracks.map(([a,t,y],k)=>`${k+1}. ${a} – ${t} (${y})`).join("\n");
+  {const box=document.getElementById("ytBox");if(box)box.dataset.k=box.dataset.first;ytFrame=null;ytReady=false;setTimeout(ytPrefetch,0)}
   document.getElementById("copy").addEventListener("click",()=>{
     const st=document.getElementById("copyStatus"),box=document.getElementById("copyBox");
     const fallback=()=>{box.value=txt;box.hidden=false;box.focus();box.select();st.textContent="Seleziona e copia il testo qui sotto"};
@@ -778,13 +779,29 @@ function route(){
 }
 function ytPause(){document.querySelectorAll(".yt-v iframe").forEach(f=>{try{f.contentWindow.postMessage(JSON.stringify({event:"command",func:"pauseVideo",args:[]}),"*")}catch(e){}})}
 function ytProbe(id){return new Promise(r=>{const i=new Image();let done=0;const fin=ok=>{if(!done){done=1;r(ok)}};i.onload=()=>fin(i.naturalWidth>120);i.onerror=()=>fin(false);setTimeout(()=>fin(true),2500);i.src=`https://i.ytimg.com/vi/${id}/hqdefault.jpg`})}
-async function ytShow(k,play){const box=document.getElementById("ytBox");if(!box)return;const e=S[cur],tr=e.tracks[k];if(!tr)return;let Y=ytOf(tr[0],tr[1]);if(!Y)return;
-  if(Y.fb&&!(await ytProbe(Y.v))){YTDEAD[Y.v]=1;Y=ytOf(tr[0],tr[1])}
-  box.innerHTML=ytFacade(...tr);document.querySelectorAll(".mt").forEach(li=>li.classList.toggle("now",li.dataset.k===String(k)));
-  if(play)ytPlay(box.querySelector(".yt-v"))}
+/* i video non ufficiali si controllano appena si apre la scheda, così il tocco fa partire subito il video */
+function ytPrefetch(){(S[cur].tracks||[]).forEach(([a,t])=>{const r=YT[a+"|"+t];if(!r||!r[4]||YTDEAD[r[0]])return;
+  ytProbe(r[0]).then(ok=>{if(ok)return;YTDEAD[r[0]]=1;const box=document.getElementById("ytBox");const v=box&&box.querySelector(".yt-v");
+    if(v&&v.dataset.v===r[0]&&!v.querySelector("iframe")){const k=+box.dataset.k;ytShow(k,false)}})})}
+let ytFrame=null,ytReady=false,ytState=-1;
+function ytMark(k){const box=document.getElementById("ytBox");if(box)box.dataset.k=k;document.querySelectorAll(".mt").forEach(li=>li.classList.toggle("now",li.dataset.k===String(k)))}
+function ytShow(k,play){const box=document.getElementById("ytBox");if(!box)return;const tr=S[cur].tracks[k];if(!tr)return;const Y=ytOf(tr[0],tr[1]);if(!Y)return;
+  ytMark(k);
+  if(play&&ytFrame&&ytReady&&box.contains(ytFrame)){
+    const tmp=document.createElement("div");tmp.innerHTML=ytFacade(...tr);box.querySelector(".yt-c").replaceWith(tmp.querySelector(".yt-c"));
+    box.querySelector(".yt-v").dataset.v=Y.v;if(MUS.playing){MUS.pause();syncUI()}
+    ytFrame.contentWindow.postMessage(JSON.stringify({event:"command",func:"loadVideoById",args:[Y.v]}),"*");return}
+  box.innerHTML=ytFacade(...tr);if(play)ytPlay(box.querySelector(".yt-v"))}
 function ytPlay(v){if(!v)return;if(MUS.playing){MUS.pause();syncUI()}
-  const f=document.createElement("iframe");f.src=`https://www.youtube-nocookie.com/embed/${v.dataset.v}?autoplay=1&rel=0&playsinline=1&enablejsapi=1`;f.title="Video su YouTube";f.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";f.allowFullscreen=true;f.referrerPolicy="strict-origin-when-cross-origin";
+  const org=/^https?:/.test(location.protocol)?"&origin="+encodeURIComponent(location.origin):"";
+  const f=document.createElement("iframe");f.src=`https://www.youtube-nocookie.com/embed/${v.dataset.v}?autoplay=1&rel=0&playsinline=1&enablejsapi=1${org}`;f.title="Video su YouTube";f.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";f.allowFullscreen=true;f.referrerPolicy="strict-origin-when-cross-origin";
+  ytFrame=f;ytReady=false;ytState=-1;
+  f.addEventListener("load",()=>{const hi=()=>{try{f.contentWindow.postMessage(JSON.stringify({event:"listening",id:"sb",channel:"widget"}),"*")}catch(e){}};hi();setTimeout(hi,800);setTimeout(hi,2500)});
   v.innerHTML="";v.appendChild(f)}
+window.addEventListener("message",ev=>{if(!ytFrame||ev.source!==ytFrame.contentWindow)return;let d;try{d=typeof ev.data==="string"?JSON.parse(ev.data):ev.data}catch(e){return}if(!d)return;
+  ytReady=true;let st=null;if(d.event==="onStateChange")st=d.info;else if(d.event==="infoDelivery"&&d.info&&typeof d.info.playerState==="number")st=d.info.playerState;
+  if(st===null||st===ytState)return;ytState=st;
+  if(st===1&&MUS.playing){MUS.pause();syncUI()}});
 app.addEventListener("click",ev=>{
   const go=ev.target.closest(".yt-go");if(go){ytPlay(go.closest(".yt-v"));return}
   const pk=ev.target.closest(".mt-p,button.mt-s");if(pk){ytShow(+pk.dataset.k,true);const v=document.getElementById("ytBox");if(v&&v.getBoundingClientRect().top<0)v.scrollIntoView({behavior:"smooth",block:"start"});return}
