@@ -1,0 +1,1254 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>L’esilio delle macchine · Synth Britannia</title><meta name="description" content="Tappa 15 di 23 · Gli anni ’90, dalle classifiche ai rave. Manchester, magazzini e campi, 1988–1999."><link rel="canonical" href="https://synth-britannia.vercel.app/esilio-delle-macchine"><meta property="og:type" content="website"><meta property="og:site_name" content="Synth Britannia"><meta property="og:locale" content="it_IT"><meta property="og:title" content="L’esilio delle macchine · Synth Britannia"><meta property="og:description" content="Tappa 15 di 23 · Gli anni ’90, dalle classifiche ai rave. Manchester, magazzini e campi, 1988–1999."><meta property="og:url" content="https://synth-britannia.vercel.app/esilio-delle-macchine"><meta property="og:image" content="https://synth-britannia.vercel.app/og/esilio-delle-macchine.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="L’esilio delle macchine · Synth Britannia"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="L’esilio delle macchine · Synth Britannia"><meta name="twitter:description" content="Tappa 15 di 23 · Gli anni ’90, dalle classifiche ai rave. Manchester, magazzini e campi, 1988–1999."><meta name="twitter:image" content="https://synth-britannia.vercel.app/og/esilio-delle-macchine.jpg"><meta name="theme-color" content="#000000"><script>window.__SITE=1</script></head><body><meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cutive&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@75..112.5,300..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+<style>
+/* Layout: oscilloscopio a doppia traccia. CH1 = la musica (l'unico segnale a colori), CH2 = il paese (grigio).
+   Navigazione: una tappa alla volta, tutto in una sola scheda. */
+:root{
+  --ground:#FAFAF9; --ink:#0C0C0E; --mute:#686870; --rule:#DADADE; --panel:#F0F0F2;
+  --signal:#CC0069; --signal-ink:#FFFFFF;
+  --screen:#08080A; --screen-ink:#F4F4F2; --screen-dim:#B2B2B9; --trace2:#8E8E97; --screen-signal:#FF3D96;
+  --f-display:"Anybody","Arial Narrow",Impact,sans-serif;
+  --f-body:"American Typewriter","AmericanTypewriter","Cutive","Courier Prime","Courier New",serif;
+  --f-mono:"Martian Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0B0B0D; --ink:#EDEDEA; --mute:#9C9CA4; --rule:#27272C; --panel:#141417;
+    --signal:#FF4A9E; --signal-ink:#0B0B0D; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0B0B0D; --ink:#EDEDEA; --mute:#9C9CA4; --rule:#27272C; --panel:#141417;
+  --signal:#FF4A9E; --signal-ink:#0B0B0D; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.65;margin:0;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:0}
+
+/* ---------- HERO: lo schermo ---------- */
+.hero{position:relative;background:var(--screen);color:var(--screen-ink);overflow:hidden}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .wrap{position:relative;padding-block:24px 34px;display:grid;gap:22px;grid-template-columns:minmax(0,1fr)}
+.readout{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--trace2)}
+.readout .c1{color:var(--screen-signal)}
+.readout .c1::before,.readout .c2::before{content:"";display:inline-block;width:16px;height:2px;margin-right:8px;vertical-align:middle;background:currentColor}
+.hero-grid{display:grid;gap:22px;align-items:end;grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.hero-grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px}}
+.mast{margin:0;display:grid;line-height:.8;font-family:var(--f-display);text-transform:uppercase;max-width:720px}
+.mast span{display:block;white-space:nowrap;width:max-content;font-size:84px}
+.m1{font-weight:900;font-variation-settings:"wdth" 150}
+.m2{font-weight:800;font-variation-settings:"wdth" 50;margin-top:.04em}
+.hero-txt{display:grid;gap:14px;max-width:46ch}
+.motto{margin:0;font-style:italic;font-size:clamp(20px,2.2vw,26px);line-height:1.25;color:var(--screen-ink)}
+.lede{margin:0;color:var(--screen-dim);font-size:16px;line-height:1.6}
+.hero-ctl{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.hbtn{appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--screen-signal);background:var(--screen-signal);color:#08080A;text-decoration:none}
+.hbtn.ghost{background:transparent;color:var(--screen-ink);border-color:#4A4A52}
+.hbtn.ghost[aria-pressed="true"]{border-color:var(--screen-signal);color:var(--screen-signal)}
+.hbtn:hover{filter:brightness(1.1)}
+
+/* ---------- BARRA DI NAVIGAZIONE ---------- */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ground)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--ground);border-bottom:1px solid var(--ink)}
+.bar-in{padding-block:10px 8px;display:grid;gap:6px}
+.bar-row{display:grid;grid-template-columns:48px minmax(0,1fr) 48px;gap:8px}
+.nb{appearance:none;cursor:pointer;min-height:52px;border:1px solid var(--ink);background:transparent;color:var(--ink);font-family:var(--f-mono);font-size:20px;line-height:1;transition:background .2s,color .2s}
+.nb:hover{background:var(--ink);color:var(--ground)}
+.nb:disabled{opacity:.25;cursor:default;background:transparent;color:var(--ink)}
+.here{appearance:none;cursor:pointer;min-width:0;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;text-align:left;padding:6px 12px;min-height:52px;border:1px solid var(--ink);background:var(--panel);color:var(--ink)}
+.here:hover{border-color:var(--signal)}
+.here-n{font-family:var(--f-display);font-weight:900;font-variation-settings:"wdth" 110;font-size:28px;line-height:1;color:var(--signal);font-variant-numeric:tabular-nums}
+.here-t{display:grid;min-width:0;gap:1px}
+.here-t small{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.here-t b{font-family:var(--f-display);font-weight:800;font-variation-settings:"wdth" 85;text-transform:uppercase;font-size:16px;line-height:1.1;overflow-wrap:break-word}
+.here-i{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);white-space:nowrap;display:flex;gap:6px;align-items:center}
+.here[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.chev{display:inline-block;transition:transform .2s}
+@media (max-width:520px){.here-i .w{display:none}.here{gap:10px;padding:6px 10px}}
+.strip{display:flex;gap:3px}
+.tick{appearance:none;flex:1 1 0;min-width:0;height:22px;padding:0;border:0;background:transparent;cursor:pointer;display:flex;align-items:center}
+.tick.gap{margin-left:7px}
+.tick i{display:block;width:100%;height:4px;background:var(--rule);transition:height .2s,background .2s}
+.tick.past i{background:var(--mute)}
+.tick:hover i{background:var(--ink)}
+.tick.on i,.tick.on:hover i{height:12px;background:var(--signal)}
+.index{max-height:min(66vh,560px);overflow-y:auto;overscroll-behavior:contain;border-top:1px solid var(--rule);padding-block:4px 16px}
+.ix{columns:2 340px;column-gap:40px}
+.ix-g{break-inside:avoid;padding-top:12px}
+.ix-h{margin:0;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding:6px 0;border-bottom:1px solid var(--ink)}
+.ix-a{display:grid;grid-template-columns:2.8rem minmax(0,1fr);gap:2px 12px;padding:10px 6px;border-bottom:1px solid var(--rule);text-decoration:none;align-items:baseline;transition:background .15s}
+.ix-a:hover{background:var(--panel)}
+.ix-a[aria-current="true"]{background:var(--panel)}
+.ix-a[aria-current="true"] .ix-n{color:var(--signal)}
+.ix-n{font-family:var(--f-display);font-weight:900;font-variation-settings:"wdth" 75;font-size:24px;line-height:1;color:var(--mute);font-variant-numeric:tabular-nums}
+.ix-w{font-family:var(--f-display);font-weight:800;font-variation-settings:"wdth" 90;text-transform:uppercase;font-size:17px;line-height:1.15}
+.ix-w em{font-style:normal;font-family:var(--f-mono);font-weight:400;font-size:10px;letter-spacing:.1em;color:var(--signal);vertical-align:2px;margin-left:6px}
+.ix-t{grid-column:2;font-size:14px;line-height:1.35;color:var(--mute)}
+.next{display:grid;gap:4px;margin-block:24px 52px;padding:18px clamp(16px,4vw,32px);border:1px solid var(--ink);text-decoration:none;transition:background .2s,color .2s}
+.next:hover{background:var(--ink);color:var(--ground)}
+.next small{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.next:hover small{color:inherit}
+.next span{font-family:var(--f-display);font-weight:800;font-variation-settings:"wdth" 90;text-transform:uppercase;font-size:clamp(20px,2.6vw,28px);line-height:1.1}
+
+/* ---------- MONDI: ogni atto ha la sua epoca ---------- */
+html:root[data-world]{--grain:0;--grain-img:none;--d-wdth:100;--d-wght:800;--d-skew:0deg;--d-track:0em;--radius:0px;--rule-w:1px;--scope-bg:#08080A;--scope-grid:rgba(255,255,255,.08);--trace:var(--signal);--accent2:var(--signal);--accent3:var(--signal);--f-label:var(--f-mono)}
+html:root[data-world="zine"]{--ground:#E6E3DC;--ink:#121212;--mute:#5B5852;--rule:#121212;--panel:#DAD6CC;--signal:#D7261E;--signal-ink:#FFFFFF;--grain:.3;--grain-img:var(--noise-dark);--d-wdth:110;--d-wght:900;--rule-w:3px;--scope-bg:#E6E3DC;--scope-grid:rgba(0,0,0,.16);--trace:#121212;--trace2:#7E7A72;--f-label:var(--f-body);color-scheme:light}
+html:root[data-world="cold"]{--ground:#0A0B0D;--ink:#D3D7DB;--mute:#6A727A;--rule:#1F2327;--panel:#101316;--signal:#8FC1D9;--signal-ink:#0A0B0D;--grain:.09;--grain-img:var(--noise-light);--d-wdth:55;--d-wght:500;--d-track:.02em;--scope-bg:#050607;--scope-grid:rgba(255,255,255,.06);--trace:#8FC1D9;--trace2:#4C565E;color-scheme:dark}
+html:root[data-world="pop"]{--ground:#FFFFFF;--ink:#0A0A0A;--mute:#666666;--rule:#0A0A0A;--panel:#F3F3F3;--signal:#FF2D7A;--signal-ink:#FFFFFF;--accent2:#FFD60A;--accent3:#19C2FF;--grain:0;--d-wdth:125;--d-wght:900;--d-skew:-10deg;--rule-w:2px;--scope-bg:#0A0A0A;--scope-grid:rgba(255,255,255,.09);--trace:#FF2D7A;--trace2:#19C2FF;--f-label:var(--f-display);color-scheme:light}
+html:root[data-world="rave"]{--ground:#050505;--ink:#F2F2F2;--mute:#8A8A8A;--rule:#2A2A2A;--panel:#101010;--signal:#D4FF00;--signal-ink:#050505;--accent2:#FF2BD6;--accent3:#FF7A00;--grain:.22;--grain-img:var(--noise-light);--d-wdth:150;--d-wght:900;--scope-bg:#000000;--scope-grid:rgba(212,255,0,.13);--trace:#D4FF00;--trace2:#FF2BD6;color-scheme:dark}
+html:root[data-world="screen"]{--ground:#0D0E13;--ink:#F1F1F4;--mute:#8C8E98;--rule:rgba(255,255,255,.13);--panel:rgba(255,255,255,.055);--signal:#9D8CFF;--signal-ink:#0D0E13;--accent2:#4FE3FF;--grain:.05;--grain-img:var(--noise-light);--d-wdth:100;--d-wght:600;--d-track:-.02em;--radius:18px;--scope-bg:rgba(255,255,255,.04);--scope-grid:rgba(255,255,255,.07);--trace:#9D8CFF;--trace2:#4FE3FF;--f-label:var(--f-display);color-scheme:dark}
+:root{--noise-dark:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");--noise-light:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+body::after{content:"";position:fixed;inset:0;z-index:7;pointer-events:none;opacity:var(--grain,0);background-image:var(--grain-img,none);background-size:240px}
+body{transition:background-color .5s,color .5s}
+.nb,.here,.btn,.next,.listen,.score,.ch2band,.scope,.mt-s,.copybox{border-radius:var(--radius)}
+.nb,.here{border-width:var(--rule-w)}
+.eyebrow{font-family:var(--f-label)}
+
+/* ---------- COPERTINA: un respiro prima dell'informazione ---------- */
+.cover{position:relative;overflow:hidden;isolation:isolate;min-height:calc(100svh - var(--barh,110px) - env(safe-area-inset-top,0px) - 66px - env(safe-area-inset-bottom,0px));display:grid}
+.cv-in{width:100%;display:grid;grid-template-rows:auto 1fr auto;gap:22px;padding-top:20px;padding-bottom:26px;min-width:0}
+.cv-clip{display:none}
+.cv-top{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font-family:var(--f-label);font-size:12.5px;color:var(--mute)}
+.cv-step{color:var(--ink);font-weight:700}
+.cv-place::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--signal);margin:0 8px 2px 0}
+.cv-mid{position:relative;z-index:1;display:grid;align-content:start;gap:22px;min-width:0}
+.cv-txt{display:grid;gap:14px;min-width:0;animation:rise .6s cubic-bezier(.2,.7,.1,1) both}
+.cv-photo{margin:0;position:relative;max-width:min(100%,520px);justify-self:start;min-width:0}
+.ph{position:relative;display:block;overflow:hidden}
+.ph img{display:block;width:100%;height:auto;max-height:46vh;object-fit:cover}
+.ph::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0}
+.cv-cred{font-family:var(--f-label);font-size:10.5px;line-height:1.45;color:var(--mute);margin-top:8px;max-width:52ch}
+.cv-cred a{color:inherit}
+@media (min-width:900px){.cv-mid{grid-template-columns:minmax(0,1fr) minmax(280px,40%);align-items:end;gap:48px}.cv-photo{justify-self:end;max-width:100%}.ph img{max-height:62vh}}
+.w-zine .ph{border:3px solid var(--ink);box-shadow:7px 7px 0 var(--ink);transform:rotate(-1.4deg);background:var(--ground);margin:0 8px 12px 0}
+.w-zine .cv-cred{font-family:var(--f-body);font-size:11px}
+.w-cold .cv-photo{max-width:min(100%,400px)}
+.w-cold .ph img{opacity:.92}
+.w-cold .ph::after{background:var(--signal);mix-blend-mode:multiply;opacity:.3}
+.w-pop .ph{border:3px solid var(--ink);box-shadow:12px 12px 0 var(--accent2);margin:0 12px 14px 0}
+.w-pop .ph img{filter:contrast(1.06)}
+.w-rave .ph{outline:2px solid var(--signal);outline-offset:6px}
+.w-rave .ph::after{background:linear-gradient(135deg,var(--accent2),var(--signal));mix-blend-mode:multiply;opacity:.32}
+.w-screen .ph{border-radius:var(--radius)}
+.w-screen .ph::after{background:linear-gradient(160deg,var(--signal),var(--accent2));mix-blend-mode:soft-light;opacity:.55}
+.cv-num{font-family:var(--f-display);line-height:.8;font-size:clamp(96px,26vw,250px);font-variation-settings:"wdth" var(--d-wdth),"wght" var(--d-wght);letter-spacing:var(--d-track);color:var(--ink);font-variant-numeric:tabular-nums;width:max-content;max-width:100%}
+.cv-who{margin:0;font-family:var(--f-display);text-transform:uppercase;font-size:clamp(38px,9vw,104px);line-height:.92;font-variation-settings:"wdth" var(--d-wdth),"wght" var(--d-wght);letter-spacing:var(--d-track);text-wrap:balance;overflow-wrap:anywhere}
+.cv-line{margin:0;font-size:clamp(19px,2.4vw,28px);line-height:1.35;max-width:30ch;font-style:italic}
+.cv-ctl{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;align-self:end}
+.cv-hint{font-family:var(--f-label);font-size:12.5px;color:var(--mute)}
+.cv-tile{display:none}
+
+/* fanzine fotocopiata */
+.w-zine .cv-top{font-size:14px;color:var(--ink)}
+.w-zine .cv-years{display:inline-block;border:2.5px solid var(--signal);color:var(--signal);padding:2px 9px;transform:rotate(-4deg);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.w-zine .cv-num{font-size:clamp(96px,22vw,210px);background:var(--ink);color:var(--ground);padding:.06em .1em .02em;transform:rotate(-2.5deg);margin-left:6px}
+.w-zine .cv-who{line-height:1.02;letter-spacing:.01em}
+.w-zine .rl{display:inline-block;transform-origin:center}
+.w-zine .rl.inv{background:var(--ink);color:var(--ground);padding:0 .06em}
+.w-zine .cv-line{font-style:normal;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px;text-decoration-skip-ink:none}
+.w-zine .cover{border-bottom:3px dashed var(--ink)}
+.w-zine .cv-txt{animation:none}
+.w-zine .cv-clip{display:block;order:9;justify-self:end;max-width:min(36ch,100%);margin:22px 0 0;padding:12px 14px;border:3px solid var(--ink);background:var(--ground);font-size:15px;line-height:1.5;transform:rotate(1.4deg);box-shadow:4px 4px 0 var(--ink)}
+.w-zine .cv-clip::before{content:"Intanto, fuori";display:block;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:12px;margin-bottom:6px;border-bottom:1px solid var(--ink)}
+.w-zine .cv-hint::before{content:"✂ "}
+.cv-ctl{min-height:46px}
+
+/* freddo, industriale */
+.w-cold .cv-num{font-variation-settings:"wdth" 55,"wght" 200;letter-spacing:0;color:var(--mute)}
+.w-cold .cv-mid{gap:22px}
+.cv-txt{min-width:0}.cv-who{max-width:100%}
+.w-cold .cv-who{font-size:clamp(46px,11vw,132px);line-height:.9}
+.w-cold .cv-line{font-size:14.5px;line-height:1.65;color:var(--mute);font-style:normal;font-family:var(--f-mono);max-width:42ch}
+.w-cold .cover::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--signal);opacity:.35;animation:scan 11s linear infinite;z-index:0}
+@keyframes scan{from{transform:translateY(0)}to{transform:translateY(100vh)}}
+
+/* pop lucido */
+.w-pop .cover::before{content:"";position:absolute;z-index:0;width:min(64vmin,540px);height:min(64vmin,540px);border-radius:50%;background:var(--accent3);right:-12vmin;top:7%}
+.w-pop .cover::after{content:"";position:absolute;left:0;right:0;bottom:0;height:14px;background:repeating-linear-gradient(-45deg,var(--signal) 0 12px,var(--accent2) 12px 24px,var(--ink) 24px 30px)}
+.w-pop .cv-num{color:var(--signal);transform:skewX(var(--d-skew));text-shadow:.05em .05em 0 var(--accent2),.1em .1em 0 var(--ink);padding-right:.15em;animation:popin .55s cubic-bezier(.2,1.5,.3,1) both}
+@keyframes popin{from{transform:skewX(var(--d-skew)) scale(.6);opacity:0}to{transform:skewX(var(--d-skew)) scale(1);opacity:1}}
+.w-pop .cv-who span{display:inline-block;background:var(--ink);color:#FFFFFF;padding:.04em .16em;transform:skewX(var(--d-skew));line-height:1.05;max-width:100%}
+.w-pop .cv-line{font-size:clamp(22px,2.8vw,32px)}
+.w-pop .cv-top{font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:12px;font-variation-settings:"wdth" 110}
+
+/* volantino rave */
+.w-rave .cv-tile{display:block;position:absolute;inset:-20% -10%;z-index:0;font-family:var(--f-display);font-variation-settings:"wdth" 150,"wght" 900;font-size:clamp(70px,17vw,180px);line-height:.82;color:transparent;-webkit-text-stroke:1px rgba(212,255,0,.14);transform:rotate(-9deg);overflow:hidden;word-break:break-all;pointer-events:none;user-select:none}
+.w-rave .cv-num{color:transparent;-webkit-text-stroke:3px var(--signal);text-shadow:.06em .06em 0 var(--accent2);animation:strobe 1.9s steps(1) infinite}
+@keyframes strobe{0%{-webkit-text-stroke-color:var(--signal);text-shadow:.06em .06em 0 var(--accent2)}50%{-webkit-text-stroke-color:var(--accent2);text-shadow:-.06em .06em 0 var(--signal)}}
+.w-rave .cv-who{color:var(--signal);font-size:clamp(40px,10vw,112px);line-height:.88;letter-spacing:-.01em}
+.w-rave .cv-line{font-style:normal;line-height:1.9}
+.w-rave .cv-line span{background:var(--accent2);color:#050505;padding:.05em .3em;box-decoration-break:clone;-webkit-box-decoration-break:clone;font-family:var(--f-mono);font-size:clamp(14px,1.7vw,18px);text-transform:uppercase;letter-spacing:.04em}
+.w-rave .cv-top{text-transform:uppercase;letter-spacing:.1em;font-size:11px;color:var(--signal)}
+
+/* schermo di oggi */
+.w-screen .cover::before,.w-screen .cover::after{content:"";position:absolute;z-index:0;border-radius:50%;filter:blur(70px);opacity:.5;pointer-events:none}
+.w-screen .cover::before{width:52vmin;height:52vmin;background:var(--signal);left:-10vmin;top:10%;animation:drift 26s ease-in-out infinite alternate}
+.w-screen .cover::after{width:46vmin;height:46vmin;background:var(--accent2);right:-8vmin;bottom:4%;animation:drift 34s ease-in-out infinite alternate-reverse}
+@keyframes drift{from{transform:translate(0,0)}to{transform:translate(12vmin,-10vmin)}}
+.w-screen .cv-num{font-variation-settings:"wdth" 100,"wght" 200;letter-spacing:-.04em;text-shadow:0 0 48px rgba(157,140,255,.5)}
+.w-screen .cv-who{font-variation-settings:"wdth" 100,"wght" 600;text-transform:none;letter-spacing:-.02em;font-size:clamp(34px,7vw,84px)}
+.w-screen .cv-line{color:var(--mute);font-style:normal;font-size:clamp(18px,2.2vw,26px)}
+.w-screen .cv-top{font-size:13px}
+.w-screen .listen,.w-screen .score,.w-screen .ch2band,.w-screen .scope{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+
+/* ---------- IL RESTO DELLA SCHEDA ---------- */
+.detail{display:grid;gap:26px;padding-top:30px}
+.scope{position:relative;height:120px;background:var(--scope-bg);color:var(--ink);border:var(--rule-w) solid var(--rule);overflow:hidden}
+.scope canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scope-l{position:absolute;left:0;right:0;bottom:0;display:flex;flex-wrap:wrap;gap:4px 18px;justify-content:space-between;padding:8px 14px;font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--trace2)}
+.scope-l .c1{color:var(--trace)}
+.sec{margin:0 0 14px;font-family:var(--f-display);text-transform:uppercase;font-variation-settings:"wdth" var(--d-wdth),"wght" var(--d-wght);letter-spacing:var(--d-track);font-size:clamp(22px,2.6vw,30px);line-height:1}
+.w-screen .sec{text-transform:none}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 18px;border:var(--rule-w) solid var(--ink);color:var(--ink);background:transparent;text-decoration:none;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s}
+.btn:hover{background:var(--ink);color:var(--ground)}
+.btn.primary{background:var(--signal);border-color:var(--signal);color:var(--signal-ink)}
+.btn.primary:hover{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.facts{list-style:none;margin:0;padding:0;border-top:var(--rule-w) solid var(--rule)}
+.facts li{display:grid;grid-template-columns:7.2rem minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:15.5px;line-height:1.55}
+.fk{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.03em;color:var(--signal);padding-top:3px;font-variant-numeric:tabular-nums}
+.bignums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:var(--rule-w) solid var(--rule)}
+.bignums div{background:var(--ground);padding:14px 14px 16px;display:grid;gap:6px;align-content:start}
+.bignums b{font-family:var(--f-display);font-weight:900;font-variation-settings:"wdth" 75;font-size:clamp(30px,4vw,44px);line-height:1;color:var(--signal);font-variant-numeric:tabular-nums}
+.bignums span{font-size:14.5px;line-height:1.45}
+@media (max-width:460px){.bignums{grid-template-columns:minmax(0,1fr)}}
+.facts-box{margin-top:36px}
+.pl-foot{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;padding-top:20px}
+.copybox{width:100%;min-height:150px;font-family:var(--f-mono);font-size:12px;padding:12px;border:1px solid var(--ink);background:var(--panel);color:var(--ink)}
+.status{font-family:var(--f-mono);font-size:11.5px;color:var(--signal);letter-spacing:.06em}
+.extra{margin-top:44px;border-top:var(--rule-w) solid var(--rule);padding-top:20px;display:grid;gap:14px}
+.extra > p{margin:0;max-width:62ch;color:var(--mute);font-size:15px}
+.xl{list-style:none;margin:0;padding:0;columns:2 300px;column-gap:36px}
+.xl li{break-inside:avoid;display:grid;grid-template-columns:2.2rem minmax(0,1fr);gap:8px;padding:6px 0;border-bottom:1px solid var(--rule);font-size:14.5px;line-height:1.4}
+.xl li span:first-child{font-family:var(--f-mono);font-size:11px;color:var(--mute);padding-top:2px;font-variant-numeric:tabular-nums}
+.xl a{text-decoration:none}
+.xl a:hover{color:var(--signal)}
+.xl i{font-style:normal;color:var(--mute)}
+.story{min-width:0}
+.story p{max-width:62ch;margin:0 0 1.1em;font-size:17px;line-height:1.75}
+.story .lead::first-letter{font-family:var(--f-display);font-weight:900;font-variation-settings:"wdth" var(--d-wdth),"wght" 900;float:left;font-size:4.4em;line-height:.82;margin:.08em .12em 0 0;color:var(--signal)}
+.story h3{font-family:var(--f-display);font-variation-settings:"wdth" var(--d-wdth),"wght" var(--d-wght);text-transform:uppercase;font-size:clamp(22px,2.6vw,30px);line-height:1.05;margin:1.6em 0 .5em;text-wrap:balance}
+.w-screen .story h3{text-transform:none}
+.ch2band{position:relative;margin-top:36px;background:var(--panel);color:var(--ink);overflow:hidden;border:var(--rule-w) solid var(--rule)}
+.ch2band canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ch2in{position:relative;display:grid;gap:10px;padding:30px clamp(16px,5vw,56px) 36px;max-width:900px}
+.ch2in .lab{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:0}
+.ch2in p.big{margin:0;font-size:clamp(17px,1.9vw,20px);line-height:1.65}
+.tbl{overflow-x:auto;margin:10px 0 8px;border-top:var(--rule-w) solid var(--rule)}
+.tbl table{border-collapse:collapse;width:100%;min-width:640px;font-size:15px;line-height:1.45}
+.tbl th,.tbl td{text-align:left;vertical-align:top;padding:10px 14px 10px 0;border-bottom:1px solid var(--rule)}
+.tbl th{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:500}
+.tbl td:first-child{font-family:var(--f-mono);font-size:12.5px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tbl td:nth-child(2){color:var(--mute)}
+.src{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:14px}
+.src a{color:var(--ink)}
+.src a:hover{color:var(--signal)}
+.deep{display:grid;grid-template-columns:minmax(0,1fr);gap:36px}
+@media (min-width:900px){
+  .deep{grid-template-columns:minmax(0,1fr) 23rem;gap:36px 56px}
+  .deep .col{grid-column:1;grid-row:1}
+  .deep .listen{grid-column:2;grid-row:1;position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--barh,110px) + 18px);align-self:start;max-height:calc(100vh - var(--barh,110px) - env(safe-area-inset-top,0px) - 66px - 40px);overflow-y:auto;overscroll-behavior:contain}
+}
+.col{min-width:0}
+.listen{display:grid;gap:14px;align-content:start;min-width:0;padding:18px;border:var(--rule-w) solid var(--rule);background:var(--ground)}
+.w-screen .listen{background:var(--panel)}
+.listen .btn{justify-content:center}
+.listen .sec{margin-bottom:0}
+.mini{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.mt{display:grid;grid-template-columns:2rem minmax(0,1fr) 44px;gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid var(--rule)}
+.mt-n{font-family:var(--f-display);font-weight:900;font-variation-settings:"wdth" 60;font-size:24px;line-height:1;color:var(--mute);opacity:.5;transition:color .2s,opacity .2s;font-variant-numeric:tabular-nums}
+.mt:hover .mt-n,.mt:focus-within .mt-n{color:var(--signal);opacity:1}
+.mt-b{display:grid;gap:2px;min-width:0}
+.mt-t{font-family:var(--f-display);font-weight:700;font-variation-settings:"wdth" 90;text-transform:uppercase;font-size:16px;line-height:1.15;overflow-wrap:anywhere}
+.mt-a{font-family:var(--f-label);font-size:11.5px;color:var(--mute)}
+.mt-x{font-size:13.5px;line-height:1.4;font-style:italic}
+.mt-s{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--ink);text-decoration:none;font-family:var(--f-mono);font-size:14px;transition:background .2s,color .2s}
+.mt-s:hover{background:var(--signal);border-color:var(--signal);color:var(--signal-ink)}
+.listen .pl-foot{padding-top:0}
+.pl-note{margin:0;font-size:13px;line-height:1.5;color:var(--mute)}
+.yt{display:grid;gap:8px;margin:0}
+.yt-v{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden;border:var(--rule-w) solid var(--rule)}
+.yt-v iframe,.yt-v img,.yt-v button{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-v img{object-fit:cover;filter:grayscale(1) contrast(1.1);opacity:.85;transition:opacity .25s,filter .25s}
+.yt-v button{display:grid;place-items:center;background:transparent;cursor:pointer;padding:0;color:inherit}
+.yt-v button span{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--signal);color:var(--signal-ink);font-size:22px;padding-left:4px;box-shadow:0 0 0 8px color-mix(in srgb,var(--signal) 25%,transparent);transition:transform .2s}
+.yt-v button:hover span,.yt-v button:focus-visible span{transform:scale(1.08)}
+.yt-v button:hover~img,.yt-v:hover img{opacity:1;filter:grayscale(.2)}
+.yt-c{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;justify-content:space-between;font-family:var(--f-label);font-size:12px;color:var(--mute)}
+.yt-c b{font-family:var(--f-display);font-weight:700;font-variation-settings:"wdth" 90;text-transform:uppercase;font-size:14px;color:var(--ink)}
+.yt-c a{color:var(--mute)}
+.mt.now .mt-n{color:var(--signal);opacity:1}
+.mt.now .mt-t{color:var(--signal)}
+.mt-p{all:unset;cursor:pointer;display:grid;gap:2px;min-width:0}
+.mt-p:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+button.mt-s{cursor:pointer;background:transparent;color:var(--ink)}
+.mt.now button.mt-s{background:var(--signal);border-color:var(--signal);color:var(--signal-ink)}
+.mt-f{font-family:var(--f-label);font-size:11px;color:var(--signal)}
+.mt.off .mt-s{opacity:.45}
+.mt.off .mt-f{color:var(--mute)}
+.xl li.off a{color:var(--mute)}
+.xl em{display:block;font-style:normal;font-size:11px;color:var(--mute)}
+.score{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px 14px;align-items:center;padding:12px 14px;background:var(--panel);color:var(--ink);border:var(--rule-w) solid var(--rule);overflow:hidden}
+.score .scope{grid-column:1 / -1;height:96px;margin:-12px -14px 0;border:0;border-bottom:var(--rule-w) solid var(--rule);border-radius:0}
+.score .scope-l{justify-content:space-between}
+.eq{display:flex;gap:3px;align-items:flex-end;height:24px;width:23px}
+.eq i{display:block;width:4px;height:25%;background:var(--signal);opacity:.55}
+.score.on .eq i{opacity:1;animation:eq .9s ease-in-out infinite alternate}
+.score.on .eq i:nth-child(2){animation-delay:-.35s}.score.on .eq i:nth-child(3){animation-delay:-.6s}.score.on .eq i:nth-child(4){animation-delay:-.15s}
+@keyframes eq{from{height:18%}to{height:100%}}
+.score-t{display:grid;gap:2px;min-width:0}
+.score-t small{font-family:var(--f-label);font-size:11px;color:var(--mute)}
+.score-t b{font-family:var(--f-display);font-variation-settings:"wdth" var(--d-wdth),"wght" var(--d-wght);text-transform:uppercase;font-size:19px;line-height:1.1;overflow-wrap:anywhere}
+.score-t span{font-family:var(--f-label);font-size:12px;color:var(--mute)}
+.score .btn{background:var(--signal);border-color:var(--signal);color:var(--signal-ink);justify-content:center}
+.score .btn:hover{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.score .btn[aria-pressed="true"]{background:transparent;color:var(--signal)}
+@media (max-width:600px){.score{grid-template-columns:auto minmax(0,1fr)}.score .btn{grid-column:1 / -1}}
+.score-ref{grid-column:1 / -1;font-family:var(--f-label);font-size:12px;color:var(--mute);text-decoration:none;border-top:1px solid var(--rule);padding-top:8px}
+.score-ref:hover{color:var(--signal)}
+.player{position:fixed;left:0;right:0;bottom:0;z-index:8;background:#08080A;color:#F4F4F2;border-top:1px solid #2A2A30;padding-bottom:env(safe-area-inset-bottom,0px)}
+.player .wrap{display:grid;grid-template-columns:48px minmax(0,1fr) minmax(0,200px);gap:14px;align-items:center;padding-block:8px}
+.pp{appearance:none;cursor:pointer;width:48px;height:48px;border:1px solid #FF3D96;background:#FF3D96;color:#08080A;font-size:17px;line-height:1;font-family:var(--f-mono)}
+.pp[aria-pressed="true"]{background:transparent;color:#FF3D96}
+.pp:hover{filter:brightness(1.12)}
+.pl-t{display:grid;gap:1px;min-width:0}
+.pl-t small{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#8E8E97;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-t b{font-family:var(--f-display);font-weight:800;font-variation-settings:"wdth" 85;text-transform:uppercase;font-size:15px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-t span{font-family:var(--f-mono);font-size:10.5px;color:#B2B2B9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#plScope{display:block;width:100%;height:40px}
+@media (max-width:520px){.player .wrap{grid-template-columns:48px minmax(0,1fr) 84px;gap:10px}}
+body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
+.anim{animation:rise .55s cubic-bezier(.2,.7,.1,1) both}
+@keyframes rise{from{opacity:.2;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.foot{border-top:1px solid var(--rule)}
+.foot .wrap{padding-block:26px 34px;display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--mute);text-transform:uppercase}
+.foot a{color:var(--ink)}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* ---------- splash: una pagina di televideo su un televisore a tubo, circa 1981 ---------- */
+.sp{position:fixed;inset:0;z-index:9999;background:#000;color:#fff;display:grid;place-items:center;overflow:hidden;font-family:"VT323",ui-monospace,monospace;-webkit-font-smoothing:none;
+  --tx-r:#FF2A2A;--tx-g:#2AFF4F;--tx-y:#FFF22A;--tx-b:#2A3BFF;--tx-m:#FF2AE8;--tx-c:#2AF4FF;--tx-w:#F4F4F4}
+.sp[hidden]{display:none}
+.sp-tube{position:relative;width:min(100vw,calc(100dvh*1.25));height:100dvh;display:flex;flex-direction:column;justify-content:center;padding:max(18px,env(safe-area-inset-top)) clamp(14px,4vw,48px) max(18px,env(safe-area-inset-bottom));
+  font-size:clamp(17px,min(4.6vw,3.4dvh),34px);line-height:1.12;transform-origin:50% 50%;animation:tvon .7s cubic-bezier(.2,.7,.2,1) both}
+.sp-tube::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:3;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.34) 0 1px,transparent 1px 3px)}
+.sp-tube::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:4;background:radial-gradient(ellipse 120% 95% at 50% 50%,transparent 58%,rgba(0,0,0,.55) 82%,#000 100%);animation:flick 4.5s steps(1) infinite}
+.sp-in{position:relative;z-index:2;display:grid;gap:.42em;text-shadow:.06em 0 rgba(255,0,60,.55),-.06em 0 rgba(0,200,255,.45),0 0 .35em rgba(255,255,255,.25)}
+.sp-hd{display:flex;justify-content:space-between;gap:.6em;white-space:nowrap;color:var(--tx-w)}
+.sp-hd b{font-weight:400;color:var(--tx-y)}
+.sp-hd .pg{display:inline-block;min-width:3ch}
+.sp-band{background:var(--tx-b);color:var(--tx-w);padding:.08em .5ch;display:flex;justify-content:space-between}
+.sp-band span:last-child{color:var(--tx-y)}
+.sp-cv{display:block;width:100%;height:auto;image-rendering:pixelated;margin:.25em 0 .1em}
+.sp-l{white-space:pre-wrap}
+.c-y{color:var(--tx-y)}.c-c{color:var(--tx-c)}.c-g{color:var(--tx-g)}.c-m{color:var(--tx-m)}.c-r{color:var(--tx-r)}.c-w{color:var(--tx-w)}
+.sp-seq{display:grid;grid-template-columns:repeat(16,1fr);gap:.28ch;margin:.15em 0}
+.sp-seq i{display:block;height:.62em;background:#123a18;outline:1px solid #0b2410}
+.sp-seq i.on{background:var(--tx-g);box-shadow:0 0 .5em var(--tx-g)}
+.sp-seq i.acc{background:#3a3610}.sp-seq i.acc.on{background:var(--tx-y);box-shadow:0 0 .5em var(--tx-y)}
+.sp-go{all:unset;cursor:pointer;color:var(--tx-w);display:block;text-align:center;padding:.2em 0;animation:tflash 1.1s steps(1) infinite}
+.sp-go:focus-visible{outline:2px solid var(--tx-c);outline-offset:4px}
+.sp-fx{display:grid;grid-template-columns:repeat(4,1fr);gap:.5ch;margin-top:.3em}
+.sp-fx button{all:unset;cursor:pointer;text-align:center;padding:.18em .2ch;color:#000;font-size:.82em;line-height:1.1;text-shadow:none}
+.sp-fx button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.sp-fx .r{background:var(--tx-r)}.sp-fx .g{background:var(--tx-g)}.sp-fx .y{background:var(--tx-y)}.sp-fx .c{background:var(--tx-c)}
+.sp-hint{color:#8a8a8a;font-size:.72em;text-align:center}
+.sp.off .sp-tube{animation:tvoff .55s cubic-bezier(.6,0,.9,.4) forwards}
+.sp.off{animation:spfade .2s .5s forwards}
+@keyframes tvon{0%{transform:scale(1,.004);filter:brightness(6)}45%{transform:scale(1,.004);filter:brightness(6)}75%{transform:scale(1,1.04);filter:brightness(2)}100%{transform:none;filter:none}}
+@keyframes tvoff{0%{transform:none;filter:none}55%{transform:scale(1,.006);filter:brightness(5)}100%{transform:scale(0,.006);filter:brightness(8)}}
+@keyframes spfade{to{opacity:0}}
+@keyframes tflash{0%{opacity:1}50%{opacity:0}}
+@keyframes flick{0%{opacity:1}3%{opacity:.86}4%{opacity:1}61%{opacity:.93}62%{opacity:1}}
+@media (max-width:560px){.sp-fx{grid-template-columns:repeat(2,1fr)}.sp-hd .dt{display:none}.sp-hint{display:none}}
+@media (max-aspect-ratio:4/5){.sp-in{gap:clamp(.42em,2.4dvh,1.6em)}.sp-cv{margin:.6em 0 .5em}.sp-seq i{height:1em}.sp-fx button{padding:.45em .2ch}}
+</style>
+<div class="sp" id="splash" role="dialog" aria-modal="true" aria-label="Synth Britannia, pagina d'apertura" hidden>
+  <div class="sp-tube"><div class="sp-in">
+    <div class="sp-hd" aria-hidden="true"><span>P<span class="pg" id="spPg">100</span></span><b>SYNTH BRITANNIA</b><span class="dt" id="spDt"></span><span id="spCk">00:00:00</span></div>
+    <div class="sp-band"><span>1975 &rarr; 2026</span><span>UK</span></div>
+    <canvas class="sp-cv" id="spCv" width="106" height="32" role="img" aria-label="Synth Britannia"></canvas>
+    <div class="sp-l c-y">CINQUANT'ANNI DI SYNTH POP BRITANNICO</div>
+    <div class="sp-l c-c">23 TAPPE &middot; 4 ATTI &middot; UNA COLONNA SONORA</div>
+    <div class="sp-seq" id="spSeq" aria-hidden="true"></div>
+    <div class="sp-l c-m">Sheffield &middot; Basildon &middot; Manchester &middot; Londra</div>
+    <button class="sp-go" id="spGo" type="button">&#9654; PREMI PER ACCENDERE</button>
+    <div class="sp-fx">
+      <button class="r" type="button" data-sp="audio">INIZIA CON L'AUDIO</button>
+      <button class="g" type="button" data-sp="index">INDICE</button>
+      <button class="y" type="button" data-sp="quiet">SENZA AUDIO</button>
+      <button class="c" type="button" data-sp="t01">TAPPA 01</button>
+    </div>
+    <div class="sp-hint">Digita 100&ndash;123 per andare a una pagina</div>
+  </div></div>
+</div>
+<header class="hero" id="hero">
+  <canvas id="heroScope" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="readout" aria-hidden="true"><span class="c1">CH1 · La musica</span><span class="c2">CH2 · Intanto, fuori</span><span>1975 → 2026</span><span>25 passi</span></div>
+    <div class="hero-grid">
+      <h1 class="mast" aria-label="Synth Britannia"><span class="m1">Synth</span><span class="m2">Britannia</span></h1>
+      <div class="hero-txt">
+        <p class="motto">Il futuro, suonato in anticipo.</p>
+        <p class="lede">Cinquant’anni di synth pop britannico in ventitré tappe, dal 1975 a oggi. Due tracce scorrono insieme: la musica, e il paese che intanto le cambiava intorno.</p>
+        <div class="hero-ctl">
+          <button class="hbtn" id="start" type="button">Inizia il viaggio ↓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div id="navAnchor" aria-hidden="true"></div>
+  <nav class="bar" id="bar" aria-label="Navigazione delle tappe">
+    <div class="wrap bar-in">
+      <div class="bar-row">
+        <button class="nb" id="prev" type="button" aria-label="Tappa precedente">←</button>
+        <button class="here" id="here" type="button" aria-expanded="false" aria-controls="index">
+          <span class="here-n" id="hereN">00</span>
+          <span class="here-t"><small id="hereK">Prologo</small><b id="hereW">La scintilla</b></span>
+          <span class="here-i"><span class="w">Indice</span><span class="chev" aria-hidden="true">▾</span></span>
+        </button>
+        <button class="nb" id="next" type="button" aria-label="Tappa successiva">→</button>
+      </div>
+      <div class="index" id="index" hidden></div>
+      <div class="strip" id="strip" aria-label="Le 25 tappe"></div>
+    </div>
+  </nav>
+  <div id="app"></div>
+</main>
+
+<div class="player" id="player" role="region" aria-label="Colonna sonora">
+  <div class="wrap">
+    <button class="pp" id="pp" type="button" aria-pressed="false" aria-label="Avvia la colonna sonora">▶</button>
+    <div class="pl-t"><small>Colonna sonora originale</small><b id="plT">00 · Scintilla</b><span id="plS">Drone, nastri e primi blip · 76 BPM</span></div>
+    <canvas id="plScope" aria-hidden="true"></canvas>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>Testo completo, verifiche e fonti: <a href="https://claude.ai/code/artifact/bcbbb90d-06eb-4e6c-a247-5056f184a507" target="_blank" rel="noopener">il documento Synth Britannia</a></span>
+    <span>Video da YouTube e una playlist Spotify per ogni tappa · Foto da Wikimedia Commons, con licenza Creative Commons o di pubblico dominio: i crediti sono sotto ogni foto</span>
+  </div>
+</footer>
+
+<script>
+const ACTS={
+  p:{name:"Prologo",short:"Prologo",range:"1975"},
+  1:{name:"Atto I · I pionieri del silicio",short:"Atto I",range:"1977–81"},
+  2:{name:"Atto II · I titani del pop",short:"Atto II",range:"1980–90"},
+  3:{name:"Atto III · Esilio e ritorno",short:"Atto III",range:"1988–2010"},
+  4:{name:"Atto IV · L’eredità",short:"Atto IV",range:"2011–26"},
+  e:{name:"Epilogo",short:"Epilogo",range:"2026"}
+};
+
+const S=[
+{id:"t00",n:"00",act:"p",kind:"pro",who:`La scintilla`,tag:`nel grigio d’Inghilterra`,place:`Regno Unito`,years:`1975–1979`,
+facts:[[`1976–77`,`Il punk esplode e in un paio d’anni si consuma.`],[`Modelli`,`Kraftwerk, la Berlino di Bowie, Giorgio Moroder, i romanzi di J.G. Ballard.`],[`1978`,`Daniel Miller incide Warm Leatherette: nasce la Mute Records.`],[`Mezzi`,`Synth monofonici e drum machine, in camera da letto o in studi di fortuna.`]],
+outShort:`1975: inflazione oltre il 25%. 1976: prestito del FMI. 1978–79: il Winter of Discontent.`,
+story:[`Tutto comincia da qui. Synth Britannia segue in ventitré tappe l’evoluzione dell’elettronica pop britannica, dagli esperimenti di metà anni ’70 fino a oggi. Il punto di partenza è l’omonimo documentario BBC Four del 2009, che racconta il primo decennio. Da lì proseguiamo noi, restando sempre sul suolo britannico.`,
+`Regno Unito, fine anni Settanta. Le fabbriche chiudono e gli scioperi si moltiplicano. Il culmine è il Winter of Discontent del 1978-79, con i rifiuti accumulati per strada e i servizi pubblici paralizzati. Nel maggio 1979 arriva Margaret Thatcher, e nei primi anni ’80 la disoccupazione giovanile esplode nelle città industriali del Nord: Sheffield, Liverpool, Manchester.`,
+`Il punk aveva urlato la sua rabbia con tre accordi, ma nel giro di un paio d’anni si era consumato. Una parte di quella generazione sceglie un’altra strada: spegnere le chitarre e accendere le macchine.`,
+`Sono ragazzi della periferia, studenti delle scuole d’arte, impiegati e operai. Li accomuna l’idea che il rock tradizionale sia diventato prevedibile. Guardano ai Kraftwerk, alla Berlino di Bowie, alla disco elettronica di Giorgio Moroder e ai romanzi distopici di J.G. Ballard. Non vogliono distruggere il presente: vogliono immaginare il futuro. Comprano i primi synth monofonici e le drum machine alla loro portata, li sistemano in camera da letto o in studi di fortuna e cominciano a costruire un suono nuovo.`,
+`È anche una scelta di identità. Al posto del rocker con i capelli lunghi e la camicia aperta c’è un’estetica moderna, geometrica, spesso androgina. Da quelle città grigie nasce un’architettura sonora che conquisterà il mondo.`],
+out:`Nel 1975 l’inflazione britannica supera il 25% e nel 1976 il governo laburista deve chiedere un prestito al Fondo Monetario Internazionale. Molti di questi ragazzi crescono nei grandi complessi di case popolari costruiti negli anni ’60, tra torri di cemento e quartieri svuotati dalle fabbriche che chiudono. È lo stesso paesaggio che raccontano Ballard e, presto, i primi synth.`,
+tracks:[[`David Bowie`,`Warszawa`,`1977`,`La Berlino della Guerra Fredda trasformata in paesaggio sonoro.`],[`Throbbing Gristle`,`United`,`1978`,`Dal gruppo che ha dato il nome all’industrial, una melodia inattesa.`],[`The Normal`,`Warm Leatherette`,`1978`,`Daniel Miller, un synth economico e un’idea alla Ballard: da qui nasce la Mute.`],[`Fad Gadget`,`Back to Nature`,`1979`,`Il primo artista messo sotto contratto dalla Mute.`],[`Cabaret Voltaire`,`Nag Nag Nag`,`1979`,`Sheffield, nastri e rumore: il lato più sperimentale della scena.`]],
+extra:{title:`La colonna sonora del documentario`,note:`I 42 brani di Synth Britannia (BBC Four, 16 ottobre 2009), nell’ordine pubblicato con la scheda del programma. Comprende anche le influenze non britanniche citate nel film.`,
+list:[[`Depeche Mode`,`New Life`],[`Wendy Carlos`,`William Tell Overture`],[`Wendy Carlos`,`A Clockwork Orange, Main Title`],[`Kraftwerk`,`Autobahn`],[`The Clash`,`White Riot`],[`The Normal`,`T.V.O.D.`],[`The Normal`,`Warm Leatherette`],[`The Future`,`4 JG`],[`The Human League`,`Being Boiled`],[`Donna Summer`,`I Feel Love`],[`Cabaret Voltaire`,`Seconds Too Late`],[`Cabaret Voltaire`,`Nag Nag Nag`],[`OMD`,`Messages`],[`OMD`,`Enola Gay`],[`Joy Division`,`Atmosphere`],[`John Foxx`,`Underpass`],[`Throbbing Gristle`,`Still Walking`],[`Throbbing Gristle`,`Hot on the Heels of Love`],[`Fad Gadget`,`Back to Nature`],[`Silicon Teens`,`Memphis Tennessee`],[`Tubeway Army`,`Are “Friends” Electric?`],[`Gary Numan`,`Cars`],[`Visage`,`Fade to Grey`],[`The Flying Lizards`,`Money`],[`Depeche Mode`,`New Life`],[`Depeche Mode`,`Just Can’t Get Enough`],[`The Human League`,`Don’t You Want Me`],[`Heaven 17`,`Penthouse and Pavement`],[`Cabaret Voltaire`,`Landslide`],[`Soft Cell`,`Tainted Love`],[`Yazoo`,`Only You`],[`Yazoo`,`Don’t Go`],[`OMD`,`Maid of Orleans`],[`Eurythmics`,`Sweet Dreams (Are Made of This)`],[`Ultravox`,`Vienna`],[`Kraftwerk`,`The Model`],[`Depeche Mode`,`Everything Counts`],[`Depeche Mode`,`Master and Servant`],[`Pet Shop Boys`,`West End Girls`],[`New Order`,`Ceremony`],[`New Order`,`Blue Monday`],[`Philip Oakey & Giorgio Moroder`,`Together in Electric Dreams`]]}},
+
+{id:"t01",n:"01",act:1,kind:"ep",who:`OMD`,tag:`L’architettura romantica del suono`,place:`Wirral, Merseyside`,years:`1978–oggi`,
+facts:[[`1979`,`Electricity, registrata ai Cargo Studios di Rochdale.`],[`1980`,`Enola Gay: una canzone su Hiroshima che fa ballare.`],[`1981`,`I cori di Souvenir escono da un Mellotron.`],[`2023`,`Bauhaus Staircase, accolto da molti come il migliore da decenni.`]],
+outShort:`1981: la rivolta di Toxteth. La NATO decide di portare i missili Cruise in Gran Bretagna.`,
+story:[`Wirral, 1978. Il vento dall’estuario, le raffinerie all’orizzonte. Andy McCluskey e Paul Humphreys prendono la lezione dei Kraftwerk e la riempiono di malinconia e melodia. Mentre molti pensano che i sintetizzatori servano solo a evocare robot, gli OMD dimostrano che possono raccontare emozioni profondamente umane.`,
+`Nel 1979 registrano Electricity ai Cargo Studios di Rochdale. Poi arrivano le classifiche, con canzoni su temi tutt’altro che leggeri: il bombardamento di Hiroshima in Enola Gay, una raffineria trasformata in cattedrale in Stanlow. I cori di Souvenir vengono dal Mellotron, uno strumento a nastri. Bauhaus Staircase (2023) è il loro ultimo album, accolto da molti come il migliore da decenni. Nel 2024 hanno chiuso il tour britannico più grande della loro carriera alla O2 di Londra.`],
+out:`Il Merseyside è tra le aree più colpite dalla crisi di porti e fabbriche, e nel luglio 1981 il quartiere di Toxteth, a Liverpool, esplode in una rivolta. Intanto la Guerra Fredda si riaccende: nel 1979 la NATO decide di schierare missili nucleari Cruise anche in Gran Bretagna. La paura atomica torna nelle canzoni, ed Enola Gay ne diventa la più ballata.`,
+tracks:[[`OMD`,`Electricity`,`1979`,`L’urgenza del punk dentro un synth economico.`],[`OMD`,`Enola Gay`,`1980`,`Ritmo da festa, tema atomico: il loro capolavoro pop.`],[`OMD`,`Stanlow`,`1980`,`Un’ode lenta e solenne alla raffineria sul Mersey.`],[`OMD`,`Souvenir`,`1981`,`Nostalgia analogica e cori di Mellotron.`],[`OMD`,`Bauhaus Staircase`,`2023`,`La prova che hanno ancora molto da dire.`]]},
+
+{id:"t02",n:"02",act:1,kind:"ep",who:`Gary Numan`,tag:`L’alieno nella macchina`,place:`Cambridge e Londra`,years:`1978–oggi`,
+facts:[[`1978`,`Un Minimoog dimenticato agli Spaceward Studios di Cambridge cambia tutto.`],[`Maggio 1979`,`Are “Friends” Electric? a Top of the Pops, poi al numero uno.`],[`1979`,`Anche Cars arriva al numero uno.`],[`Eredità`,`Nine Inch Nails, Foo Fighters, Basement Jaxx, Sugababes.`]],
+outShort:`Maggio 1979: Margaret Thatcher vince le elezioni. Comincia la stretta monetarista.`,
+story:[`Cambridge, 1978. Gary Webb registra il primo album dei Tubeway Army, una band punk, agli Spaceward Studios. Trova un Minimoog lasciato nella sala di regia, preme un tasto e il suono lo convince a cambiare tutto. Nel maggio 1979 si presenta a Top of the Pops pallido e immobile con Are “Friends” Electric?. Il brano va al numero uno, e poco dopo ci arriva anche Cars, firmata Gary Numan.`,
+`Numan trasforma la fantascienza distopica in un muro di suono pesante e minaccioso. Dimostra che si può fare pop restando freddi e distanti. La sua influenza è lunga: i Nine Inch Nails hanno inciso una cover di Metal, i Foo Fighters di Down in the Park. I Basement Jaxx hanno campionato M.E. in Where’s Your Head At, e le Sugababes hanno costruito Freak Like Me su Are “Friends” Electric?. Intruder (2021) è arrivato al numero due nel Regno Unito. Nel 2026 è di nuovo in tour in Nord America; il nuovo album di inediti, annunciato da tempo, non è ancora uscito.`],
+out:`Maggio 1979 è anche il mese in cui Margaret Thatcher vince le elezioni. Comincia la stretta monetarista: tassi d’interesse alti, sterlina forte, e un’industria manifatturiera che nel giro di due anni perde una parte enorme della sua produzione. L’uomo-macchina freddo e solo di Numan suona come la colonna sonora di un paese che non si riconosce più.`,
+tracks:[[`Tubeway Army`,`Are “Friends” Electric?`,`1979`,`Paranoia urbana e Moog oppressivo.`],[`Gary Numan`,`Cars`,`1979`,`L’auto come rifugio dall’alienazione moderna.`],[`Gary Numan`,`M.E.`,`1979`,`Il lamento dell’ultima macchina rimasta sulla Terra.`],[`Gary Numan`,`Metal`,`1979`,`Un androide che sogna di diventare umano.`],[`Gary Numan`,`Intruder`,`2021`,`Industriale, cupo, attualissimo.`]]},
+
+{id:"t03",n:"03",act:1,kind:"ep",who:`John Foxx & Ultravox`,tag:`La cattedrale di ghiaccio`,place:`Londra`,years:`1977–1984`,
+facts:[[`1977`,`Hiroshima Mon Amour: post-punk e drum machine.`],[`1979`,`Foxx lascia la band; nel 1980 esce Metamatic.`],[`Il ponte`,`Midge Ure e Billy Currie suonano anche nei Visage.`],[`1981`,`Vienna: synth monumentali, pianoforte e viola elettrica.`]],
+outShort:`Tangenziali, sottopassi, Docklands abbandonati. In Europa, la cortina di ferro.`,
+story:[`Nella Londra di fine anni ’70 gli Ultravox di John Foxx sono tra i primi a fondere post-punk e macchine: Hiroshima Mon Amour è del 1977. Nel 1979 Foxx lascia la band. Da solo pubblica Metamatic (1980), un album asciutto e glaciale sulla solitudine della città.`,
+`Al suo posto arriva Midge Ure, che con il tastierista e violinista Billy Currie suona anche nei Visage, il gruppo di Steve Strange e del Blitz Club. Lì nasce la scena New Romantic. Gli Ultravox di Ure ne assorbono il gusto per l’eleganza e il dramma: Vienna (1981) unisce synth monumentali, pianoforte e viola elettrica. Da un lato il bisturi di Foxx, dall’altro il cinema di Ure: due modi opposti di intendere l’elettronica.`],
+out:`Le città inglesi sono attraversate da tangenziali, sottopassi e quartieri in cemento costruiti nel dopoguerra. Nei Docklands di Londra interi moli abbandonati aspettano una nuova vita. Underpass nasce da quel paesaggio, mentre la mitteleuropa di Vienna è quella della Guerra Fredda, divisa dalla cortina di ferro.`,
+tracks:[[`Ultravox`,`Hiroshima Mon Amour`,`1977`,`Uno dei primi incontri tra post-punk e drum machine.`],[`John Foxx`,`Underpass`,`1980`,`Ritmo robotico e synth taglienti.`],[`Ultravox`,`Sleepwalk`,`1980`,`Basso sintetico serrato, il debutto dell’era Ure.`],[`Ultravox`,`Vienna`,`1981`,`Il brano più cinematografico del decennio.`],[`Ultravox`,`Dancing with Tears in My Eyes`,`1984`,`Un inno pop sulla paura nucleare.`]]},
+
+{id:"t04",n:"04",act:1,kind:"flash",who:`Le macchine per tutti`,tag:`La sera in cui le chitarre persero il monopolio`,place:`Sheffield e Londra`,years:`1977–1981`,
+facts:[[`1978`,`Korg MS-20 ed EDP Wasp: synth alla portata di uno stipendio.`],[`Primi ’80`,`Arrivano le drum machine Roland e i primi polifonici economici.`],[`Sheffield`,`Cabaret Voltaire e Human League registrano senza chitarre.`],[`Mute`,`Un singolo diventa un’etichetta: Depeche Mode, Yazoo, Erasure.`]],
+outShort:`Disoccupazione e sussidio: pochi soldi, molto tempo. Nascono Rough Trade, Factory e Mute.`,
+story:[`Maggio 1979: Gary Numan a Top of the Pops è il momento simbolico. Ma la rivoluzione era cominciata un paio d’anni prima, quando i sintetizzatori erano diventati finalmente accessibili. Prima servivano budget da grande band o i laboratori dei Kraftwerk. Alla fine del decennio arrivano modelli monofonici giapponesi e britannici alla portata di uno stipendio, come il Korg MS-20 e l’inglese EDP Wasp, entrambi del 1978. Nei primi anni ’80 seguono le drum machine Roland e i primi polifonici economici.`,
+`Così un gruppo di amici di Sheffield poteva registrare in un piccolo studio senza saper suonare la chitarra: è la storia di Cabaret Voltaire e Human League. Daniel Miller, con un solo singolo, fonda la Mute Records, che diventerà la casa di Depeche Mode, Yazoo ed Erasure. La tecnologia toglie il monopolio ai soliti noti e dà la parola a chi aveva idee prima che mezzi.`],
+out:`Con la disoccupazione in crescita, molti ragazzi vivono di sussidio: pochi soldi, ma molto tempo libero e affitti ancora bassi. Quel tempo diventa il primo, involontario finanziamento della nuova musica. Nascono le etichette indipendenti, come Rough Trade, Factory e Mute, che stampano e distribuiscono dischi fuori dalle major.`,
+tracks:[[`The Normal`,`T.V.O.D.`,`1978`,`L’altro lato del singolo che ha fondato la Mute.`],[`Thomas Leer`,`Private Plane`,`1978`,`Elettronica fatta in casa e autoprodotta.`],[`Silicon Teens`,`Memphis Tennessee`,`1979`,`Daniel Miller rifà Chuck Berry con una band immaginaria.`],[`The Flying Lizards`,`Money (That’s What I Want)`,`1979`,`Un classico soul smontato con pochi mezzi.`],[`Cabaret Voltaire`,`Seconds Too Late`,`1980`,`Sheffield, nastri e ritmi grezzi.`]]},
+
+{id:"t05",n:"05",act:1,kind:"ep",who:`The Human League`,tag:`Dallo studio di Sheffield al tetto del mondo`,place:`Sheffield`,years:`1977–1982`,
+facts:[[`1977`,`Due operatori informatici e un portantino d’ospedale.`],[`Ottobre 1980`,`La scissione: Ware e Marsh fondano gli Heaven 17.`],[`Crazy Daisy`,`Oakey recluta Joanne Catherall e Susan Ann Sulley.`],[`1981`,`Dare e Don’t You Want Me, numero uno di Natale.`]],
+outShort:`1980: tre mesi di sciopero dell’acciaio. Sheffield diventa la «Repubblica popolare dello Yorkshire del Sud».`,
+story:[`Sheffield, 1977. Martyn Ware e Ian Craig Marsh, due operatori informatici, formano con il portantino d’ospedale Phil Oakey gli Human League. Niente chitarre: solo synth e ritmi meccanici. Being Boiled (1978) è un manifesto di proto synth pop.`,
+`Nell’ottobre 1980 la band si spacca. Ware e Marsh se ne vanno e fondano gli Heaven 17. Oakey e Adrian Wright tengono il nome e, con un tour alle porte, reclutano due ragazze notate in pista al Crazy Daisy di Sheffield: Joanne Catherall e Susan Ann Sulley. Sembra un disastro annunciato, invece è l’inizio del mito. Dare (1981), prodotto da Martin Rushent con synth e drum machine Linn, diventa un fenomeno mondiale. Don’t You Want Me è il numero uno di Natale nel Regno Unito e nel 1982 conquista anche gli Stati Uniti.`],
+out:`Sheffield vive di acciaio. Nel 1980 il primo grande sciopero nazionale della siderurgia dura tre mesi, e nel corso del decennio la città perde decine di migliaia di posti di lavoro nell’industria. Il consiglio comunale laburista, soprannominato «Repubblica popolare dello Yorkshire del Sud», diventa uno dei simboli dell’opposizione al thatcherismo. Le canzoni degli Heaven 17 lo dicono apertamente.`,
+tracks:[[`The Human League`,`Being Boiled`,`1978`,`Basso sintetico fangoso, l’inizio di tutto.`],[`The Human League`,`Empire State Human`,`1979`,`Filastrocca elettronica del primo periodo.`],[`The Human League`,`Love Action (I Believe in Love)`,`1981`,`La drum machine incontra la pista da ballo.`],[`The Human League`,`Don’t You Want Me`,`1981`,`Il prototipo della pop song elettronica perfetta.`],[`Heaven 17`,`(We Don’t Need This) Fascist Groove Thang`,`1981`,`L’altra metà della scissione: funk elettronico e politico.`]]},
+
+{id:"t06",n:"06",act:2,kind:"ep",who:`Visage e il Blitz Club`,tag:`I New Romantic`,place:`Covent Garden, Londra`,years:`1979–1982`,
+facts:[[`1979`,`Al Blitz, il martedì, Steve Strange decide chi entra.`],[`1980`,`Fade to Grey, successo in mezza Europa.`],[`La scena`,`Spandau Ballet e Duran Duran: il synth come costume.`],[`1982`,`Ghosts dei Japan entra nella top 5 britannica.`]],
+outShort:`Aprile 1981: Brixton in fiamme. Inizio 1982: oltre tre milioni di disoccupati.`,
+story:[`Covent Garden, 1979. Al Blitz Club, il martedì sera, Steve Strange decide chi entra e Rusty Egan mette i dischi. Il pubblico è fatto di studenti d’arte, stilisti e aspiranti star in costumi estremi: è la culla dei New Romantic. Strange ed Egan formano i Visage con Midge Ure e Billy Currie, e Fade to Grey (1980) diventa un successo in mezza Europa.`,
+`Da quella scena escono gli Spandau Ballet, che nel 1980 debuttano con un suono tutto sintetizzatori. Da Birmingham arrivano i Duran Duran, che nel 1981 uniscono synth, chitarre e glamour e conquistano MTV. Per entrambi, però, il synth è più un costume che una lingua: dal 1983 gli Spandau passano al pop soul e al sassofono di True e Gold, e i Duran restano una band di chitarra, basso e batteria. Più defilati e raffinati, i Japan di David Sylvian portano l’elettronica verso l’arte: Ghosts, quasi solo voce e sintetizzatori, entra nella top 5 britannica nel 1982. Il synth non è più solo un suono: è un’immagine.`],
+out:`Nel 1981 la recessione morde. Ad aprile il quartiere di Brixton, a Londra, è in fiamme, e all’inizio del 1982 i disoccupati superano i tre milioni. Al Blitz la risposta è l’evasione: abiti cuciti a mano, trucco teatrale, l’idea di diventare qualcun altro almeno per una notte.`,
+tracks:[[`Visage`,`Fade to Grey`,`1980`,`L’inno del Blitz, freddo ed elegante.`],[`Spandau Ballet`,`To Cut a Long Story Short`,`1980`,`Il debutto, ancora tutto synth.`],[`Visage`,`Mind of a Toy`,`1981`,`Malinconia meccanica.`],[`Duran Duran`,`Planet Earth`,`1981`,`I New Romantic pronti per le classifiche.`],[`Japan`,`Ghosts`,`1982`,`Minimalismo elettronico e voce sussurrata.`]]},
+
+{id:"t07",n:"07",act:2,kind:"ep",who:`Yazoo`,tag:`L’algoritmo incontra l’anima`,place:`Basildon, Essex`,years:`1981–1983`,
+facts:[[`Fine 1981`,`Vince Clarke lascia i Depeche Mode.`],[`L’annuncio`,`Alison Moyet cerca musicisti su Melody Maker. Clarke risponde.`],[`1982–83`,`Due album: Upstairs at Eric’s e You and Me Both.`],[`Dal 1985`,`Clarke riprende il modello con Andy Bell negli Erasure.`]],
+outShort:`Basildon è una «new town» del dopoguerra. Con il Right to Buy del 1980 gli inquilini comprano la casa popolare.`,
+story:[`Fine 1981. Vince Clarke ha appena scritto quasi tutto il primo album dei Depeche Mode, ma lascia la band. Alison Moyet, cresciuta come lui a Basildon tra punk e blues, mette un annuncio su Melody Maker per cercare musicisti. Clarke risponde e nascono gli Yazoo. Durano due album, Upstairs at Eric’s (1982) e You and Me Both (1983), e poco più di un anno e mezzo.`,
+`Bastano per dimostrare una cosa: la precisione dei sequencer può fare da base a una voce calda, soul, piena di dolore. Il modello «programmatore più grande voce» diventerà un classico. Clarke stesso lo riprenderà dal 1985 con Andy Bell negli Erasure. In Gran Bretagna Situation è il lato B di Only You; negli Stati Uniti, remixata per i club, diventa un classico delle piste da ballo.`],
+out:`Basildon è una «new town» del dopoguerra, costruita per le famiglie che lasciavano l’East End di Londra. Con il Right to Buy del 1980 molti inquilini comprano la casa popolare in cui vivono. Nasce la working class aspirazionale dell’Essex, che vota Thatcher e sogna il salto sociale. È lo stesso mondo da cui escono Yazoo e Depeche Mode.`,
+tracks:[[`Yazoo`,`Only You`,`1982`,`Una delle ballate elettroniche più struggenti di sempre.`],[`Yazoo`,`Don’t Go`,`1982`,`Riff di synth spietato e voce che graffia.`],[`Yazoo`,`Situation`,`1982`,`Il lato B che conquistò i club.`],[`Yazoo`,`Nobody’s Diary`,`1983`,`Malinconia pura su un ritmo da ballo.`],[`Yazoo`,`Ode to Boy`,`1983`,`Ipnotica e minimale, tutta sulla voce di Alison.`]]},
+
+{id:"t08",n:"08",act:2,kind:"ep",who:`Soft Cell`,tag:`Il lato oscuro della notte`,place:`Leeds e Soho`,years:`1979–1982`,
+facts:[[`Leeds`,`Marc Almond e Dave Ball si conoscono al Politecnico.`],[`1981`,`Tainted Love, un brano soul del 1964 ridotto all’osso: numero uno.`],[`1981`,`Non-Stop Erotic Cabaret porta in classifica la notte di Soho.`],[`Eredità`,`Il lato noir del synth pop, fino alla darkwave di oggi.`]],
+outShort:`Soho a luci rosse. L’omosessualità maschile in Inghilterra depenalizzata solo nel 1967.`,
+story:[`Marc Almond e Dave Ball si conoscono al Politecnico di Leeds alla fine degli anni ’70. Almond è un performer provocatorio, Ball costruisce basi elettroniche essenziali e sporche. Nel 1981 riprendono Tainted Love, un brano soul del 1964, e lo riducono a pochi colpi di synth e drum machine. Arrivano al numero uno nel Regno Unito e in mezzo mondo.`,
+`L’album Non-Stop Erotic Cabaret (1981) porta in classifica la vita notturna di Soho: solitudine, desiderio, perdizione. I Soft Cell aprono il lato noir del synth pop, una linea che arriva fino alla darkwave di oggi.`],
+out:`All’inizio degli anni ’80 Soho è ancora il quartiere a luci rosse di Londra, tra sexy shop, club gay e locali notturni. In Inghilterra l’omosessualità maschile era stata depenalizzata solo nel 1967, e la cultura gay vive ancora ai margini. I Soft Cell la portano in prima serata a Top of the Pops.`,
+tracks:[[`Soft Cell`,`Memorabilia`,`1981`,`Il primo singolo, già pensato per i club.`],[`Soft Cell`,`Tainted Love`,`1981`,`Due colpi di synth che hanno fatto la storia.`],[`Soft Cell`,`Bedsitter`,`1981`,`La solitudine di una stanza in affitto.`],[`Soft Cell`,`Say Hello, Wave Goodbye`,`1982`,`Ballata teatrale sugli addii.`],[`Soft Cell`,`Torch`,`1982`,`Fiati caldi ed elettronica notturna.`]]},
+
+{id:"t09",n:"09",act:2,kind:"ep",who:`New Order`,tag:`Le ceneri, il battito, la redenzione`,place:`Manchester`,years:`1980–1987`,
+facts:[[`Maggio 1980`,`La morte di Ian Curtis chiude i Joy Division.`],[`New York`,`I club e la musica elettronica da ballo li cambiano.`],[`1982`,`Con la Factory aprono l’Haçienda.`],[`1983`,`Blue Monday, spesso citato come il 12 pollici più venduto di sempre.`]],
+outShort:`L’Haçienda nasce in un ex salone di yacht e per anni perde soldi, sostenuta dai New Order.`,
+story:[`Maggio 1980: Ian Curtis, voce dei Joy Division, si toglie la vita. Bernard Sumner, Peter Hook e Stephen Morris decidono di continuare come New Order, e a fine anno entra Gillian Gilbert alle tastiere. Nei viaggi a New York scoprono la scena dei club e la musica elettronica da ballo. Decidono di fondere il post-punk con le macchine.`,
+`Nel 1983 esce Blue Monday, spesso citato come il 12 pollici più venduto di tutti i tempi. La formula è unica: il basso melodico di Hook, la voce e le chitarre di Sumner, sequencer e drum machine. Con la Factory Records aprono a Manchester l’Haçienda, il club che anni dopo sarà il cuore della rivoluzione rave. Senza di loro non ci sarebbero i Chemical Brothers.`],
+out:`Manchester, culla della rivoluzione industriale, è piena di magazzini e fabbriche vuote. L’Haçienda apre nel 1982 in un ex salone espositivo di yacht e per anni perde soldi, sostenuta in gran parte dagli incassi dei New Order. Secondo una storia molto citata, la copertina di Blue Monday era così costosa da far perdere denaro su ogni copia venduta. È il simbolo di un’economia indipendente fatta più di entusiasmo che di conti.`,
+tracks:[[`New Order`,`Temptation`,`1982`,`Le chitarre si sciolgono nel ritmo elettronico.`],[`New Order`,`Blue Monday`,`1983`,`Il monolito nero del dancefloor.`],[`New Order`,`Bizarre Love Triangle`,`1986`,`Perfezione pop e cascate di tastiere.`],[`New Order`,`True Faith`,`1987`,`L’apice commerciale.`],[`New Order`,`Be a Rebel`,`2020`,`Il battito non si è fermato.`]]},
+
+{id:"t10",n:"10",act:2,kind:"flash",who:`Il 12 pollici`,tag:`Come il remix è diventato un’arte`,place:`Londra`,years:`1982–1985`,
+facts:[[`Origini`,`Il mix esteso nasce nella disco degli anni ’70, con Tom Moulton.`],[`Laboratorio`,`Intro per i DJ, echi, pause che ripartono più forti.`],[`ZTT`,`Trevor Horn, Frankie Goes to Hollywood, Art of Noise.`],[`Fairlight`,`I primi campionatori smontano e ricostruiscono le canzoni.`]],
+outShort:`Gennaio 1984: la BBC bandisce Relax dalla radio. Va al numero uno per cinque settimane.`,
+story:[`Il mix esteso su 12 pollici nasce nella disco degli anni ’70. Le band elettroniche inglesi lo adottano nei primi anni ’80 e ne fanno un laboratorio: allungano i brani, isolano la drum machine per i DJ, aggiungono echi e pause che ripartono con più forza.`,
+`Il salto lo fa Trevor Horn. Con l’etichetta ZTT, i Frankie Goes to Hollywood e gli Art of Noise usa i primi campionatori come il Fairlight per smontare e ricostruire le canzoni. Ogni singolo esce in più versioni. Il produttore diventa un autore al pari della band.`],
+out:`Nel gennaio 1984 la BBC bandisce dalla radio Relax dei Frankie Goes to Hollywood per il testo esplicito: il singolo va al numero uno e ci resta cinque settimane. Pochi mesi dopo Two Tribes, sulla minaccia nucleare tra Stati Uniti e Unione Sovietica, resta in vetta per nove settimane. La censura e la Guerra Fredda finiscono per vendere dischi.`,
+tracks:[[`ABC`,`The Look of Love`,`1982`,`Trevor Horn alla produzione: pop in alta definizione.`],[`Art of Noise`,`Moments in Love`,`1983`,`Campionamenti e silenzi, il lato più sognante della ZTT.`],[`Frankie Goes to Hollywood`,`Relax`,`1983`,`Bandito dalla BBC, cinque settimane al numero uno.`],[`Frankie Goes to Hollywood`,`Two Tribes`,`1984`,`La Guerra Fredda in pista, nove settimane in vetta.`],[`Art of Noise`,`Close (to the Edit)`,`1984`,`Una canzone costruita come un collage.`]]},
+
+{id:"t11",n:"11",act:2,kind:"ep",who:`Eurythmics`,tag:`L’avanguardia degli specchi`,place:`Londra`,years:`1982–1987`,
+facts:[[`L’inizio`,`Un prestito in banca e uno studio in un loft a nord di Londra.`],[`1983`,`Sweet Dreams (Are Made of This), numero uno negli Stati Uniti.`],[`MTV`,`Annie Lennox in completo maschile e capelli arancioni.`],[`Fine ’80`,`La svolta verso un pop-rock più chitarristico.`]],
+outShort:`1982: la guerra delle Falkland. Giugno 1983: Thatcher rieletta a valanga.`,
+story:[`Dopo lo scioglimento dei Tourists, Dave Stewart e Annie Lennox chiedono un prestito in banca per comprare attrezzatura da registrazione. Si chiudono in un piccolo studio ricavato in un loft a nord di Londra. Ne esce Sweet Dreams (Are Made of This), numero uno negli Stati Uniti nel 1983. Il video, con una Lennox in completo maschile e capelli arancioni cortissimi, cambia l’immagine femminile su MTV.`,
+`Stewart costruisce basi elettroniche rigide e ipnotiche; sopra, la voce di Lennox si muove libera tra soul e teatro. Gli Eurythmics portano l’androginia nel pop di massa. Nella seconda metà del decennio virano verso un pop-rock più chitarristico, senza perdere la loro identità.`],
+out:`Nel 1982 la guerra delle Falkland rilancia la popolarità di Thatcher, che nel giugno 1983 vince le elezioni a valanga. Il paradosso dell’epoca è evidente. La prima donna premier britannica non è un’icona del femminismo, mentre Annie Lennox in giacca e cravatta mette in discussione i ruoli di genere davanti a milioni di spettatori.`,
+tracks:[[`Eurythmics`,`Love Is a Stranger`,`1982`,`Electro-pop ossessivo e trasformismo vocale.`],[`Eurythmics`,`Sweet Dreams (Are Made of This)`,`1983`,`Riff ipnotico e testo cinico sul desiderio.`],[`Eurythmics`,`Who’s That Girl?`,`1983`,`Trasformismo puro: nel video Lennox recita anche un ruolo maschile.`],[`Eurythmics`,`Here Comes the Rain Again`,`1984`,`Archi e synth malinconici.`],[`Eurythmics`,`I Need a Man`,`1987`,`La svolta rock-blues.`]]},
+
+{id:"t12",n:"12",act:2,kind:"ep",who:`La seconda ondata`,tag:`Il synth diventa mainstream`,place:`Londra, Bath, Basildon`,years:`1982–1986`,
+facts:[[`Thomas Dolby`,`She Blinded Me with Science, numero 5 negli Stati Uniti.`],[`Blancmange`,`Living on the Ceiling, con tabla e sitar.`],[`Tears for Fears`,`Da Mad World al numero uno americano nel 1985.`],[`1985`,`Vince Clarke e Andy Bell fondano gli Erasure.`]],
+outShort:`1984–85: lo sciopero dei minatori. Band Aid e Live Aid. MTV apre l’America.`,
+story:[`Tra il 1982 e il 1985 il synth pop smette di essere una scommessa. Con MTV, le band britanniche conquistano anche gli Stati Uniti. Thomas Dolby, inventore e musicista, va nella top 5 americana con She Blinded Me with Science. I Blancmange portano in classifica ritmi e strumenti indiani mescolati ai synth. Howard Jones gira da solo con un muro di tastiere e un mimo sul palco.`,
+`Da Bath arrivano i Tears for Fears di Roland Orzabal e Curt Smith. Mad World (1982) è synth pop cupo e introspettivo. Songs from the Big Chair (1985) li porta al numero uno negli Stati Uniti con Everybody Wants to Rule the World. Nel 1985 Vince Clarke trova la voce di Andy Bell e fonda gli Erasure: con la Mute diventeranno una delle band più amate della seconda metà del decennio.`],
+out:`Tra il marzo 1984 e il marzo 1985 lo sciopero dei minatori spacca il paese e si chiude con una sconfitta; le miniere cominciano a chiudere una dopo l’altra. Nello stesso periodo il pop britannico scopre la sua forza globale. Band Aid (1984) e Live Aid (1985) ne fanno anche uno strumento di coscienza collettiva, e in America MTV apre le porte a quella che i giornali chiamano la «seconda invasione britannica».`,
+tracks:[[`Blancmange`,`Living on the Ceiling`,`1982`,`Synth e suggestioni indiane.`],[`Tears for Fears`,`Mad World`,`1982`,`Il lato malinconico della seconda ondata.`],[`Thomas Dolby`,`She Blinded Me with Science`,`1982`,`Ironia, campionamenti e successo americano.`],[`Howard Jones`,`New Song`,`1983`,`L’uomo-orchestra elettronico.`],[`Erasure`,`Sometimes`,`1986`,`Il ritorno di Vince Clarke, al numero due.`]]},
+
+{id:"t13",n:"13",act:2,kind:"ep",who:`Pet Shop Boys`,tag:`L’intelletto sul dancefloor`,place:`Londra`,years:`1981–oggi`,
+facts:[[`Agosto 1981`,`Neil Tennant e Chris Lowe si incontrano in un negozio di elettronica.`],[`1986`,`West End Girls, numero uno nel Regno Unito e negli Stati Uniti.`],[`2024`,`Nonetheless, quindicesimo album in studio.`],[`2026`,`Dreamworld nelle arene e cinque serate di brani rari a Londra.`]],
+outShort:`1986: il Big Bang della City. 1987: la campagna sull’AIDS. 1988: la Section 28.`,
+story:[`Londra, agosto 1981. Neil Tennant, giornalista musicale, e Chris Lowe, studente di architettura, si incontrano in un negozio di elettronica sulla King’s Road. Li unisce la passione per la disco e i ritmi sintetici. West End Girls esce una prima volta nel 1984, poi viene registrata di nuovo. Nel 1986 è numero uno nel Regno Unito e negli Stati Uniti.`,
+`I Pet Shop Boys fanno della musica da ballo una forma d’arte colta: synth e campionatori luccicanti, testi pieni di ironia, critica sociale e malinconia. Fanno pensare il pubblico mentre lo fanno ballare. Nonetheless (2024) è il loro quindicesimo album. Il tour Dreamworld, in corso dal 2022, riempie ancora le arene europee, e nell’aprile 2026 hanno dedicato cinque serate londinesi ai brani meno noti del loro repertorio.`],
+out:`Nell’ottobre 1986 il «Big Bang» deregolamenta la City di Londra: è l’epoca degli yuppie, che i Pet Shop Boys raccontano con ironia in Opportunities (Let’s Make Lots of Money). È anche l’epoca dell’AIDS, con la campagna governativa «Don’t Die of Ignorance» del 1987. Nel 1988 arriva la Section 28, che vieta agli enti locali di «promuovere» l’omosessualità. It’s a Sin e Being Boring vanno ascoltate anche alla luce di tutto questo.`,
+tracks:[[`Pet Shop Boys`,`West End Girls`,`1985`,`Rap sussurrato nella nebbia di Londra.`],[`Pet Shop Boys`,`Suburbia`,`1986`,`Noia e rabbia di periferia, tra cani che abbaiano e synth.`],[`Pet Shop Boys`,`It’s a Sin`,`1987`,`Drammatico e barocco: produzione pop perfetta.`],[`Pet Shop Boys`,`Being Boring`,`1990`,`Poesia sul tempo e sugli amici perduti.`],[`Pet Shop Boys`,`Loneliness`,`2024`,`Beat da club ed eleganza orchestrale.`]]},
+
+{id:"t14",n:"14",act:2,kind:"ep",who:`Depeche Mode`,tag:`La carne, il ferro, la fede`,place:`Basildon e Berlino`,years:`1980–oggi`,
+facts:[[`Fine 1981`,`Clarke se ne va: Martin Gore diventa l’autore principale.`],[`1982`,`Entra Alan Wilder, che ne plasma il suono.`],[`1986`,`Stripped si apre con il motore della Porsche di Dave Gahan.`],[`1990`,`Violator, e gli stadi di tutto il mondo.`]],
+outShort:`Registrano a Berlino Ovest, vicino al Muro. Marzo 1988: un concerto a Berlino Est.`,
+story:[`Basildon, 1980. I Depeche Mode nascono come gruppo synth pop allegro e scanzonato, con le canzoni di Vince Clarke. Quando Clarke se ne va, a fine 1981, Martin Gore diventa l’autore principale. Nel 1982 entra Alan Wilder, che ne plasma il suono. Comincia una discesa verso atmosfere cupe, industriali e sensuali.`,
+`Con campionatori come l’E-mu Emulator registrano lamiere percosse e rumori meccanici e li trasformano in ritmi. I testi parlano di sesso, fede, potere e dipendenza. In Violator (1990) Personal Jesus porta in primo piano una chitarra blues, e il gruppo diventa capace di riempire gli stadi di tutto il mondo. Dopo la morte di Andy Fletcher nel 2022, Gahan e Gore hanno pubblicato Memento Mori (2023) e un tour mondiale, raccontato nel film concerto M (2025).`],
+out:`A metà decennio i Depeche Mode registrano a Berlino Ovest, negli studi Hansa a pochi passi dal Muro. Nel marzo 1988 suonano anche a Berlino Est, uno dei rari concerti di una band occidentale nella DDR; un anno e mezzo dopo il Muro cade. In patria, Everything Counts e People Are People puntano il dito contro l’avidità e il razzismo degli anni del thatcherismo.`,
+tracks:[[`Depeche Mode`,`Everything Counts`,`1983`,`Il primo morso industriale, contro l’avidità.`],[`Depeche Mode`,`Stripped`,`1986`,`Si apre con il motore della Porsche di Dave Gahan, campionato e trasformato in ritmo.`],[`Depeche Mode`,`Enjoy the Silence`,`1990`,`La canzone perfetta: malinconia e ritmo dance.`],[`Depeche Mode`,`Walking in My Shoes`,`1993`,`Muro di synth e pianoforte distorto.`],[`Depeche Mode`,`Ghosts Again`,`2023`,`Una melodia struggente sulla mortalità.`]]},
+
+{id:"t15",n:"15",act:3,kind:"flash",who:`L’esilio delle macchine`,tag:`Gli anni ’90, dalle classifiche ai rave`,place:`Manchester, magazzini e campi`,years:`1988–1999`,
+facts:[[`1987–88`,`L’acid house e la Second Summer of Love.`],[`TB-303`,`Un basso sintetico fallito sul mercato diventa il suono simbolo.`],[`Britpop`,`L’industria cerca «autenticità» e chitarre.`],[`Club culture`,`KLF, Orbital, Prodigy, Underworld, Chemical Brothers.`]],
+outShort:`1994: una legge contro i rave cita i «battiti ripetitivi». 1997: Blair e la Cool Britannia.`,
+story:[`Tra il 1987 e il 1988 l’acid house sbarca in Gran Bretagna. La Second Summer of Love riempie magazzini e campi di ragazzi che ballano tutta la notte, e l’Haçienda di Manchester ne diventa il tempio. Il suono simbolo è quello del Roland TB-303, un basso sintetico fallito sul mercato e rivenduto di seconda mano a pochi soldi.`,
+`Poco dopo l’industria discografica si innamora prima del grunge e poi del Britpop. La parola d’ordine diventa «autenticità» e il synth pop anni ’80 viene liquidato come finto e datato. Ma le macchine non spariscono. KLF, Orbital, The Prodigy, Underworld e Chemical Brothers portano l’elettronica britannica in classifica con un linguaggio nuovo: quello della club culture. Il synth pop non muore, va in esilio. E i vecchi strumenti analogici diventano preziosi per una nuova generazione di produttori.`],
+out:`Thatcher cade nel novembre 1990 e il paese entra in un’altra recessione. Dopo il grande rave illegale di Castlemorton (1992), il governo approva il Criminal Justice and Public Order Act del 1994, che nomina espressamente la musica fatta di «battiti ripetitivi»: un suono elettronico entra in una legge per limitarne le feste. Nel 1997 vince Tony Blair, e la «Cool Britannia» porta il Britpop a Downing Street.`,
+tracks:[[`A Guy Called Gerald`,`Voodoo Ray`,`1988`,`Manchester risponde a Chicago: l’acid house inglese.`],[`Orbital`,`Chime`,`1990`,`Un classico rave nato in casa.`],[`The KLF`,`3 a.m. Eternal`,`1991`,`Il rave arriva al numero uno.`],[`The Prodigy`,`Out of Space`,`1992`,`Breakbeat e campioni, dalla provincia dell’Essex.`],[`Underworld`,`Born Slippy .NUXX`,`1996`,`L’inno elettronico di una generazione.`]]},
+
+{id:"prodigy",n:"16",act:3,kind:"ep",who:`The Prodigy`,tag:`Il rave diventa punk`,place:`Braintree, Essex`,years:`1990–oggi`,
+facts:[[`1991`,`Charly campiona un filmato educativo per bambini e arriva al numero 3.`],[`1994`,`Music for the Jilted Generation, numero uno: la risposta alla legge contro i rave.`],[`1996–97`,`Firestarter e Breathe al numero uno; The Fat of the Land primo in sedici paesi, Stati Uniti compresi.`],[`2026`,`Howlett e Maxim di nuovo nelle arene, con un nuovo album «evil rave» annunciato.`]],
+outShort:`1994: la legge contro i rave. Howlett risponde con un album per la «generazione tradita».`,
+story:[`Braintree, Essex, 1990. Liam Howlett monta breakbeat e campioni su un Roland W-30 nella cameretta di casa. Con lui ci sono due ballerini, Keith Flint e Leeroy Thornhill, e poco dopo l’MC Maxim. Charly (1991) campiona il gatto parlante di un filmato di pubblica utilità degli anni Settanta e arriva al numero 3. Una parte della stampa parla con disprezzo di «toytown techno», techno da giocattolo. Howlett risponde indurendo il suono.`,
+`Music for the Jilted Generation (1994) va al numero uno. È scritto in gran parte contro la legge che vuole fermare i rave, e Their Law, inciso con i Pop Will Eat Itself, lo dice senza giri di parole. Poi Keith Flint cambia ruolo: da ballerino diventa la voce e il volto di Firestarter (1996), il primo numero uno del gruppo, seguito da Breathe. The Fat of the Land (1997) arriva al primo posto in sedici paesi, Stati Uniti compresi: l’elettronica britannica ora suona come il punk. Keith Flint muore nel marzo 2019, a 49 anni. Howlett e Maxim continuano: nell’aprile 2026 riempiono le arene britanniche, con Carl Cox, e annunciano un nuovo album.`],
+out:`Il Criminal Justice and Public Order Act del 1994 dà alla polizia il potere di sciogliere i raduni all’aperto con musica fatta di una successione di «battiti ripetitivi». Per una generazione cresciuta nei rave, la musica stessa diventa sospetta: Howlett la chiama «jilted generation», la generazione tradita. Nel 2026 il gruppo remixa gli Sleaford Mods, i cronisti dell’Inghilterra dell’austerità: trent’anni dopo, la rabbia ha cambiato bersaglio, non tono.`,
+tracks:[[`The Prodigy`,`Charly`,`1991`,`Un gatto dei cartoni animati diventa un successo rave.`],[`The Prodigy`,`Their Law`,`1994`,`Con i Pop Will Eat Itself, contro la legge sui rave.`],[`The Prodigy`,`Firestarter`,`1996`,`Keith Flint passa dal ballo alla voce: primo numero uno.`],[`The Prodigy`,`Breathe`,`1996`,`Il secondo numero uno, tra elettronica e punk.`],[`The Prodigy`,`Omen`,`2009`,`Il ritorno, dall’album Invaders Must Die, di nuovo al numero uno.`]]},
+
+{id:"underworld",n:"17",act:3,kind:"ep",who:`Underworld`,tag:`Techno e poesia di strada`,place:`Cardiff e Romford`,years:`1987–oggi`,
+facts:[[`1994`,`dubnobasswithmyheadman: con Darren Emerson, il trio cambia la dance inglese.`],[`1996`,`Born Slippy .NUXX chiude Trainspotting e arriva al numero 2.`],[`2012`,`Direttori musicali della cerimonia d’apertura delle Olimpiadi di Londra.`],[`2026`,`Karl Hyde e Rick Smith in tour tutto l’anno, da Las Vegas a Creamfields.`]],
+outShort:`1996: Trainspotting e l’Edimburgo dell’eroina. 2012: l’Olimpiade che celebra il paese in piena austerità.`,
+story:[`Karl Hyde e Rick Smith suonano insieme a Cardiff dalla fine degli anni Settanta. Nel 1983, come Freur, hanno un piccolo successo synth pop, Doot-Doot; gli Underworld nascono nel 1987 come gruppo pop rock, senza fortuna. La svolta arriva all’inizio degli anni Novanta con un DJ ventenne, Darren Emerson. Con lui dubnobasswithmyheadman (1994) unisce techno, dub e i testi di Hyde: frammenti di frasi raccolte per strada e nei pub, ripetuti come un mantra. Hyde e Smith fanno parte anche di Tomato, il collettivo di design che dà al gruppo la sua grafica fatta di parole.`,
+`Nel 1996 Danny Boyle mette Born Slippy .NUXX nel finale di Trainspotting. Il brano, uscito l’anno prima come lato B, torna nei negozi e arriva al numero 2. Hyde l’aveva scritto sulle sue notti da ubriaco a Soho; il pubblico lo prende per un inno alla birra. Emerson lascia nel 2000 e Hyde e Smith continuano in due. Nel 2012 Boyle li chiama di nuovo: sono i direttori musicali della cerimonia d’apertura delle Olimpiadi di Londra. Seguono Drift, un anno di musica nuova pubblicata ogni settimana (2018–19), l’album Strawberry Hotel (2024) e, nel 2026, un tour che attraversa tutto l’anno.`],
+out:`Trainspotting, tratto dal romanzo di Irvine Welsh, racconta i giovani di Edimburgo tra eroina e disoccupazione, figli della deindustrializzazione degli anni Ottanta. Sedici anni dopo, la cerimonia olimpica di Boyle celebra la rivoluzione industriale, il servizio sanitario nazionale e la cultura pop: un ritratto generoso del paese, proprio mentre il governo di coalizione taglia la spesa pubblica. Due Gran Bretagne opposte, e la colonna sonora è la stessa.`,
+tracks:[[`Underworld`,`Rez`,`1993`,`Il primo classico: techno ipnotica, senza parole.`],[`Underworld`,`Cowgirl`,`1994`,`Da dubnobasswithmyheadman: voce e sequencer in loop.`],[`Underworld`,`Born Slippy .NUXX`,`1996`,`Il finale di Trainspotting.`],[`Underworld`,`King of Snake`,`1999`,`Il basso di I Feel Love di Donna Summer, rifatto per chiudere il decennio.`],[`Underworld`,`And I Will Kiss`,`2012`,`Dalla cerimonia d’apertura delle Olimpiadi di Londra.`]]},
+
+{id:"chemical",n:"18",act:3,kind:"ep",who:`The Chemical Brothers`,tag:`Il big beat`,place:`Manchester e Londra`,years:`1992–oggi`,
+facts:[[`1995`,`Da Dust Brothers a Chemical Brothers: esce Exit Planet Dust.`],[`1996`,`Setting Sun con Noel Gallagher, primo numero uno.`],[`1997`,`Dig Your Own Hole numero uno; Block Rockin’ Beats vince un Grammy.`],[`2023`,`For That Beautiful Feeling, decimo album. Sei Grammy in carriera.`]],
+outShort:`1997: Noel Gallagher da Blair a Downing Street. 1998: arrivano le tasse universitarie.`,
+story:[`Tom Rowlands ed Ed Simons si conoscono nel 1989 all’università di Manchester e si ritrovano nelle notti dell’Haçienda. Cominciano come DJ e produttori con il nome Dust Brothers, ma l’omonimo duo americano protesta e nel 1995 diventano The Chemical Brothers. Il loro suono, presto battezzato big beat, mette insieme breakbeat hip hop, acid house e chitarre psichedeliche: musica da club che piace anche al pubblico del rock.`,
+`Nel 1996 Setting Sun, cantata da Noel Gallagher degli Oasis sul ritmo di Tomorrow Never Knows dei Beatles, è il loro primo numero uno: il Britpop e la club culture, che sembravano nemici, si stringono la mano. Dig Your Own Hole (1997) va al primo posto e Block Rockin’ Beats vince un Grammy. Da allora i Grammy sono diventati sei, e i loro concerti, con le immagini di Adam Smith e Marcus Lyall, sono tra i più spettacolari dell’elettronica. Il decimo album, For That Beautiful Feeling, esce nel 2023. Nel 2025 Rowlands fonda i Tomora con la cantante norvegese Aurora.`],
+out:`Gli anni dei Chemical Brothers sono quelli della «Cool Britannia». Nel luglio 1997, tre mesi dopo la vittoria laburista, Noel Gallagher è ospite di Tony Blair a Downing Street: la cultura giovanile diventa immagine di governo. Nel 1998 la Gran Bretagna introduce le tasse universitarie: la generazione di Rowlands e Simons è tra le ultime ad aver studiato gratis.`,
+tracks:[[`The Chemical Brothers`,`Chemical Beats`,`1995`,`Il manifesto del big beat.`],[`The Chemical Brothers`,`Setting Sun`,`1996`,`Con Noel Gallagher: Britpop e club insieme.`],[`The Chemical Brothers`,`Block Rockin’ Beats`,`1997`,`Numero uno e Grammy.`],[`The Chemical Brothers`,`Hey Boy Hey Girl`,`1999`,`Il ritornello che chiude un decennio di club.`],[`The Chemical Brothers`,`The Devil Is in the Beats`,`2011`,`Dalla colonna sonora del film Hanna.`]]},
+
+{id:"t16",n:"19",act:3,kind:"ep",who:`Ladytron e Goldfrapp`,tag:`Il ritorno dell’analogico`,place:`Liverpool e Londra`,years:`1999–2008`,
+facts:[[`1999`,`A Liverpool nascono i Ladytron.`],[`Electroclash`,`Synth vintage in bella vista, voci distaccate.`],[`2000–03`,`Goldfrapp: da Felt Mountain a Black Cherry.`],[`2005`,`Supernature e Destroy Everything You Touch.`]],
+outShort:`Napster, l’iPod, il crollo del CD. Febbraio 2003: Londra in piazza contro la guerra in Iraq.`,
+story:[`Liverpool, 1999. I produttori Daniel Hunt e Reuben Wu si uniscono alle cantanti Helen Marnie e Mira Aroyo. Nascono i Ladytron. Diventano uno dei nomi di punta dell’electroclash, il movimento che rifiuta la pulizia del digitale e riscopre il lato freddo e spigoloso della prima new wave. Sul palco portano synth vintage in bella vista, voci distaccate e testi paranoici.`,
+`Negli stessi anni Alison Goldfrapp e Will Gregory passano dalle atmosfere cinematografiche di Felt Mountain (2000) al glam elettronico di Black Cherry (2003) e Supernature (2005). Il synth britannico torna a essere sexy, teatrale e moderno.`],
+out:`Il nuovo millennio porta Napster, l’iPod e il crollo delle vendite di CD: le case discografiche perdono il controllo della distribuzione. Allo stesso tempo un computer portatile con un software diventa uno studio completo, e i vecchi synth analogici diventano oggetti di culto. Nel febbraio 2003 centinaia di migliaia di persone marciano a Londra contro la guerra in Iraq, e una generazione torna a sentirsi distante dalla politica ufficiale.`,
+tracks:[[`Ladytron`,`Playgirl`,`2001`,`Minimale e fredda, come la prima new wave.`],[`Ladytron`,`Seventeen`,`2002`,`Martello electroclash con basso ossessivo.`],[`Goldfrapp`,`Strict Machine`,`2003`,`Glam elettronico e sensualità.`],[`Ladytron`,`Destroy Everything You Touch`,`2005`,`Muro di synth e melodia celestiale.`],[`Goldfrapp`,`Ooh La La`,`2005`,`Il glam rock riletto con i sintetizzatori.`]]},
+
+{id:"t17",n:"20",act:3,kind:"ep",who:`L’ondata del 2009`,tag:`Il synth pop torna in vetta`,place:`Londra, Blackpool, Manchester`,years:`2008–2010`,
+facts:[[`2009`,`La Roux al numero uno con Bulletproof.`],[`2009`,`Little Boots vince il sondaggio BBC Sound of 2009.`],[`La scena`,`Hot Chip, Hurts, Ellie Goulding.`],[`Coincidenza`,`È lo stesso anno del documentario BBC.`]],
+outShort:`La crisi del 2008, poi dal 2010 l’austerità: tagli a enti locali, cultura e servizi per i giovani.`,
+story:[`Nel 2009, mentre la BBC manda in onda Synth Britannia, una nuova generazione riporta il synth pop in cima alle classifiche britanniche. La Roux, il progetto di Elly Jackson, arriva al numero uno con Bulletproof. Little Boots, al secolo Victoria Hesketh, porta sul palco il Tenori-on giapponese e un’estetica da pop star elettronica.`,
+`Intorno a loro si muove una scena intera. Gli Hot Chip, da Londra, mescolano indie ed elettronica già dalla metà del decennio. Gli Hurts, da Manchester, tornano all’eleganza malinconica degli anni ’80. Ellie Goulding porta il synth pop nel mainstream radiofonico. A trent’anni da Sheffield e Basildon, il cerchio comincia a chiudersi.`],
+out:`La crisi finanziaria del 2008 trascina il Regno Unito in recessione, e dal 2010 il nuovo governo avvia l’austerità, con tagli a enti locali, cultura e servizi per i giovani. Ma i nuovi talenti emergono online, senza passare per la gavetta tradizionale: Little Boots si fa conoscere con i video girati in camera su YouTube e vince il sondaggio BBC Sound of 2009.`,
+tracks:[[`Hot Chip`,`Ready for the Floor`,`2008`,`Indie che balla con le macchine.`],[`La Roux`,`Bulletproof`,`2009`,`Il synth pop anni ’80 di nuovo al numero uno.`],[`Little Boots`,`Remedy`,`2009`,`Pop elettronico luminoso e diretto.`],[`Hurts`,`Wonderful Life`,`2010`,`Malinconia in bianco e nero, alla Tears for Fears.`],[`Ellie Goulding`,`Starry Eyed`,`2010`,`Il synth entra nelle radio di tutti i giorni.`]]},
+
+{id:"t18",n:"21",act:4,kind:"ep",who:`Chvrches`,tag:`Il synth pop alza la voce`,place:`Glasgow`,years:`2011–oggi`,
+facts:[[`2011`,`Iain Cook, Martin Doherty e Lauren Mayberry a Glasgow.`],[`Il suono`,`Scrittura anni ’80, potenza della produzione di oggi.`],[`I temi`,`Molestie online, ansia, relazioni tossiche.`],[`2024`,`Mayberry esordisce da solista con Vicious Creature.`]],
+outShort:`Arriva lo streaming. 2014: il referendum scozzese. 2016: la Scozia vota contro la Brexit.`,
+story:[`Glasgow, 2011. Iain Cook e Martin Doherty si uniscono alla cantante Lauren Mayberry e nascono i Chvrches. L’idea è chiara: prendere la scrittura melodica del synth pop classico e darle la potenza della produzione contemporanea.`,
+`Il risultato è un muro sonoro imponente, su cui la voce cristallina di Mayberry canta testi duri: le molestie online, l’ansia, le relazioni tossiche. Sono la prova che la lezione degli anni ’80 può riempire i festival di oggi. Nel 2024 Mayberry ha esordito come solista con Vicious Creature.`],
+out:`Gli anni ’10 sono quelli dello streaming. Spotify arriva nel Regno Unito tra il 2008 e il 2009 e in pochi anni cambia il modo di ascoltare e di guadagnare: per molte band il disco diventa un biglietto da visita, mentre il reddito vero arriva da tour, festival e merchandising. In Scozia il referendum sull’indipendenza del 2014 e poi la Brexit, respinta dalla maggioranza degli scozzesi nel 2016, accendono il dibattito sull’identità.`,
+tracks:[[`Chvrches`,`The Mother We Share`,`2012`,`Voci campionate e un ritornello immenso.`],[`Chvrches`,`Leave a Trace`,`2015`,`Testo affilato, produzione lucida.`],[`Chvrches`,`Clearest Blue`,`2015`,`Un crescendo che esplode in un riff di scuola Depeche Mode.`],[`Chvrches`,`He Said She Said`,`2021`,`Rabbia contro la manipolazione psicologica.`],[`Chvrches`,`Over`,`2023`,`Disco-pop malinconico, singolo fuori album.`]]},
+
+{id:"t19",n:"22",act:4,kind:"ep",who:`La nuova scena`,tag:`Il synth britannico oggi`,place:`Londra, Todmorden, Rotherham`,years:`2015–oggi`,
+facts:[[`2015`,`Years & Years al numero uno con King.`],[`2020`,`Future Nostalgia di Dua Lipa conquista il pop globale.`],[`Il Nord`,`Working Men’s Club, da Todmorden nello Yorkshire.`],[`Le voci`,`Kelly Lee Owens dal Galles, Self Esteem da Rotherham.`]],
+outShort:`Tour nell’UE ancora −21% sul 2019. In un anno chiudono 30 piccoli locali; 175 città senza tour regolari.`,
+story:[`Negli ultimi dieci anni il synth pop britannico si è diviso in due strade. Una porta al pop di massa. Gli Years & Years di Olly Alexander arrivano al numero uno nel 2015 con King. Nel 2020 la londinese Dua Lipa pubblica Future Nostalgia, un omaggio alla disco elettronica degli anni ’80 che diventa uno degli album pop più ascoltati al mondo.`,
+`L’altra strada torna alle origini, ruvide e sperimentali. I Working Men’s Club, da Todmorden nello Yorkshire, mescolano post-punk e drum machine come a Sheffield nel 1979. La gallese Kelly Lee Owens fonde techno e canzone. Self Esteem, da Rotherham, a pochi chilometri da Sheffield, usa l’elettronica per un pop confessionale e potente.`],
+out:`Brexit, pandemia e caro vita colpiscono proprio i musicisti emergenti. I tour nell’Unione Europea degli artisti britannici sono ancora inferiori del 21% rispetto al 2019, e i costi aggiuntivi sono stimati in circa 208 milioni di sterline. Tra luglio 2024 e luglio 2025 hanno chiuso 30 piccoli locali, più della metà degli altri ha chiuso il 2025 senza profitti, e 175 città non ricevono più tour regolari. Secondo il primo censimento dei musicisti (2023), il reddito medio dalla musica è di circa 20.700 sterline l’anno, e il 43% guadagna meno di 14.000. Oggi suonare costa più che mai, mentre gli strumenti non sono mai costati così poco.`,
+tracks:[[`Years & Years`,`King`,`2015`,`Synth pop da numero uno.`],[`Dua Lipa`,`Physical`,`2020`,`Gli anni ’80 riletti per il pop globale.`],[`Working Men’s Club`,`Teeth`,`2020`,`Post-punk elettronico del Nord inglese.`],[`Kelly Lee Owens`,`On`,`2020`,`Techno che diventa canzone.`],[`Self Esteem`,`I Do This All the Time`,`2021`,`Un manifesto parlato tra pop elettronico e cori gospel.`]]},
+
+{id:"t20",n:"23",act:4,kind:"ep",who:`I vecchi leoni`,tag:`Il ruggito che non si spegne`,place:`Dalle arene ai festival`,years:`2022–2026`,
+facts:[[`OMD`,`Bauhaus Staircase (2023) e i concerti all’aperto dell’estate 2026.`],[`Depeche Mode`,`Memento Mori (2023), il tour mondiale e il film M.`],[`Pet Shop Boys`,`Nonetheless (2024) e il tour Dreamworld.`],[`Ancora attivi`,`Heaven 17, Gary Numan, Soft Cell, Tears for Fears.`]],
+outShort:`Marzo 2026: no all’uso di musica protetta per l’IA senza permesso. Luglio 2026: Andy Burnham primo ministro.`,
+story:[`La cosa più sorprendente di questa storia è che molti pionieri non si sono fermati al circuito della nostalgia. Gli OMD hanno pubblicato Bauhaus Staircase (2023) e nell’estate 2026 hanno girato l’Europa con una serie di concerti all’aperto. I Depeche Mode hanno risposto alla morte di Andy Fletcher con Memento Mori (2023) e un tour mondiale. I Pet Shop Boys hanno pubblicato Nonetheless (2024) e continuano a portare in tour Dreamworld. Heaven 17 e Gary Numan sono ancora in tour, i Soft Cell sono tornati con Happiness Not Included (2022) e i Tears for Fears con The Tipping Point (2022).`,
+`Hanno saputo raccontare il tempo che passa, la perdita e la maturità dentro i loro sintetizzatori. Il cerchio si chiude qui. Lo strumento nato in un’Inghilterra grigia per immaginare un futuro freddo e lontano si è rivelato tra i più umani e duraturi della musica moderna.`],
+out:`Il denaro della musica oggi si concentra in alto: arene, festival e ristampe di lusso, sostenuti da un pubblico adulto con potere d’acquisto. La politica cerca di proteggere il resto della filiera. Nel marzo 2026 il governo ha rinunciato a permettere alle aziende di IA di usare musica protetta senza permesso, e il settore discute un contributo sui biglietti dei grandi concerti per finanziare i piccoli locali. Intanto il paese cambia di nuovo guida: a luglio 2026 Andy Burnham diventa primo ministro, il settimo in dieci anni.`,
+tracks:[[`Depeche Mode`,`My Cosmos Is Mine`,`2023`,`Un’apertura cupa e solenne.`],[`OMD`,`Look at You Now`,`2023`,`Melodia luminosa, firma inconfondibile. Singolo nel 2024.`],[`Pet Shop Boys`,`Dancing Star`,`2024`,`Pura euforia da club.`],[`Tears for Fears`,`The Tipping Point`,`2022`,`Pop elettronico e maturità rock.`],[`Soft Cell & Pet Shop Boys`,`Purple Zone`,`2022`,`L’incontro tra due leggende.`]]},
+
+{id:"ep",n:"EP",act:"e",kind:"epi",who:`Dove siamo arrivati`,tag:`Che cos’è oggi il synth pop britannico`,place:`Regno Unito`,years:`2026`,
+big:[[`£1,57 mld`,`Ricavi della musica registrata nel 2025: record nominale, ma ancora sotto il 2006 in termini reali.`],[`£20.700`,`Reddito medio annuo dalla musica (censimento 2023). Il 43% guadagna meno di £14.000.`],[`−21%`,`Tour nell’Unione Europea degli artisti britannici rispetto al 2019.`],[`7`,`Primi ministri in dieci anni, con Andy Burnham da luglio 2026.`]],
+outShort:`Gli strumenti non sono mai costati così poco. Tempo e spazi per suonare non sono mai stati così cari.`,
+story:[`Oggi il synth pop britannico non è più un genere: è un linguaggio che il pop di tutto il mondo parla senza accorgersene. Ma l’ambiente che lo aveva fatto nascere, fatto di tempo libero, affitti bassi, piccoli locali ed etichette indipendenti, è più fragile che mai. Il paradosso di oggi è tutto qui: gli strumenti non sono mai costati così poco, e vivere di musica non è mai stato così difficile.`],
+table:[[`1975–1979`,`Inflazione oltre il 25%, prestito del FMI, Winter of Discontent`,`Kraftwerk e Moroder come modelli; Sheffield, Mute, Throbbing Gristle`],[`1979–1983`,`Thatcher, recessione, tre milioni di disoccupati, rivolte del 1981`,`Numan al numero uno, Blitz Club, Human League, OMD, Soft Cell`],[`1984–1990`,`Sciopero dei minatori, Big Bang della City, AIDS, Section 28`,`Seconda invasione britannica, ZTT, Pet Shop Boys, Depeche Mode negli stadi`],[`1990–2000`,`Recessione, legge contro i rave (1994), Blair e la Cool Britannia`,`Il synth pop esce dalle classifiche, l’elettronica conquista i club`],[`2000–2010`,`Napster, crollo del CD, guerra in Iraq, crisi del 2008`,`Electroclash, Goldfrapp, l’ondata del 2009 lanciata online`],[`2010–2026`,`Austerità, streaming, Brexit, pandemia, caro vita`,`Chvrches, Dua Lipa, la nuova scena del Nord, i fondatori nelle arene`]],
+sections:[[`L’innovazione: dalla scarsità all’abbondanza`,`Nel 1978 un Minimoog era un oggetto raro, che Numan trovò per caso in uno studio. Nei primi anni ’80 i synth giapponesi abbassarono i prezzi; negli anni 2000 bastava un portatile. Oggi programmi gratuiti, app e copie economiche dei synth storici mettono uno studio intero in una cameretta. La tecnologia non è più l’ostacolo: lo sono il tempo, gli spazi per suonare e la possibilità di farsi ascoltare in mezzo a una quantità infinita di musica. La nuova frontiera è l’intelligenza artificiale: nel marzo 2026 il governo britannico ha rinunciato all’idea di permettere alle aziende di IA di usare musica protetta senza permesso, dopo le proteste di artisti come Paul McCartney, Elton John e Dua Lipa.`],
+[`L’economia: un mercato che cresce, una base che si assottiglia`,`Nel 2025 il mercato discografico britannico ha superato per la prima volta 1,5 miliardi di sterline, all’undicesimo anno consecutivo di crescita, con lo streaming al 67,7% dei ricavi. In termini reali, però, è ancora sotto i livelli del 2006. E la ricchezza non scende fino in fondo: il reddito medio dalla musica è di circa 20.700 sterline l’anno, i piccoli locali chiudono, e i tour europei costano di più dopo la Brexit. Nel 1979 la disoccupazione regalava ai ragazzi di Sheffield tempo e stanze vuote dove sperimentare; oggi quel tempo e quelle stanze sono la cosa più cara.`],
+[`La politica: dagli slogan alle regole`,`Negli anni ’80 il bersaglio era chiaro, e le canzoni lo nominavano: la bomba, l’avidità, il razzismo, la paura dell’AIDS. Oggi le battaglie politiche del synth britannico sono meno visibili ma decisive: il diritto d’autore nell’era dell’IA, i visti e i costi per suonare in Europa, la sopravvivenza dei locali dove si comincia. Su questo sfondo il paese ha cambiato sette primi ministri in dieci anni: un’instabilità che rende difficile qualunque politica culturale di lungo periodo.`],
+[`Dove siamo arrivati`,`Il synth pop britannico oggi vive in tre luoghi. Sui grandi palchi, dove OMD, Pet Shop Boys, Depeche Mode e Human League sono ancora tra i nomi più richiesti. Nel pop di massa, che con Dua Lipa e Years & Years ne ha assorbito suoni e gesti. E nei piccoli club del Nord, dove band come Working Men’s Club rifanno con pochi mezzi quello che a Sheffield si faceva nel 1979. La sfida non è più tecnologica. È ritrovare il tempo, gli spazi e il denaro per sperimentare: proprio le cose che, mezzo secolo fa, la crisi aveva paradossalmente regalato.`]],
+out:`La crisi del 1979 aveva regalato ai ragazzi di Sheffield e Basildon tempo, affitti bassi e stanze vuote dove sperimentare. Nel 2026 la tecnologia è alla portata di tutti, ma proprio il tempo e gli spazi per suonare sono diventati la cosa più cara. È da qui che dovrà ripartire la prossima scintilla.`,
+sources:[[`BPI – mercato discografico britannico 2025`,`https://www.bpi.co.uk/news/13097053`],[`CMU – il mercato in termini reali`,`https://completemusicupdate.com/new-generation-of-british-artists-propel-uk-record-industry-to-1-5-billion-high-says-bpi/`],[`Music Venue Trust – Annual Report 2025`,`https://www.musicvenuetrust.com/2026/01/music-venue-trust-annual-report-2025/`],[`Help Musicians – Musicians’ Census 2023`,`https://www.helpmusicians.org.uk/media-and-press-office/first-ever-musicians-census-provides-unparalleled-insight-into-of-the-careers-of-the-uks-music-creators`],[`International Arts Manager – i costi dei tour dopo la Brexit`,`https://internationalartsmanager.com/government-report-reveals-208-million-cost-of-brexit-touring-barriers-for-uk-sector/`],[`Billboard – il governo abbandona l’opt-out sull’IA`,`https://www.billboard.com/pro/uk-music-industry-wins-government-abandons-ai-opt-out-plan/`],[`NPR/WBUR – Andy Burnham primo ministro`,`https://www.wvtf.org/2026-07-20/andy-burnham-takes-over-as-uk-prime-minister`]],
+tracks:[[`Heaven 17`,`Temptation`,`1983`,`Synth e orchestra: la seconda vita di Ware e Marsh.`],[`Depeche Mode`,`People Are People`,`1984`,`Contro il razzismo, negli anni del thatcherismo.`],[`Pet Shop Boys`,`Opportunities (Let’s Make Lots of Money)`,`1985`,`L’ironia sugli anni degli yuppie.`],[`Little Boots & Phil Oakey`,`Symmetry`,`2009`,`Due generazioni di synth britannico nello stesso brano.`],[`OMD`,`Kleptocracy`,`2023`,`La protesta politica, più di quarant’anni dopo Electricity.`]]}
+];
+
+/* ---------- playlist su Spotify ---------- */
+const PL={"t00":"https://open.spotify.com/playlist/0tTcaQEVQKnmzxt0UsCBPz?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=6d14d0fe-d552-4683-a0e3-b2eb07379b59","t01":"https://open.spotify.com/playlist/5z6g5nU5ZzPlIEr5ATkAdb?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=5182f408-df8d-41ec-b0bd-9a0c24614215","t02":"https://open.spotify.com/playlist/7q4KuX6Gn8ea2etIAGQo4L?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=24548258-06ef-4a7b-9f1e-6b77551c1fb9","t03":"https://open.spotify.com/playlist/3jRA5Pu8z5PwPOSaAGu3Rq?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=ffdd5ee3-858f-4557-87a6-b6ba784d1a97","t04":"https://open.spotify.com/playlist/6lJiCwJwHfm15VQjHsFEKH?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=2005810a-10d6-454e-ad3b-ee61e9bcc0c4","t05":"https://open.spotify.com/playlist/4m0DfIauxFGLaiYxSXq5JM?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=3e7445cd-70ec-4025-b5c9-a6b656131558","t06":"https://open.spotify.com/playlist/75f4v6O05Nr7zd4gxVV8Ao?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=d618bc7f-72d8-45c4-9f56-7cc2125c0bed","t07":"https://open.spotify.com/playlist/3czXULumMrfvnhz2nUk0zu?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=acfc3e3d-55ef-4ea5-9dea-af1ae306add6","t08":"https://open.spotify.com/playlist/2S96nksJQNdm4wEGs3UEoY?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=fa681293-66aa-4261-839f-600b5c616432","t09":"https://open.spotify.com/playlist/5KibjBTwAdyH0RxRQNOzsA?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=5b9f1416-3117-42f6-a06b-c138f8635d3a","t10":"https://open.spotify.com/playlist/08rcO33cVqbVTQ1ToY17ba?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=59fccf85-9ab5-42fb-b3fd-e3a04f124549","t11":"https://open.spotify.com/playlist/3fq9VFfAseKH8Euuhr91YM?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=87be31a0-f182-420b-aefa-9f8419b6d581","t12":"https://open.spotify.com/playlist/6yVYoJhu6cZtT3e0pxqqtx?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=dfe236e5-3487-48f1-bcac-346b444d46c6","t13":"https://open.spotify.com/playlist/5YQqRLc5JMY6ekTy5wHlQN?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=4ae40bb7-9c56-463b-bf72-40b9313ed461","t14":"https://open.spotify.com/playlist/4X75NaQhnwqCdIeDLuWdqK?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=2e72b20f-8329-4381-bcc8-039f3953763d","t15":"https://open.spotify.com/playlist/0rP2GCHRRXlqH15Okbbpws?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=458a44ae-0997-4256-a234-9a478b94c11c","prodigy":"https://open.spotify.com/playlist/6rC2dM2nD5cZOBNLam5QYL","underworld":"https://open.spotify.com/artist/1PXHzxRDiLnjqNrRn2Xbsa","chemical":"https://open.spotify.com/artist/1GhPHrq36VKCY3ucVaZCfo","t16":"https://open.spotify.com/playlist/6HR0zep8thzXuyM8yiieA7?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=77a6a6f1-516c-4c06-97b4-f146b8388985","t17":"https://open.spotify.com/playlist/7wwY3Bk3NTl3wPHlgm6Wuh?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=27f57b27-0835-492f-94e8-9803770f9450","t18":"https://open.spotify.com/playlist/6NIz5OIBTpC9XyuJXoCNAl?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=a52d9b50-6c6e-4f44-96a7-64b81a4002ea","t19":"https://open.spotify.com/playlist/1UNa6lMteVG6whANcOuo4s?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=8ac32551-b53b-4e35-9ba5-6aa0a570c992","t20":"https://open.spotify.com/playlist/73qY71JQEIJ6AfBtTRhxJl?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=45d76837-382d-4ecf-b030-26ed34d109d3","ep":"https://open.spotify.com/playlist/4WEhU52hf7pmGkUJvzTCHE?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=446823b8-b9a0-4727-b9f1-6c6148bdb13d"};
+
+const BG={"t00": ["Warm Leatherette", "The Normal", "1978", "https://open.spotify.com/track/6Jyr3xy2MXnssSCGv1CHRe?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=e8abfd46-4947-4f21-8f43-9cf3fe33df90", ""], "t01": ["Enola Gay", "OMD", "1980", "https://open.spotify.com/track/51j1T5zy8EnyE6crKELDnh?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=71cc167f-f376-4915-bcb4-d8374a62367a", ""], "t02": ["Are “Friends” Electric?", "Tubeway Army", "1979", "https://open.spotify.com/track/3xfOF1wyjUZocifZ5WLeFx?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=bb79be8c-299f-4959-884d-93f7c99c8a10", ""], "t03": ["Vienna", "Ultravox", "1981", "https://open.spotify.com/track/2LXjhNee4iPRVemx9NSZQ3?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=544fa3d0-3fe2-4314-b8c2-9a2384a347b6", ""], "t04": ["Memphis Tennessee", "Silicon Teens", "1979", "https://open.spotify.com/track/36aFqPZ53tblYcZXi9dbqj?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=d325d514-4f73-45d4-82f1-5d62cc682e0f", "Daniel Miller e una band immaginaria: il fai-da-te in tre minuti."], "t05": ["Being Boiled", "The Human League", "1978", "https://open.spotify.com/track/2yMjKoqxWE5DLnaC9BUAdu?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=546b4a0c-83b8-4eb6-9219-bcf44c52d33a", "Don’t You Want Me non è ascoltabile su Spotify in Italia: suona l’inizio di tutto."], "t06": ["Fade to Grey", "Visage", "1980", "https://open.spotify.com/track/3zJUF2PWvKR0qSqkm2Ps28?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=be25830b-dba9-461e-96ca-a9c4de97ff1d", ""], "t07": ["Only You", "Yazoo", "1982", "https://open.spotify.com/track/4GNilkZKILsug3l5pdLoxo?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=8dd26e18-66b9-4817-b5f9-060135ab0f42", ""], "t08": ["Purple Zone", "Soft Cell & Pet Shop Boys", "2022", "https://open.spotify.com/track/0uvZOgo7tNbsszpdzA9duH?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=3319813b-f3a3-4244-a5a5-0337d40c07fd", "Il catalogo anni ’80 dei Soft Cell non è ascoltabile su Spotify in Italia: suona il loro ritorno con i Pet Shop Boys."], "t09": ["Blue Monday", "New Order", "1983", "https://open.spotify.com/track/6hHc7Pks7wtBIW8Z6A0iFq?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=759419d5-0c64-411c-86c2-a235e432cee7", ""], "t10": ["Opportunities (12″ Mix)", "Pet Shop Boys", "1985", "https://open.spotify.com/track/3PvQ4RNiR3ix5L3ffZaW5j?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=6a490eee-5c93-45c9-99d3-97b1b57f72d8", "Un mix esteso da manuale. I brani della ZTT non sono ascoltabili su Spotify in Italia."], "t11": ["Sweet Dreams (Are Made of This)", "Eurythmics", "1983", "https://open.spotify.com/track/1TfqLAPs4K3s2rJMoCokcS?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=0c85614b-85d7-46fc-93a6-cde64bde8c1d", ""], "t12": ["Sometimes", "Erasure", "1986", "https://open.spotify.com/track/3hSD1WQGMFOq08DnnRm2eC?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=bea2eb33-452c-4b83-aca7-6c57099cf9f0", ""], "t13": ["West End Girls", "Pet Shop Boys", "1985", "https://open.spotify.com/track/5Dqik1P9toCJTLj5rEm78s?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=7715cc4e-8f88-4dca-a104-50b260467c9d", ""], "t14": ["Enjoy the Silence", "Depeche Mode", "1990", "https://open.spotify.com/track/6WK9dVrRABMkUXFLNlgWFh?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=40bb236e-557a-4bab-b930-1e928a05c34a", ""], "t15": ["Chime", "Orbital", "1990", "https://open.spotify.com/track/5LOKOBboMIbi4moxpjuFL5?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=f3e1795d-2941-4734-be96-59af3d41f159", ""], "prodigy": ["Firestarter", "The Prodigy", "1996", "https://open.spotify.com/track/79CUrU5o2KAVDTNm4x3eGU", ""], "underworld": ["Cowgirl", "Underworld", "1994", "https://open.spotify.com/track/1COtA9CnHgV20I8XQ9e4Lz", "Da una compilation: quasi tutto il catalogo degli Underworld non è ascoltabile su Spotify in Italia."], "chemical": ["The Devil Is in the Beats", "The Chemical Brothers", "2011", "https://open.spotify.com/track/30aM2MMs9xCPCEwTIGaq99", "Dalla colonna sonora di Hanna: il resto del catalogo non è ascoltabile su Spotify in Italia."], "t16": ["Destroy Everything You Touch", "Ladytron", "2005", "https://open.spotify.com/track/7z5xueAygjpMdd7hT8zAY3?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=92fff58b-cb55-40dc-a400-d4fae9074412", ""], "t17": ["Remedy", "Little Boots", "2009", "https://open.spotify.com/track/5hgxGGhRlAnPMYfFCuC1vY?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=57fdf227-3d39-493b-b6d1-ba1b038c3c27", "Bulletproof di La Roux non è ascoltabile su Spotify in Italia."], "t18": ["CHVRCHES", "Pagina dell’artista", "Glasgow", "https://open.spotify.com/artist/3CjlHNtplJyTf9npxaPl5w?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=424561b5-e4e0-409f-a40f-04766786b929", "Spotify blocca in Italia i singoli brani dei Chvrches: si apre la pagina dell’artista."], "t19": ["Physical", "Dua Lipa", "2020", "https://open.spotify.com/track/3AzjcOeAmA57TIOr9zF1ZW?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=a02699bd-dfff-444d-ba9d-ed18524a5bde", ""], "t20": ["Look at You Now", "OMD", "2023", "https://open.spotify.com/track/2P8nHnr0nud6CDIkz9XY2V?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=ec71d2b6-608e-4137-8639-7ae9b92d3c8a", ""], "ep": ["Kleptocracy", "OMD", "2023", "https://open.spotify.com/track/4UVnKcIv9aK4ImrgFUdvJ5?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=a1e99e96-57ec-4ee0-a6df-55a95bea42e7", "La protesta politica, più di quarant’anni dopo Electricity."]};
+
+const PH={"prodigy":{"src":"/img/prodigy.jpg","w":640,"h":483,"what":"Keith Flint e il chitarrista Jim Davies a Lipsia, 2005","artist":"Herr Stern","lic":"CC BY-SA 3.0","licUrl":"https://creativecommons.org/licenses/by-sa/3.0","file":"Leipzig-Arena 2005.jpg","date":"2005"},"underworld":{"src":"/img/underworld.jpg","w":760,"h":760,"what":"Karl Hyde al Quart Festival di Kristiansand, 2016","artist":"Tore Sætre","lic":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","file":"Karl Hyde Underworld (223726).jpg","date":"2016"},"chemical":{"src":"/img/chemical.jpg","w":760,"h":506,"what":"The Chemical Brothers al Sónar di Barcellona, 2022","artist":"Pcavaller","lic":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","file":"0040 SonarClub TheChemicalBrothers MartiniAriel 20220618.jpg","date":"2022"},"t00":{"src":"/img/t00.png","w":800,"h":800,"what":"EMS VCS3 «Putney», il sintetizzatore inglese del 1969","artist":"Alexander Baxevanis","lic":"CC BY 2.0","licUrl":"https://creativecommons.org/licenses/by/2.0","file":"EMS The Putney (VCS3).jpg","date":"2012"},"t01":{"src":"/img/t01.jpg","w":960,"h":666,"what":"Andy McCluskey e Paul Humphreys, 2011","artist":"monophonic.grrrl","lic":"CC BY-SA 2.0","licUrl":"https://creativecommons.org/licenses/by-sa/2.0","file":"Orchestral Manoeuvres In The Dark 2011.jpg","date":"2011"},"t02":{"src":"/img/t02.jpg","w":722,"h":960,"what":"Gary Numan a Manchester","artist":"Man Alive!","lic":"CC BY 2.0","licUrl":"https://creativecommons.org/licenses/by/2.0","file":"Gary Numan 2011.jpg","date":"2011"},"t03":{"src":"/img/t03.jpg","w":687,"h":960,"what":"John Foxx nel backstage del Cargo, Londra","artist":"Grueslayer","lic":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","file":"MUSIC John Foxx 2008.jpg","date":"2008"},"t04":{"src":"/img/t04.jpg","w":960,"h":646,"what":"Korg MS-20, il sintetizzatore economico del 1978","artist":"Wilfredor","lic":"CC0","licUrl":"https://creativecommons.org/publicdomain/zero/1.0/","file":"Korg Synthesizer MS-20.jpg","date":"2024"},"t05":{"src":"/img/t05.jpg","w":960,"h":641,"what":"The Human League al Paradiso di Amsterdam","artist":"Ludovic Hirlimann","lic":"CC BY-SA 2.0","licUrl":"https://creativecommons.org/licenses/by-sa/2.0","file":"The Human League at Paradiso, Amsterdam, Netherlands-19April2011.jpg","date":"2011"},"t06":{"src":"/img/t06.jpg","w":960,"h":720,"what":"Steve Strange dal vivo con i Visage","artist":"Andrew Hurley","lic":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","file":"Steve Strange, lead singer of English New Wave group \"Visage\".jpg","date":"2014"},"t07":{"src":"/img/t07.jpg","w":960,"h":638,"what":"Yazoo, la reunion del 2008","artist":"livepict.com","lic":"CC BY-SA 3.0","licUrl":"https://creativecommons.org/licenses/by-sa/3.0","file":"Yazoo (band) 2008.06.21 001.jpg","date":"2008"},"t08":{"src":"/img/t08.jpg","w":700,"h":960,"what":"Soft Cell, foto promozionale del 1983","artist":"Sire Records, foto di Eugene Adebari","lic":"Pubblico dominio","licUrl":"","file":"Soft Cell (1983 Sire publicity photo) 02.jpg","date":"1983"},"t09":{"src":"/img/t09.jpg","w":960,"h":640,"what":"New Order dal vivo","artist":"Julio Enriquez","lic":"CC BY 2.0","licUrl":"https://creativecommons.org/licenses/by/2.0","file":"New order 2012 2.jpg","date":"2012"},"t10":{"src":"/img/t10.jpg","w":960,"h":384,"what":"Puntina sul solco di un Technics SL-1200","artist":"Franz van Duns","lic":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","file":"Groove and needle in close embrace from beginning to end.jpg","date":"2019"},"t11":{"src":"/img/t11.jpg","w":684,"h":960,"what":"Eurythmics, foto promozionale del 1985","artist":"RCA Records","lic":"Pubblico dominio","licUrl":"","file":"Eurythmics 1985.jpg","date":"1985"},"t12":{"src":"/img/t12.jpg","w":691,"h":960,"what":"Andy Bell e Vince Clarke, San Francisco 1986","artist":"Nancy J Price","lic":"CC BY-SA 3.0","licUrl":"https://creativecommons.org/licenses/by-sa/3.0","file":"Erasure-andy-vince-wolfgangs-np.jpg","date":"1986"},"t13":{"src":"/img/t13.jpg","w":960,"h":682,"what":"L’insegna di un concerto dei Pet Shop Boys","artist":"James Seattle","lic":"CC BY 2.0","licUrl":"https://creativecommons.org/licenses/by/2.0","file":"Day 007 of 366 (Throw-Back Thursday Edition).jpg","date":"2011"},"t14":{"src":"/img/t14.jpg","w":960,"h":960,"what":"Depeche Mode a Portland","artist":"Brianhphoto","lic":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","file":"Depeche mode in portland Nov 2023.jpg","date":"2023"},"t15":{"src":"/img/t15.jpg","w":960,"h":640,"what":"Orbital all’Hammersmith Apollo di Londra","artist":"Duk3L1xon","lic":"CC BY 4.0","licUrl":"https://creativecommons.org/licenses/by/4.0","file":"Orbital in 2017.jpg","date":"2017"},"t16":{"src":"/img/t16.jpg","w":809,"h":960,"what":"Goldfrapp dal vivo a Oxford","artist":"Greenwich Photography","lic":"CC BY 2.0","licUrl":"https://creativecommons.org/licenses/by/2.0","file":"Goldfrapp Live 2010.jpg","date":"2010"},"t17":{"src":"/img/t17.jpg","w":640,"h":960,"what":"Little Boots","artist":"Mia Margetic / This Is Music Ltd","lic":"CC BY 3.0","licUrl":"https://creativecommons.org/licenses/by/3.0","file":"Little Boots (singer).jpg","date":"2011"},"t18":{"src":"/img/t18.jpg","w":960,"h":687,"what":"Chvrches a Detroit","artist":"Chvrchesitalia","lic":"CC BY-SA 2.0","licUrl":"https://creativecommons.org/licenses/by-sa/2.0","file":"Chvrches 2014.jpg","date":"2023"},"t19":{"src":"/img/t19.jpg","w":624,"h":960,"what":"Dua Lipa alla Berlinale 2026","artist":"Harald Krichel","lic":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","file":"Dua Lipa-69798 (cropped).jpg","date":"2026"},"t20":{"src":"/img/t20.jpg","w":960,"h":720,"what":"Tears for Fears dal vivo","artist":"KWa","lic":"CC BY-SA 3.0","licUrl":"https://creativecommons.org/licenses/by-sa/3.0","file":"Tears for Fears 2008.jpg","date":"2008"},"ep":{"src":"/img/ep.jpg","w":960,"h":632,"what":"La folla di Glastonbury","artist":"Czampal","lic":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","file":"Glastonbury Tribute (cropped and straightened).jpg","date":"2016"}};
+const TR={"The Prodigy|Charly":["02G5u4AcbGhlfSkHzGCpmN",""],"The Prodigy|Their Law":["68k8LJZSquZeUFIkicIPTI",""],"The Prodigy|Firestarter":["79CUrU5o2KAVDTNm4x3eGU",""],"The Prodigy|Breathe":["0Ja4hLKiUSw01E01pJ1yGr",""],"The Prodigy|Omen":["2fplVRbbr1cBG7K5xt1hTE",""],"Underworld|Rez":[null,"blocked"],"Underworld|Cowgirl":["1COtA9CnHgV20I8XQ9e4Lz",""],"Underworld|King of Snake":[null,"blocked"],"Underworld|And I Will Kiss":[null,"blocked"],"The Chemical Brothers|Chemical Beats":[null,"blocked"],"The Chemical Brothers|Setting Sun":[null,"blocked"],"The Chemical Brothers|Block Rockin’ Beats":[null,"blocked"],"The Chemical Brothers|Hey Boy Hey Girl":[null,"blocked"],"The Chemical Brothers|The Devil Is in the Beats":["30aM2MMs9xCPCEwTIGaq99",""],"OMD|Electricity":["0dJRhlMEqJ50Ll5G3huQf3",""],"David Bowie|Warszawa":["5DfvrqibQOQLUsN5QKqBJI",""],"Throbbing Gristle|United":["6dzgPL0vXzlMCXOZtBKXiP",""],"Fad Gadget|Back to Nature":["088nawO9gAPXfeD4fy2SNz",""],"Cabaret Voltaire|Nag Nag Nag":["3Jh9Q25UlM6K979kFE9f6v",""],"OMD|Enola Gay":["51j1T5zy8EnyE6crKELDnh",""],"OMD|Stanlow":["6UR2t4tbtobvXLFRZhH5nb","live"],"OMD|Souvenir":["1sAbj3NVjlieEzRXzoHiFA",""],"OMD|Bauhaus Staircase":["3rhcQVsRhTVunPhoZYd4Kr",""],"Gary Numan|Cars":["4QQEzkxcONBthDLfzqIh9S",""],"Gary Numan|M.E.":["0YBA7eO8kqEzUoC6zAEutF",""],"Gary Numan|Metal":["7FcLgWXLFyAmDrKXIDNwcF",""],"Gary Numan|Intruder":["3cbjDpcObT5zKm9rjvqYvL",""],"Ultravox|Hiroshima Mon Amour":[null,"blocked"],"John Foxx|Underpass":["4YQfX5QoyL1weIUpLQY4Bx",""],"Ultravox|Sleepwalk":["7zm1oAJPPSksl50VugOTXL",""],"Ultravox|Dancing with Tears in My Eyes":["3RL0sk0ONrt5laiqFnAkAy",""],"The Normal|T.V.O.D.":["1brzpF7BFrZOZcMmpP3ATG",""],"Thomas Leer|Private Plane":["2LjV95u5ZQLiDoeutf75ok",""],"The Flying Lizards|Money (That’s What I Want)":[null,"blocked"],"The Flying Lizards|Money":[null,"blocked"],"Cabaret Voltaire|Seconds Too Late":["6YkpDyIILiyMdlFlz4PxQ6",""],"The Human League|Empire State Human":["264dqmPnwMRZFmFPybTWUL","live"],"The Human League|Love Action (I Believe in Love)":["3S79sQMpnMJvHqK1d99R7s",""],"The Human League|Don’t You Want Me":["0AQ7KFLa7POKk4gBKKYyr0","live"],"Heaven 17|(We Don’t Need This) Fascist Groove Thang":["17OUapdbki0jxguverblcY","remix"],"Spandau Ballet|To Cut a Long Story Short":["2CfqGS6D9piBWM3SAjbUJM",""],"Visage|Mind of a Toy":["1IBoVXS4oN1kqtijDlTF20",""],"Duran Duran|Planet Earth":["3MTP9Ea2Z2PEgB09tXhp3S",""],"Japan|Ghosts":["56cELDPiUxpMXM5yGvOUhQ",""],"Yazoo|Don’t Go":["098JUtp63d1Hsge11VuoD2",""],"Yazoo|Situation":["7Adxt6GqSVRjvWQ83SM49j",""],"Yazoo|Nobody’s Diary":["2kxWb7TClJzV3DNMunpqon",""],"Yazoo|Ode to Boy":["2gU6fRHC3vuIncla2Tw8iD",""],"Soft Cell|Memorabilia":[null,"blocked"],"Soft Cell|Tainted Love":[null,"blocked"],"Soft Cell|Bedsitter":[null,"blocked"],"Soft Cell|Say Hello, Wave Goodbye":["5E7XkqfJKaAyBIPttidIfp","live"],"Soft Cell|Torch":["6zI6XHbVO7mEpP4PMb8aL9","live"],"New Order|Temptation":["7j5Q3zhjvpQvMeoPSZwdsa",""],"New Order|Bizarre Love Triangle":["6wVViUl2xSRoDK2T7dMZbR",""],"New Order|True Faith":["4fpxnJGDWFxjGvLJOqPPt8",""],"New Order|Be a Rebel":["7LdNsqjNoH1wnAY8uDXRIg",""],"ABC|The Look of Love":[null,"blocked"],"Art of Noise|Moments in Love":["59euN3uPVC4x63PPqmd15m","live"],"Frankie Goes to Hollywood|Relax":[null,"blocked"],"Frankie Goes to Hollywood|Two Tribes":[null,"blocked"],"Art of Noise|Close (to the Edit)":[null,"blocked"],"Eurythmics|Love Is a Stranger":["3qDibdWbOVhDK39Klc2dvI",""],"Eurythmics|Who’s That Girl?":["5MmVdHW1rAg64iW8Hl5ByO",""],"Eurythmics|Here Comes the Rain Again":["3ZooowctgcKwNx7XtRK3W0",""],"Eurythmics|I Need a Man":["2Q0l5qt7nkLgYxYdXoMBu7",""],"Blancmange|Living on the Ceiling":["7ygp7PFQu9oYlV72tSd2Wz",""],"Tears for Fears|Mad World":[null,"blocked"],"Thomas Dolby|She Blinded Me with Science":["4RkKf3UBRxF2kn2Vh0ww8l",""],"Howard Jones|New Song":["01QAgElIaZwj5HRAuNa7ty",""],"Pet Shop Boys|Suburbia":["3F4JxbEkur9ZXAtQ5GFVXB",""],"Pet Shop Boys|It’s a Sin":["3GNwCZIv4xKUiyoaQfj9Ah",""],"Pet Shop Boys|Being Boring":["25NxW0iRRFOrIfxu4nrYfE",""],"Pet Shop Boys|Loneliness":["6ZNXgoeANOXuk21U9IujVZ",""],"Depeche Mode|Everything Counts":["4oWQeGyPFyr4EpTrv5v0gJ",""],"Depeche Mode|Stripped":["0WpQNP2IxiTtuO8myrA2VH",""],"Depeche Mode|Enjoy the Silence":["6WK9dVrRABMkUXFLNlgWFh",""],"Depeche Mode|Walking in My Shoes":["4lXEE71fm0o3YXhpKhbnzO",""],"Depeche Mode|Ghosts Again":["3p5JD79PQP737dyEY2hnmf",""],"A Guy Called Gerald|Voodoo Ray":["3RTnNwz2gBvPdEaGQluT2Y",""],"Orbital|Chime":["5LOKOBboMIbi4moxpjuFL5",""],"The KLF|3 a.m. Eternal":["0ldLTYuqnHU92weLtw6W9m",""],"The Prodigy|Out of Space":["37m2khXl5lnBzicq1mGoZG",""],"Underworld|Born Slippy .NUXX":[null,"blocked"],"Ladytron|Playgirl":["2i1RPs2CVW6Iw92PuWcQgF",""],"Ladytron|Seventeen":["7qHMaeWBGykUXtoMQLkIC4",""],"Goldfrapp|Strict Machine":["4IBxFTs7vqUkFeXj481Ghy",""],"Ladytron|Destroy Everything You Touch":["7z5xueAygjpMdd7hT8zAY3",""],"Goldfrapp|Ooh La La":["3E0gVkirGK2ouGHPuOO9cN",""],"Hot Chip|Ready for the Floor":["6q6PeTloTbL2vb1Gt9sQQc",""],"La Roux|Bulletproof":[null,"blocked"],"Little Boots|Remedy":["5hgxGGhRlAnPMYfFCuC1vY",""],"Hurts|Wonderful Life":["2pxpJ9lmbqPEIk3M7ezLR0",""],"Ellie Goulding|Starry Eyed":[null,"blocked"],"Chvrches|The Mother We Share":[null,"blocked"],"Chvrches|Leave a Trace":[null,"blocked"],"Chvrches|Clearest Blue":[null,"blocked"],"Chvrches|He Said She Said":[null,"blocked"],"Chvrches|Over":[null,"blocked"],"Years & Years|King":[null,"blocked"],"Dua Lipa|Physical":["3AzjcOeAmA57TIOr9zF1ZW",""],"Working Men’s Club|Teeth":["36euNemOU0ZVArw2FmW9Ta",""],"Kelly Lee Owens|On":["167c1Blr84k9YpSCHLNh9m",""],"Self Esteem|I Do This All the Time":[null,"blocked"],"Depeche Mode|My Cosmos Is Mine":["7Mj6ZcL9mmguKgofjqgKN4",""],"OMD|Look at You Now":["2P8nHnr0nud6CDIkz9XY2V",""],"Pet Shop Boys|Dancing Star":["3UUnDEpvIEJrYNVESeEVR4",""],"Tears for Fears|The Tipping Point":[null,"blocked"],"Soft Cell & Pet Shop Boys|Purple Zone":["0uvZOgo7tNbsszpdzA9duH",""],"Heaven 17|Temptation":[null,"blocked"],"Depeche Mode|People Are People":["4WoKuMjwJXuy9IqX6AH5JE",""],"Pet Shop Boys|Opportunities (Let’s Make Lots of Money)":["5Tjl3JKE16Wysns0mpfkZT",""],"Little Boots & Phil Oakey|Symmetry":[null,"nf"],"Depeche Mode|New Life":["5yAcJtUiOFTdvePkHb4hs8",""],"Wendy Carlos|William Tell Overture":[null,"nf"],"Wendy Carlos|A Clockwork Orange, Main Title":[null,"nf"],"The Clash|White Riot":["0brrVj6VnvrG70SjRTnEJA",""],"The Future|4 JG":["2uqAA02x8xKy5mWRJ0jxdW",""],"Donna Summer|I Feel Love":[null,"blocked"],"OMD|Messages":["6OMss5MjTC1NKo6ixDTkOE","live"],"Joy Division|Atmosphere":["7k42ztYdHyKWrKrENxwjkV",""],"Kraftwerk|Autobahn":["31uidLEHAcF8Cw1cX1VCS8",""],"Throbbing Gristle|Still Walking":["15qCWh5IvH1FJbxBOW4jRL",""],"Throbbing Gristle|Hot on the Heels of Love":["7cgZ2Wwqfh98q8ViBAJjp5",""],"Depeche Mode|Just Can’t Get Enough":["0qi4b1l0eT3jpzeNHeFXDT",""],"Heaven 17|Penthouse and Pavement":["5NLFqUuWiaZoF4BDhFHOyx",""],"Cabaret Voltaire|Landslide":["202uV3BScQKsVhyZKse82W",""],"OMD|Maid of Orleans":["6YUNFZCZWJFkXDxJeDaDD0","live"],"Kraftwerk|The Model":["1FL9DHDSED6lxNMDJUJQvB",""],"Depeche Mode|Master and Servant":["6E6RViXGAhLXHv4Sbe8e96",""],"New Order|Ceremony":["5CRPGdCSOfstyTVK9Ja5EQ",""],"Philip Oakey & Giorgio Moroder|Together in Electric Dreams":["66yyiRoqHI7YkNu7DLcPe6",""],"The Normal|Warm Leatherette":["6Jyr3xy2MXnssSCGv1CHRe",""],"Tubeway Army|Are “Friends” Electric?":["3xfOF1wyjUZocifZ5WLeFx",""],"Ultravox|Vienna":["2LXjhNee4iPRVemx9NSZQ3",""],"Silicon Teens|Memphis Tennessee":["36aFqPZ53tblYcZXi9dbqj",""],"The Human League|Being Boiled":["2yMjKoqxWE5DLnaC9BUAdu",""],"Visage|Fade to Grey":["3zJUF2PWvKR0qSqkm2Ps28",""],"Yazoo|Only You":["4GNilkZKILsug3l5pdLoxo",""],"New Order|Blue Monday":["6hHc7Pks7wtBIW8Z6A0iFq",""],"Eurythmics|Sweet Dreams (Are Made of This)":["1TfqLAPs4K3s2rJMoCokcS",""],"Erasure|Sometimes":["3hSD1WQGMFOq08DnnRm2eC",""],"Pet Shop Boys|West End Girls":["5Dqik1P9toCJTLj5rEm78s",""],"OMD|Kleptocracy":["4UVnKcIv9aK4ImrgFUdvJ5",""]};
+const YT={"David Bowie|Warszawa":["fJmzjGuweTI","tv","Musikladen","1978","EAD1j32TiiY",1],"Throbbing Gristle|United":["5XpqCxJZdGs","audio"],"The Normal|Warm Leatherette":["MgoqyjRXnh0","topic"],"Fad Gadget|Back to Nature":["lKXMgAWJ9JI","topic"],"Cabaret Voltaire|Nag Nag Nag":["HMHpdRZQ6K8","live","KEXP","2026"],"OMD|Electricity":["Y43XLVqjytQ","video"],"OMD|Enola Gay":["d5XJ2GiR6Bo","video"],"OMD|Souvenir":["XDIYOiQUi2s","video"],"OMD|Bauhaus Staircase":["73OUqLGQaAc","live","Virgin Radio","2023"],"Tubeway Army|Are “Friends” Electric?":["BEop9nuTSrg","live","Top of the Pops","1979"],"Gary Numan|Cars":["Y0ZEdij7Nos","live","Wembley","2022"],"Gary Numan|M.E.":["T0GaDBcQKfs","live","Wembley","2022"],"Gary Numan|Metal":["rC_T2joHxtQ","live","Wembley","2022"],"Gary Numan|Intruder":["-RxebQuFgJY","video"],"Ultravox|Hiroshima Mon Amour":["dnaO1Ui-0K0","tv","Old Grey Whistle Test","1978","XNVqdnwLC74",1],"John Foxx|Underpass":["919UyzgW6ws","video"],"Ultravox|Sleepwalk":["vIdbeJzjKSs","live","St Albans","1980"],"Ultravox|Vienna":["hKAT3Kp56Yg","video"],"Ultravox|Dancing with Tears in My Eyes":["lOnAzx5Fn8g","video"],"The Normal|T.V.O.D.":["vY4Ns3rHGI8","topic"],"Thomas Leer|Private Plane":["Fq_nmFUwKjE","topic"],"Silicon Teens|Memphis Tennessee":["_p7Ub1NDTVg","promo","","1979","SbmBWq8mcCE",0],"The Flying Lizards|Money (That’s What I Want)":["NHijqKBWAFw","tv","Top of the Pops","1979","QibyL-49olY",1],"Cabaret Voltaire|Seconds Too Late":["i9KoOiwo5pw","topic"],"The Human League|Being Boiled":["hENt5xGR8Ng","tv","What's On, Granada TV","1978","OUDEi-3o54A",1],"The Human League|Empire State Human":["NfHDQVgoT1o","tv","TV britannica","1979","Vnh21NZMVaI",1],"The Human League|Love Action (I Believe in Love)":["1M8a8ox_QeM","video"],"The Human League|Don’t You Want Me":["uPudE8nDog0","video"],"Heaven 17|(We Don’t Need This) Fascist Groove Thang":["lV5dbcOmw6I","promo","","1981","KSdGXadwT9g",1],"Visage|Fade to Grey":["UMPC8QJF6sI","video"],"Spandau Ballet|To Cut a Long Story Short":["JE2sCISQmpE","video"],"Visage|Mind of a Toy":["Wm4W34m0mG0","video"],"Duran Duran|Planet Earth":["8NF6Qa84mno","video"],"Japan|Ghosts":["99s9hTIELCo","tv","Top of the Pops","1982","ZK8DBICAWFs",1],"Yazoo|Only You":["dt9gn7R683k","live","TopPop, TV olandese","1982"],"Yazoo|Don’t Go":["_sQGwDeambg","video"],"Yazoo|Situation":["hFfPxNDwjCY","tv","The Tube","1982","ysmVlaw36L0",1],"Yazoo|Nobody’s Diary":["1qq7jTPkjVg","video"],"Yazoo|Ode to Boy":["xpItoS4tUJ4","topic"],"Soft Cell|Memorabilia":["hCIUUgw7VlQ","video","",""],"Soft Cell|Tainted Love":["XZVpR3Pk-r8","video"],"Soft Cell|Bedsitter":["lbC4yxjydUc","video"],"Soft Cell|Say Hello, Wave Goodbye":["y9KgEs3Zksg","video"],"Soft Cell|Torch":["AdQpBm03C-c","video"],"New Order|Temptation":["xxDv_RTdLQo","video"],"New Order|Blue Monday":["tJBAVTwUzHU","live","Top of the Pops","1983"],"New Order|Bizarre Love Triangle":["tkOr12AQpnU","video"],"New Order|True Faith":["mfI1S0PKJR8","video"],"New Order|Be a Rebel":["JOoyPT6RoF4","video"],"ABC|The Look of Love":["cNEdxZURTaI","video"],"Art of Noise|Moments in Love":["EC5XTz-S8k0","live","in concerto","1986","uNkcZ8QoNuI",1],"Frankie Goes to Hollywood|Relax":["Yem_iEHiyJ0","video"],"Frankie Goes to Hollywood|Two Tribes":["pO1HC8pHZw0","video"],"Art of Noise|Close (to the Edit)":["-sFK0-lcjGU","video"],"Eurythmics|Love Is a Stranger":["o6f593X6rv8","video"],"Eurythmics|Sweet Dreams (Are Made of This)":["qeMFqkcPYcg","video"],"Eurythmics|Who’s That Girl?":["-5iDKWV6Chg","video"],"Eurythmics|Here Comes the Rain Again":["izF-QhejuXE","video"],"Eurythmics|I Need a Man":["3QFu8SD4sqE","video"],"Blancmange|Living on the Ceiling":["cL0NXKprKnQ","video"],"Tears for Fears|Mad World":["u1ZvPSpLxCg","video"],"Thomas Dolby|She Blinded Me with Science":["V83JR2IoI8k","video"],"Howard Jones|New Song":["9fjg7N_mGaU","video"],"Erasure|Sometimes":["S1a8QABKNo0","video"],"Pet Shop Boys|West End Girls":["p3j2NYZ8FKs","video"],"Pet Shop Boys|Suburbia":["Z6la0zT-5JM","video"],"Pet Shop Boys|It’s a Sin":["QkwgMMNXjTc","video"],"Pet Shop Boys|Being Boring":["NVC-jusXGno","video"],"Pet Shop Boys|Loneliness":["dUVfoybVqIg","video"],"Depeche Mode|Everything Counts":["1t-gK-9EIq4","video"],"Depeche Mode|Stripped":["qU8UfYdKHvs","video"],"Depeche Mode|Enjoy the Silence":["aGSKrC7dGcY","video"],"Depeche Mode|Walking in My Shoes":["GrC_yuzO-Ss","video"],"Depeche Mode|Ghosts Again":["iIyrLRixMs8","video"],"A Guy Called Gerald|Voodoo Ray":["j7vxHOCeiQ4","video"],"Orbital|Chime":["KfCTtR_a_rE","live","Glastonbury","1994"],"The KLF|3 a.m. Eternal":["HDsCeC6f0zc","video"],"The Prodigy|Out of Space":["a4eav7dFvc8","video"],"Underworld|Born Slippy .NUXX":["XiMrrleH_hI","video"],"The Prodigy|Charly":["d-nodikKxCM","tv","Top of the Pops","1991","ucvXp4pUvb8",1],"The Prodigy|Their Law":["efYUMqV7kNU","live","Glastonbury","1995","lCEQ-VHlojk",1],"The Prodigy|Firestarter":["wmin5WkOuPw","video"],"The Prodigy|Breathe":["rmHDhAohJlQ","video"],"The Prodigy|Omen":["sqcFYai1D7Y","live","Coachella","2025"],"Underworld|Rez":["F6Y7lcvubhU","video"],"Underworld|Cowgirl":["BmpBbnPSOTI","live","BBC 6 Music Festival","2016"],"Underworld|King of Snake":["IGa06mpuDK4","live","Coachella","2016"],"Underworld|And I Will Kiss":["7QL_uG2GSZo","live","cerimonia olimpica di Londra","2012","Ka4MZzdScRI",0],"The Chemical Brothers|Chemical Beats":["_GfcIprkuvw","topic"],"The Chemical Brothers|Setting Sun":["p5NX1FC-7-w","video"],"The Chemical Brothers|Block Rockin’ Beats":["iTxOKsyZ0Lw","video"],"The Chemical Brothers|Hey Boy Hey Girl":["tpKCqp9CALQ","video"],"The Chemical Brothers|The Devil Is in the Beats":["DE29v0A7cck","topic"],"Ladytron|Playgirl":["qMH6wljk4Xw","video"],"Ladytron|Seventeen":["s6jaYJx7yeI","video"],"Goldfrapp|Strict Machine":["YeawPUpTHJA","video"],"Ladytron|Destroy Everything You Touch":["JTTwlAT_AwU","video"],"Goldfrapp|Ooh La La":["uco-2V4ytYQ","video"],"Hot Chip|Ready for the Floor":["Ah_QkwK4FY8","video"],"La Roux|Bulletproof":["Kk8eJh4i8Lo","video"],"Little Boots|Remedy":["19ICN6S66-w","live","Glastonbury","2009","oFXRFh8fMzQ",1],"Hurts|Wonderful Life":["ZsXP8uVnZa4","video"],"Ellie Goulding|Starry Eyed":["fBf2v4mLM8k","video"],"Chvrches|The Mother We Share":["_mTRvJ9fugM","video"],"Chvrches|Leave a Trace":["ipHpnzWiaNY","live","KEXP",""],"Chvrches|Clearest Blue":["BZyzX4c1vIs","video"],"Chvrches|He Said She Said":["fyyiJc0Wk2M","video"],"Chvrches|Over":["8ecVwQIUTHA","video"],"Years & Years|King":["g_uoH6hJilc","video"],"Dua Lipa|Physical":["9HDEHj2yzew","video"],"Working Men’s Club|Teeth":["0ovHJ_NzHbE","video"],"Kelly Lee Owens|On":["53EWchMsij8","video","",""],"Self Esteem|I Do This All the Time":["Mtd_jlV61mA","video"],"Depeche Mode|My Cosmos Is Mine":["S698DWXhu5I","audio"],"OMD|Look at You Now":["1i7jy-3CIQ4","video"],"Pet Shop Boys|Dancing Star":["QyzsPTwGHa8","video"],"Tears for Fears|The Tipping Point":["yUp-ujO979U","video"],"Soft Cell & Pet Shop Boys|Purple Zone":["cv4QNTg1Mps","video"],"Heaven 17|Temptation":["xWwtMrDX2o8","video"],"Depeche Mode|People Are People":["MzGnX-MbYE4","video"],"Pet Shop Boys|Opportunities (Let’s Make Lots of Money)":["aNPq-GyfrXg","tv","Top of the Pops","1986","mlLwFwZ2X4A",1],"Little Boots & Phil Oakey|Symmetry":["3Wl1bVAqKco","topic"],"OMD|Kleptocracy":["tzNvDQ7Iav8","video"],"OMD|Stanlow":["xevq955tY8c","live","con la Royal Liverpool Philharmonic",""]};
+
+/* ---------- utilità ---------- */
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const spot=(a,t)=>"https://open.spotify.com/search/"+encodeURIComponent((a+" "+t).replace(/[“”"()&]/g," ").replace(/\s+/g," ").trim());
+const RM=matchMedia("(prefers-reduced-motion: reduce)");
+const deep=id=>`https://open.spotify.com/track/${id}?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1`;
+const ytOf=(a,t)=>{const r=YT[a+"|"+t];if(!r||!r[0])return null;if(r[4]&&YTDEAD[r[0]])return {v:r[4],k:"topic",w:"",y:"",fb:"",u:0};return {v:r[0],k:r[1],w:r[2]||"",y:r[3]||"",fb:r[4]||"",u:r[5]||0}};
+const YTDEAD={};
+function ytLabel(Y){const where=Y.w||Y.y?" · "+esc([Y.w,Y.y].filter(Boolean).join(", ")):"";
+  const base=Y.k==="live"||Y.k==="tv"?"Dal vivo"+where:Y.k==="promo"?"Video"+where:ytKind(Y.k);return base+(Y.u?" · caricamento non ufficiale":"")}
+/* un video rimosso da YouTube restituisce un'anteprima vuota di 120×90: si torna all'audio ufficiale */
+function ytCheck(img){const v=img.closest(".yt-v");if(!v)return;const id=v.dataset.v;const dead=!img.naturalWidth||img.naturalWidth<=120;if(!dead)return;
+  const k=Object.keys(YT).find(x=>YT[x][0]===id&&YT[x][4]);if(!k)return;YTDEAD[id]=1;const [a,t]=k.split("|");const tr=S[cur].tracks.find(r=>r[0]===a&&r[1]===t);
+  const box=document.getElementById("ytBox");if(tr&&box)box.innerHTML=ytFacade(...tr)}
+const ytKind=k=>k==="video"?"Video ufficiale":k==="audio"?"Audio ufficiale":k==="topic"?"Audio":"Video";
+function ytFacade(a,t,y){const Y=ytOf(a,t);if(!Y)return "";return `<div class="yt-v" data-v="${Y.v}"><img src="https://i.ytimg.com/vi/${Y.v}/hqdefault.jpg" alt="" loading="lazy"${Y.fb?' onload="ytCheck(this)" onerror="ytCheck(this)"':""}><button type="button" class="yt-go" aria-label="Guarda ${esc(t)} di ${esc(a)}"><span aria-hidden="true">▶</span></button></div><div class="yt-c"><span><b>${esc(t)}</b> · ${esc(a)}, ${esc(y)}</span><span>${ytLabel(Y)} · <a href="https://www.youtube.com/watch?v=${Y.v}" target="_blank" rel="noopener">YouTube ↗</a></span></div>`}
+function trackLink(a,t){const r=TR[a+"|"+t];if(r&&r[0])return {href:deep(r[0]),direct:true,flag:r[1]==="live"?"Versione dal vivo":r[1]==="remix"?"Remix":""};return {href:spot(a,t),direct:false,flag:r&&r[1]==="blocked"?"Non ascoltabile su Spotify in Italia":""}}
+const NT=S.filter(e=>e.kind==="ep"||e.kind==="flash").length;let epN=0,flN=0;S.forEach(e=>{if(e.kind==="ep")e.ord=++epN;if(e.kind==="flash")e.ord=++flN});
+const kindLabel=e=>e.kind==="pro"?"Prologo":e.kind==="epi"?"Epilogo":e.kind==="flash"?`Flash ${String(e.ord).padStart(2,"0")} di 03`:`Episodio ${String(e.ord).padStart(2,"0")} di ${epN}`;
+const stepLabel=e=>e.kind==="pro"?"Prologo":e.kind==="epi"?"Epilogo":`Tappa ${e.n}`;
+const wdthFor=s=>{const L=s.length;return L<=10?125:L<=16?100:L<=22?80:66};
+const idx=id=>S.findIndex(e=>e.id===id);
+
+/* ---------- barra di navigazione ---------- */
+const anchor=document.getElementById("navAnchor");
+const hereBtn=document.getElementById("here"),ixEl=document.getElementById("index"),strip=document.getElementById("strip");
+const prevBtn=document.getElementById("prev"),nextBtn=document.getElementById("next");
+const barEl=document.getElementById("bar");
+const setBarH=()=>document.documentElement.style.setProperty("--barh",barEl.offsetHeight+"px");
+setBarH();if("ResizeObserver" in window)new ResizeObserver(setBarH).observe(barEl);
+function toAnchor(){const y=anchor.getBoundingClientRect().top+scrollY;scrollTo({top:y,behavior:RM.matches?"auto":"smooth"})}
+function nav(i){if(i<0||i>=S.length)return;pending="anchor";note(i);go(S[i].id)}
+function toggleIndex(force){
+  const open=force!==undefined?force:ixEl.hidden;
+  if(open&&anchor.getBoundingClientRect().top>2)scrollTo({top:anchor.getBoundingClientRect().top+scrollY,behavior:"auto"});
+  ixEl.hidden=!open;hereBtn.setAttribute("aria-expanded",String(open));
+  if(open){const c=ixEl.querySelector('[aria-current="true"]');if(c)c.scrollIntoView({block:"nearest"})}
+}
+(function buildBar(){
+  strip.innerHTML=S.map((e,i)=>`<button type="button" class="tick${i>0&&S[i-1].act!==e.act?" gap":""}" data-i="${i}" aria-label="${esc(stepLabel(e)+": "+e.who)}" title="${esc(e.n+" · "+e.who)}"><i></i></button>`).join("");
+  strip.addEventListener("click",ev=>{const b=ev.target.closest(".tick");if(b)nav(+b.dataset.i)});
+  const groups=[];S.forEach((e,i)=>{let g=groups[groups.length-1];if(!g||g.act!==e.act){g={act:e.act,items:[]};groups.push(g)}g.items.push(i)});
+  ixEl.innerHTML=`<div class="ix">${groups.map(g=>`<div class="ix-g"><p class="ix-h">${esc(ACTS[g.act].name)} · ${esc(ACTS[g.act].range)}</p>${g.items.map(i=>{const e=S[i];return `<a class="ix-a" href="#${e.id}" data-i="${i}"><span class="ix-n">${e.n}</span><span class="ix-w">${esc(e.who)}${e.kind==="flash"?"<em>Flash</em>":""}</span><span class="ix-t">${esc(e.tag)} · ${esc(e.years)}</span></a>`}).join("")}</div>`).join("")}</div>`;
+  ixEl.addEventListener("click",ev=>{const a=ev.target.closest(".ix-a");if(a){pending="anchor";note(+a.dataset.i);toggleIndex(false)}});
+  hereBtn.addEventListener("click",()=>toggleIndex());
+  prevBtn.addEventListener("click",()=>nav(cur-1));
+  nextBtn.addEventListener("click",()=>nav(cur+1));
+  addEventListener("keydown",ev=>{if(ev.key==="Escape"&&!ixEl.hidden){toggleIndex(false);hereBtn.focus()}});
+})();
+function updateBar(){
+  const e=S[cur];
+  document.getElementById("hereN").textContent=e.n;
+  document.getElementById("hereK").textContent=e.kind==="pro"?"Prologo":e.kind==="epi"?"Epilogo":`Tappa ${e.n} di ${NT}${e.kind==="flash"?" · Flash":""}`;
+  document.getElementById("hereW").textContent=e.who;
+  prevBtn.disabled=cur===0;nextBtn.disabled=cur===S.length-1;
+  strip.querySelectorAll(".tick").forEach(b=>{const k=+b.dataset.i;b.classList.toggle("on",k===cur);b.classList.toggle("past",k<cur);b.setAttribute("aria-current",k===cur?"step":"false")});
+  ixEl.querySelectorAll(".ix-a").forEach(a=>a.setAttribute("aria-current",String(+a.dataset.i===cur)));
+}
+
+/* ---------- viste ---------- */
+const app=document.getElementById("app");
+let pending="none",cur=0;
+function go(hash){if(location.hash==="#"+hash)route();else location.hash=hash}
+
+function scopeBlock(e,label2){return `<div class="scope"><canvas class="cs" data-i="${idx(e.id)}" aria-hidden="true"></canvas><div class="scope-l"><span class="c1">CH1 · ${esc(e.who)}</span><span>CH2 · ${esc(label2)}</span><span>${esc(stepLabel(e))} · ${esc(e.years)}</span></div></div>`}
+
+function scoreBlock(e){
+  const p=PATCH[e.id],b=BG[e.id];if(!p)return "";
+  return `<div class="score"><div class="scope" aria-hidden="true"><canvas class="cs" data-i="${idx(e.id)}" data-solo="1"></canvas><div class="scope-l"><span class="c1">CH1 · ${esc(p.n)}</span><span class="sc-state">Forma d’onda della colonna sonora</span><span>${p.bpm} BPM</span></div></div><div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="score-t"><small>Colonna sonora originale, generata dal vivo mentre leggi</small><b>${esc(p.n)}</b><span>${esc(p.d)}</span></div><button type="button" class="btn score-b" aria-pressed="false">▶ Suona</button>${b?`<a class="score-ref" href="${esc(b[3])}" target="_blank" rel="noopener">Il brano di riferimento: ${esc(b[0])} · ${esc(b[1])} ↗ Spotify</a>`:""}</div>`;
+}
+function nextLink(i){
+  if(i<S.length-1){const n=S[i+1];return `<a class="next" href="#${n.id}"><small>Prossima tappa →</small><span>${esc(n.n)} · ${esc(n.who)}</span></a>`}
+  return `<a class="next" href="#t00"><small>Fine del viaggio · ricomincia</small><span>00 · ${esc(S[0].who)}</span></a>`;
+}
+
+const WORLD={p:"zine",1:"cold",2:"pop",3:"rave",4:"screen",e:"screen"};
+function ransom(str,seed){let k=0;return [...str].map(ch=>{if(ch===" ")return " ";k++;const r1=hash(seed*17+k*3),r2=hash(seed*29+k*7),r3=hash(seed*41+k*11),r4=hash(seed*53+k*13);const w=70+Math.floor(r1*60),g=600+Math.floor(r2*300),rot=(r3*5-2.5).toFixed(1),inv=r4<.18&&!/[Iil1]/.test(ch);return `<span class="rl${inv?" inv":""}" style="font-variation-settings:'wdth' ${w},'wght' ${g};transform:rotate(${rot}deg)">${esc(ch)}</span>`}).join("")}
+function photoBlock(e){
+  const p=PH[e.id];if(!p)return "";
+  const page="https://commons.wikimedia.org/wiki/File:"+encodeURIComponent(p.file.replace(/ /g,"_"));
+  const lic=p.licUrl?`<a href="${esc(p.licUrl)}" target="_blank" rel="noopener">${esc(p.lic)}</a>`:esc(p.lic);
+  return `<figure class="cv-photo"><span class="ph"><img src="${esc(p.src)}" width="${p.w}" height="${p.h}" alt="${esc(p.what)}" loading="eager" decoding="async"></span><figcaption class="cv-cred">${esc(p.what)}. Foto: ${esc(p.artist)}, ${lic}, da <a href="${page}" target="_blank" rel="noopener">Wikimedia Commons</a>, convertita in bianco e nero.</figcaption></figure>`;
+}
+/* il titolo della copertina non va mai a capo a metà parola: se una parola non entra, si rimpicciolisce */
+function fitTitle(){const el=document.querySelector(".cv-who");if(!el)return;el.style.fontSize="";el.style.overflowWrap="normal";
+  const sp=[...el.querySelectorAll("span")],lim=()=>el.parentElement.clientWidth,over=()=>sp.length?sp.some(x=>x.scrollWidth>x.clientWidth+1||x.offsetWidth>lim()+1):el.scrollWidth>lim()+1;
+  let fs=parseFloat(getComputedStyle(el).fontSize),n=0;while(over()&&n++<24&&fs>22){fs*=.94;el.style.fontSize=fs+"px"}}
+let fitT=null;addEventListener("resize",()=>{clearTimeout(fitT);fitT=setTimeout(fitTitle,120)});
+try{document.fonts.ready.then(fitTitle)}catch(e){}
+function render(i){
+  const e=S[i];cur=i;
+  const world=WORLD[e.act]||"screen",p=PATCH[e.id];
+  document.documentElement.dataset.world=world;readScope();
+  const factsHTML=e.big?`<div class="bignums">${e.big.map(([b,t])=>`<div><b>${esc(b)}</b><span>${esc(t)}</span></div>`).join("")}</div>`:`<ul class="facts">${e.facts.map(([k,v])=>`<li><span class="fk">${esc(k)}</span><span>${esc(v)}</span></li>`).join("")}</ul>`;
+  let body=e.story.map((p,k)=>`<p${k===0?' class="lead"':""}>${esc(p)}</p>`).join("");
+  if(e.table){
+    body+=`<h3>Le due tracce, decennio per decennio</h3><div class="tbl"><table><thead><tr><th>Periodo</th><th>CH2 · Intanto, fuori</th><th>CH1 · Nella musica</th></tr></thead><tbody>${e.table.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+    body+=e.sections.map(([h,p])=>`<h3>${esc(h)}</h3><p>${esc(p)}</p>`).join("");
+    body+=`<h3>Fonti</h3><ul class="src">${e.sources.map(([t,u])=>`<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a></li>`).join("")}</ul>`;
+  }
+  const first=e.tracks.findIndex(([a,t])=>ytOf(a,t));
+  const tracks=e.tracks.map(([a,t,y,n],k)=>{const Y=ytOf(a,t);const L=trackLink(a,t);
+    if(Y)return `<li class="mt${k===first?" now":""}" data-k="${k}"><span class="mt-n">${String(k+1).padStart(2,"0")}</span><button type="button" class="mt-p" data-k="${k}"><span class="mt-t">${esc(t)}</span><span class="mt-a">${esc(a)}, ${esc(y)}</span><span class="mt-x">${esc(n)}</span></button><button type="button" class="mt-s" data-k="${k}" aria-label="Guarda ${esc(t)} di ${esc(a)} qui">▶</button></li>`;
+    return `<li class="mt${L.direct?"":" off"}"><span class="mt-n">${String(k+1).padStart(2,"0")}</span><div class="mt-b"><span class="mt-t">${esc(t)}</span><span class="mt-a">${esc(a)}, ${esc(y)}</span><span class="mt-x">${esc(n)}</span><span class="mt-f">${L.direct?"Non su YouTube: si apre in Spotify":esc(L.flag||"Cerca su Spotify")}</span></div><a class="mt-s" href="${L.href}" target="_blank" rel="noopener" aria-label="${L.direct?"Ascolta":"Cerca"} ${esc(t)} di ${esc(a)} su Spotify">↗</a></li>`}).join("");
+  const ytBox=first<0?"":`<figure class="yt" id="ytBox" data-first="${first}">${ytFacade(...e.tracks[first])}</figure>`;
+  const extra=e.extra?`<section class="extra" aria-labelledby="xh"><h3 class="sec" id="xh">${esc(e.extra.title)}</h3><p>${esc(e.extra.note)}</p><ol class="xl">${e.extra.list.map(([a,t],k)=>{const L=trackLink(a,t);return `<li${L.direct?"":' class="off"'}><span>${String(k+1).padStart(2,"0")}</span><a href="${L.href}" target="_blank" rel="noopener">${esc(t)} <i>· ${esc(a)}</i>${L.flag?`<em>${esc(L.flag)}</em>`:""}</a></li>`}).join("")}</ol></section>`:"";
+  const whoHTML=world==="zine"?ransom(e.who,i+1):`<span>${esc(e.who)}</span>`;
+  const tile=world==="rave"?`<div class="cv-tile" aria-hidden="true">${(e.n+" ").repeat(90)}</div>`:"";
+  app.innerHTML=`<article class="topic w-${world}" aria-labelledby="who">
+    <section class="cover">
+      ${tile}
+      <div class="wrap cv-in">
+      <div class="cv-top"><span class="cv-step">${esc(stepLabel(e))}${e.kind==="ep"||e.kind==="flash"?" di "+NT:""}${e.kind==="flash"?" · Flash":""}</span>${ACTS[e.act].name===stepLabel(e)?"":`<span>${esc(ACTS[e.act].name)}</span>`}<span class="cv-years">${esc(e.years)}</span><span class="cv-place">${esc(e.place)}</span></div>
+      <div class="cv-mid"><div class="cv-txt">
+        ${world==="zine"?`<div class="cv-clip">${esc(e.outShort)}</div>`:""}
+        <div class="cv-num" aria-hidden="true">${e.n}</div>
+        <h2 class="cv-who" id="who">${whoHTML}</h2>
+        <p class="cv-line"><span>${esc(e.tag)}</span></p>
+      </div>
+      ${photoBlock(e)}
+      </div>
+      <div class="cv-ctl"><span class="cv-hint">Scorri per leggere ↓</span></div>
+      </div>
+    </section>
+    <div class="wrap detail">
+      ${scoreBlock(e)}
+      <div class="deep">
+        <div class="col">
+          <div class="story">${body}</div>
+          <section class="ch2band" aria-label="Intanto, fuori"><canvas class="cs2" data-i="${i}" aria-hidden="true"></canvas><div class="ch2in"><p class="lab">CH2 · Intanto, fuori</p><p class="big">${esc(e.out)}</p></div></section>
+          <section class="facts-box" aria-labelledby="fh"><h3 class="sec" id="fh">In breve</h3>${factsHTML}</section>
+        </div>
+        <aside class="listen" aria-labelledby="lh">
+          <h3 class="sec" id="lh">Playlist</h3>
+          ${ytBox}
+          <p class="pl-note">Tocca un brano per guardarlo qui, senza uscire dalla pagina. La colonna sonora si ferma da sola.</p>
+          <ol class="mini">${tracks}</ol>
+          <div class="pl-foot"><a class="btn" href="${esc(PL[e.id])}" target="_blank" rel="noopener">Playlist su Spotify ↗</a><button class="btn" type="button" id="copy">Copia la scaletta</button><span class="status" id="copyStatus" role="status"></span></div>
+          <textarea class="copybox" id="copyBox" readonly hidden aria-label="Scaletta da copiare"></textarea>
+        </aside>
+      </div>
+      ${extra}
+    </div>
+  </article><div class="wrap">${nextLink(i)}</div>`;
+  const txt=`Synth Britannia · ${stepLabel(e)} · ${e.who}\n`+e.tracks.map(([a,t,y],k)=>`${k+1}. ${a} – ${t} (${y})`).join("\n");
+  {const box=document.getElementById("ytBox");if(box)box.dataset.k=box.dataset.first;ytFrame=null;ytReady=false;setTimeout(ytPrefetch,0)}
+  document.getElementById("copy").addEventListener("click",()=>{
+    const st=document.getElementById("copyStatus"),box=document.getElementById("copyBox");
+    const fallback=()=>{box.value=txt;box.hidden=false;box.focus();box.select();st.textContent="Seleziona e copia il testo qui sotto"};
+    try{navigator.clipboard.writeText(txt).then(()=>{st.textContent="Scaletta copiata"},fallback)}catch(err){fallback()}
+  });
+  mountScopes();
+}
+
+/* sul sito ogni tappa ha un suo indirizzo (es. /omd), con la sua anteprima quando si condivide */
+const SLUG={"t00":"prologo","t01":"omd","t02":"gary-numan","t03":"john-foxx-ultravox","t04":"macchine-per-tutti","t05":"human-league","t06":"visage-blitz","t07":"yazoo","t08":"soft-cell","t09":"new-order","t10":"dodici-pollici","t11":"eurythmics","t12":"seconda-ondata","t13":"pet-shop-boys","t14":"depeche-mode","t15":"esilio-delle-macchine","prodigy":"the-prodigy","underworld":"underworld","chemical":"chemical-brothers","t16":"ladytron-goldfrapp","t17":"ondata-2009","t18":"chvrches","t19":"nuova-scena","t20":"vecchi-leoni","ep":"epilogo"};
+const SITE=!!window.__SITE&&/^https?:$/.test(location.protocol);
+function slugId(){if(!SITE)return null;const p=decodeURIComponent(location.pathname).replace(/^\/+|\/+$/g,"").replace(/\.html$/,"");if(!p||p==="index")return null;return Object.keys(SLUG).find(k=>SLUG[k]===p)||null}
+function route(){
+  const h=(location.hash||"").slice(1)||slugId()||"";
+  const m=h.match(/^([a-z0-9]+?)(?:-(playlist|dettagli|approfondimento))?$/);
+  let i=m?idx(m[1]):cur;if(i<0)i=0;
+  if(m&&m[2]&&history.replaceState)history.replaceState(null,"","#"+S[i].id);
+  if(!ixEl.hidden)toggleIndex(false);
+  render(i);
+  fitTitle();
+  if(SITE&&history.replaceState){const want="/"+(i===0&&!slugId()&&!location.hash?"":SLUG[S[i].id]);if(location.pathname!==want||location.hash)history.replaceState(null,"",want);document.title=want==="/"?"Synth Britannia":S[i].who+" · Synth Britannia"}
+  updateBar();
+  if(MUS.playing)MUS.change(S[cur].id);
+  syncUI();
+  const mode=pending;pending="anchor";
+  if(mode==="anchor")toAnchor();
+}
+function ytPause(){document.querySelectorAll(".yt-v iframe").forEach(f=>{try{f.contentWindow.postMessage(JSON.stringify({event:"command",func:"pauseVideo",args:[]}),"*")}catch(e){}})}
+function ytProbe(id){return new Promise(r=>{const i=new Image();let done=0;const fin=ok=>{if(!done){done=1;r(ok)}};i.onload=()=>fin(i.naturalWidth>120);i.onerror=()=>fin(false);setTimeout(()=>fin(true),2500);i.src=`https://i.ytimg.com/vi/${id}/hqdefault.jpg`})}
+/* i video non ufficiali si controllano appena si apre la scheda, così il tocco fa partire subito il video */
+function ytPrefetch(){(S[cur].tracks||[]).forEach(([a,t])=>{const r=YT[a+"|"+t];if(!r||!r[4]||YTDEAD[r[0]])return;
+  ytProbe(r[0]).then(ok=>{if(ok)return;YTDEAD[r[0]]=1;const box=document.getElementById("ytBox");const v=box&&box.querySelector(".yt-v");
+    if(v&&v.dataset.v===r[0]&&!v.querySelector("iframe")){const k=+box.dataset.k;ytShow(k,false)}})})}
+let ytFrame=null,ytReady=false,ytState=-1;
+function ytMark(k){const box=document.getElementById("ytBox");if(box)box.dataset.k=k;document.querySelectorAll(".mt").forEach(li=>li.classList.toggle("now",li.dataset.k===String(k)))}
+function ytShow(k,play){const box=document.getElementById("ytBox");if(!box)return;const tr=S[cur].tracks[k];if(!tr)return;const Y=ytOf(tr[0],tr[1]);if(!Y)return;
+  ytMark(k);
+  if(play&&ytFrame&&ytReady&&box.contains(ytFrame)){
+    const tmp=document.createElement("div");tmp.innerHTML=ytFacade(...tr);box.querySelector(".yt-c").replaceWith(tmp.querySelector(".yt-c"));
+    box.querySelector(".yt-v").dataset.v=Y.v;if(MUS.playing){MUS.pause();syncUI()}
+    ytFrame.contentWindow.postMessage(JSON.stringify({event:"command",func:"loadVideoById",args:[Y.v]}),"*");return}
+  box.innerHTML=ytFacade(...tr);if(play)ytPlay(box.querySelector(".yt-v"))}
+function ytPlay(v){if(!v)return;if(MUS.playing){MUS.pause();syncUI()}
+  const org=/^https?:/.test(location.protocol)?"&origin="+encodeURIComponent(location.origin):"";
+  const f=document.createElement("iframe");f.src=`https://www.youtube-nocookie.com/embed/${v.dataset.v}?autoplay=1&rel=0&playsinline=1&enablejsapi=1${org}`;f.title="Video su YouTube";f.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";f.allowFullscreen=true;f.referrerPolicy="strict-origin-when-cross-origin";
+  ytFrame=f;ytReady=false;ytState=-1;
+  f.addEventListener("load",()=>{const hi=()=>{try{f.contentWindow.postMessage(JSON.stringify({event:"listening",id:"sb",channel:"widget"}),"*")}catch(e){}};hi();setTimeout(hi,800);setTimeout(hi,2500)});
+  v.innerHTML="";v.appendChild(f)}
+window.addEventListener("message",ev=>{if(!ytFrame||ev.source!==ytFrame.contentWindow)return;let d;try{d=typeof ev.data==="string"?JSON.parse(ev.data):ev.data}catch(e){return}if(!d)return;
+  ytReady=true;let st=null;if(d.event==="onStateChange")st=d.info;else if(d.event==="infoDelivery"&&d.info&&typeof d.info.playerState==="number")st=d.info.playerState;
+  if(st===null||st===ytState)return;ytState=st;
+  if(st===1&&MUS.playing){MUS.pause();syncUI()}});
+app.addEventListener("click",ev=>{
+  const go=ev.target.closest(".yt-go");if(go){ytPlay(go.closest(".yt-v"));return}
+  const pk=ev.target.closest(".mt-p,button.mt-s");if(pk){ytShow(+pk.dataset.k,true);const v=document.getElementById("ytBox");if(v&&v.getBoundingClientRect().top<0)v.scrollIntoView({behavior:"smooth",block:"start"});return}
+});
+app.addEventListener("click",ev=>{const a=ev.target.closest("a[href^='#']");if(a)pending="anchor";if(ev.target.closest(".score-b"))togglePlay();if(ev.target.closest('a[href*="spotify.com"],a[href*="youtube.com"]')&&MUS.playing){MUS.pause();syncUI()}});
+addEventListener("hashchange",route);
+addEventListener("popstate",()=>{if(!location.hash)route()});
+addEventListener("keydown",ev=>{
+  if(ev.altKey||ev.ctrlKey||ev.metaKey)return;
+  const tag=(document.activeElement&&document.activeElement.tagName)||"";if(tag==="TEXTAREA"||tag==="INPUT")return;
+  if(ev.key==="ArrowRight")nav(cur+1);
+  if(ev.key==="ArrowLeft")nav(cur-1);
+});
+document.getElementById("start").addEventListener("click",()=>{note(0);toAnchor();hereBtn.focus({preventScroll:true})});
+
+function note(){}
+
+/* ---------- colonna sonora generativa (WebAudio) ---------- */
+const PATCH={
+t00:{n:"Scintilla",d:"Drone, nastri e primi blip",bpm:76,vol:.6,key:45,mode:"min",dr:"none",bs:"drone",ld:"blip",pd:"dark",f:"mantra",hr:2,sw:.5},
+t01:{n:"Estuario",d:"Drum machine CR-78, riff di synth e cori",bpm:136,key:50,mode:"maj",pr:[0,4,5,3],dr:"cr78",bs:"seq8",ld:"sq",pd:"choir",f:"song"},
+t02:{n:"Androide",d:"Minimoog, Polymoog e batteria dritta",bpm:124,key:43,mode:"min",dr:"rock",bs:"seq8",ld:"saw",pd:"dark",f:"mantra",hr:2,sw:.25},
+t03:{n:"Ghiaccio",d:"Drum machine rigida, sequencer e archi sintetici",bpm:120,key:48,mode:"min",dr:"cr78",bs:"seq16",ld:"arp",pd:"strings",a16:1,f:"mantra",hr:2,sw:.3},
+t04:{n:"Cameretta",d:"Un synth economico, un riff, niente chitarre",bpm:128,key:52,mode:"min",dr:"cheap",bs:"pulse",ld:"sq",pd:"none",f:"mantra",hr:4,sw:.4},
+t05:{n:"Acciaio",d:"Linn, basso in ottava e synth squillanti",bpm:118,key:45,mode:"min",dr:"linn",bs:"octave",ld:"sq",pd:"brass",f:"song"},
+t06:{n:"Blitz",d:"Basso pulsante, archi sintetici, gelo europeo",bpm:120,key:47,mode:"min",dr:"sparse",bs:"seq8",ld:"arp",pd:"strings",a16:1,f:"mantra",hr:2,sw:.35},
+t07:{n:"Basildon",d:"Riff di sequencer e calore soul",bpm:124,key:41,mode:"min",dr:"linn",bs:"seq16",ld:"sq",pd:"soul",f:"song",fl:1},
+t08:{n:"Neon",d:"Battito elettronico, due note di basso, notte",bpm:140,key:44,mode:"min",dr:"synare",bs:"pulse",ld:"stab",pd:"dark",f:"song",fl:1},
+t09:{n:"Haçienda",d:"Cassa a raffica, basso sequenziato e archi",bpm:130,key:49,mode:"min",dr:"dmx",bs:"melodic",ld:"arp",pd:"strings",a16:1,f:"mantra",hr:2,sw:.5},
+t10:{n:"Extended",d:"Orchestra campionata, pause ed echi",bpm:116,key:46,mode:"dor",dr:"break",bs:"octave",ld:"stab",pd:"orch",f:"song",fl:1},
+t11:{n:"Specchi",d:"Riff di basso in do minore e archi",bpm:126,key:48,mode:"min",pr:[0,5,4,4],dr:"pop",bs:"seq16",ld:"sq",pd:"strings",f:"song"},
+t12:{n:"Classifica",d:"Pop brillante e campane digitali",bpm:126,key:52,mode:"maj",dr:"pop",bs:"octave",ld:"bell",pd:"bright",f:"song",fl:1},
+t13:{n:"West End",d:"Groove lento, basso caldo, orchestra campionata",bpm:112,key:43,mode:"min",dr:"hiphop",bs:"pulse",ld:"bell",pd:"orch",f:"song",fl:1},
+t14:{n:"Ferro",d:"Metallo percosso, basso in sequenza, cori",bpm:112,key:45,mode:"min",dr:"metal",bs:"seq8",ld:"tri",pd:"choir",f:"song"},
+t15:{n:"Acid",d:"Basso squillante e cassa dritta",bpm:124,key:45,mode:"min",pr:[0],dr:"four",bs:"acid",ld:"none",pd:"none",f:"mantra",hr:1,sw:.6},
+prodigy:{n:"Jilted",d:"Breakbeat rabbioso e basso distorto",bpm:140,key:45,mode:"phr",dr:"break",bs:"dist",ld:"stab",pd:"none",f:"song",fl:1},
+underworld:{n:"Mantra",d:"Cassa dritta, arpeggi in loop, accordi in alto",bpm:136,key:43,mode:"min",pr:[0,5],dr:"four",bs:"seq16",ld:"arp",pd:"dark",a16:1,f:"mantra",hr:4,sw:.7},
+chemical:{n:"Big Beat",d:"Batteria spezzata e acid in primo piano",bpm:112,key:47,mode:"dor",dr:"break",bs:"acid",ld:"stab",pd:"none",f:"song",fl:1},
+t16:{n:"Electroclash",d:"Synth analogici ronzanti, cassa glam",bpm:126,key:47,mode:"min",dr:"four",bs:"dist",ld:"sq",pd:"dark",f:"mantra",hr:2,sw:.5},
+t17:{n:"Rinascita",d:"Riff squadrati e pop elettronico luminoso",bpm:124,key:50,mode:"maj",dr:"pop",bs:"octave",ld:"sq",pd:"bright",f:"song",fl:1},
+t18:{n:"Festival",d:"Muro di synth e cassa enorme",bpm:120,key:46,mode:"maj",dr:"big",bs:"sub",ld:"arp",pd:"lush",a16:1,f:"song",fl:1},
+t19:{n:"Nostalgia futura",d:"Disco elettronica di oggi",bpm:120,key:41,mode:"min",dr:"disco",bs:"octave",ld:"stab",pd:"lush",f:"song",fl:1},
+t20:{n:"Maturità",d:"Archi, sintetizzatori e tempo che passa",bpm:104,key:43,mode:"min",dr:"soft",bs:"sub",ld:"bell",pd:"lush",f:"song"},
+ep:{n:"Eco",d:"Tutte le epoche in un respiro",bpm:84,vol:.6,key:45,mode:"min",dr:"none",bs:"drone",ld:"arp",pd:"lush",f:"mantra",hr:2,sw:.4}
+};
+const MUS=(function(){
+  let ac=null,master,bus,dsend,rsend,an,noise,timer=null,P=null,pid=null,step=0,nextT=0,bar=0,progA=[0,5,2,6,0,5,2,4],progB=[0,3,5,4,0,3,5,4],R=Math.random,bassA=[],bassB=[],motA=[],motB=[],motA2=[],arpA=[],arpB=[],stabA=[],stabB=[],bellSteps=[],token=0,DIST=null,SW=null,L=32,FORM=null;
+  const MODES={min:[0,2,3,5,7,8,10],dor:[0,2,3,5,7,9,10],maj:[0,2,4,5,7,9,11],phr:[0,1,3,5,7,8,10]};
+  const PROGS={min:[[0,5,2,6],[0,3,5,4],[0,6,5,6],[0,5,3,4],[0,2,5,6]],maj:[[0,4,5,3],[0,5,3,4],[0,3,4,4],[0,2,3,4]]};
+  const DR={none:{},
+    machine:{k:"x.......x.x.....",s:"....x.......x...",h:"x.x.x.x.x.x.x.x."},
+    heavy:{k:"x.....x...x.....",s:"....x.......x...",o:"..x...x...x...x."},
+    march:{k:"x...x...x...x...",s:"....x.......x...",h:"x.x.x.x.x.x.x.x."},
+    cheap:{k:"x...x...x...x...",h:"..x...x...x...x."},
+    pop:{k:"x.....x.x.......",s:"....x.......x...",c:"....x.......x...",h:"xxxxxxxxxxxxxxxx"},
+    sparse:{k:"x...x...x...x...",s:"....x.......x...",h:"..x...x...x...x."},
+    drive:{k:"x...x...x...x.x.",s:"....x.......x...",h:"x.x.x.x.x.x.x.x."},
+    break:{k:"x.....x...x.....",s:"....x..x.x..x...",h:"x.x.x.x.x.x.x.x."},
+    metal:{k:"x.....x.x.....x.",m:"....x.......x...",h:"x.x.x.x.x.x.x.x."},
+    four:{k:"x...x...x...x...",c:"....x.......x...",o:"..x...x...x...x.",h:"xxxxxxxxxxxxxxxx"},
+    big:{k:"x...x...x...x...",s:"....x.......x...",h:"x.x.x.x.x.x.x.x."},
+    disco:{k:"x...x...x...x...",c:"....x.......x...",o:"..x...x...x...x."},
+    soft:{k:"x.......x.......",s:"....x.......x...",h:"x.x.x.x.x.x.x.x."},
+    cr78:{k:"x.......x.x.....",s:"....x.......x...",h:"x.x.x.x.x.x.x.x.",r:"...x..x....x..x."},
+    rock:{k:"x.......x.x.....",s:"....x.......x...",h:"x.x.x.x.x.x.x.x."},
+    linn:{k:"x.....x.x.......",s:"....x.......x...",c:"....x.......x...",h:"x.x.x.x.x.x.x.x.",t:"..x...x...x...x."},
+    synare:{k:"x.....x.x.....x.",c:"....x.......x...",z:"..x.......x....."},
+    dmx:{k:"x...x...x...x...",s:"....x.......x...",h:"..x...x...x...x.",o:"..............x."},
+    hiphop:{k:"x......x..x.....",s:"....x.......x...",h:"x.x.x.x.x.x.x.x."}};
+  const mf=m=>440*Math.pow(2,(m-69)/12);
+  function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+  function init(){
+    const AC=window.AudioContext||window.webkitAudioContext;ac=new AC();
+    try{if(navigator.audioSession)navigator.audioSession.type="playback"}catch(e){}
+    master=ac.createGain();master.gain.value=0;
+    const comp=ac.createDynamicsCompressor();comp.threshold.value=-20;comp.knee.value=12;comp.ratio.value=3;comp.attack.value=.01;comp.release.value=.25;
+    an=ac.createAnalyser();an.fftSize=2048;
+    master.connect(comp);comp.connect(an);an.connect(ac.destination);
+    SW=ac.createBiquadFilter();SW.type="lowpass";SW.frequency.value=18000;SW.Q.value=.7;SW.connect(master);bus=ac.createGain();bus.gain.value=.9;bus.connect(SW);
+    const dl=ac.createDelay(2),fb=ac.createGain(),lp=ac.createBiquadFilter(),wet=ac.createGain();
+    lp.type="lowpass";lp.frequency.value=2400;fb.gain.value=.36;wet.gain.value=.5;dl.delayTime.value=.375;
+    dsend=ac.createGain();dsend.connect(dl);dl.connect(lp);lp.connect(fb);fb.connect(dl);lp.connect(wet);wet.connect(SW);
+    MUS._dl=dl;
+    const cv=ac.createConvolver();cv.buffer=ir(3.2);const rw=ac.createGain();rw.gain.value=.42;
+    rsend=ac.createGain();rsend.connect(cv);cv.connect(rw);rw.connect(SW);
+    noise=ac.createBuffer(1,ac.sampleRate,ac.sampleRate);const nd=noise.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;
+  }
+  function ir(sec){const len=Math.floor(ac.sampleRate*sec),b=ac.createBuffer(2,len,ac.sampleRate);for(let c=0;c<2;c++){const d=b.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.6)}return b}
+  function route(node,dry,dly,rev){const g=ac.createGain();g.gain.value=dry;node.connect(g);g.connect(bus);if(dly){const s=ac.createGain();s.gain.value=dly;node.connect(s);s.connect(dsend)}if(rev){const s=ac.createGain();s.gain.value=rev;node.connect(s);s.connect(rsend)}}
+  function env(g,t,a,peak,dec){g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(peak,t+a);g.gain.exponentialRampToValueAtTime(.0001,t+a+dec)}
+  function curve(k){const n=1024,c=new Float32Array(n);for(let i=0;i<n;i++){const x=i/n*2-1;c[i]=(1+k)*x/(1+k*Math.abs(x))}return c}
+  function kick(t,v){const o=ac.createOscillator(),g=ac.createGain();o.frequency.setValueAtTime(140,t);o.frequency.exponentialRampToValueAtTime(44,t+.11);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.85*v,t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+.42);o.connect(g);route(g,1,0,0);o.start(t);o.stop(t+.45)}
+  function nz(t,dur,type,freq,q,peak,dec,rev){const s=ac.createBufferSource();s.buffer=noise;const f=ac.createBiquadFilter();f.type=type;f.frequency.value=freq;f.Q.value=q;const g=ac.createGain();env(g,t,.002,peak,dec);s.connect(f);f.connect(g);route(g,1,0,rev||0);s.start(t,Math.random()*.5);s.stop(t+dur)}
+  function snare(t,v,rev){nz(t,.25,"highpass",1400,.7,.3*v,.18,rev);const o=ac.createOscillator(),g=ac.createGain();o.type="triangle";o.frequency.setValueAtTime(210,t);o.frequency.exponentialRampToValueAtTime(140,t+.08);env(g,t,.002,.22*v,.09);o.connect(g);route(g,1,0,0);o.start(t);o.stop(t+.15)}
+  function clap(t,v){for(let i=0;i<3;i++)nz(t+i*.011,.05,"bandpass",1600,1.2,.24*v,.02,.1);nz(t+.033,.3,"bandpass",1500,1,.2*v,.2,.25)}
+  function hat(t,v,open){nz(t,open?.35:.06,"highpass",open?7000:8200,.8,(open?.1:.075)*v,open?.28:.035,0)}
+  function rim(t,v){nz(t,.04,"bandpass",2200,3,.16*v,.025,.05);const o=ac.createOscillator(),g=ac.createGain();o.type="triangle";o.frequency.value=1700;env(g,t,.001,.07*v,.03);o.connect(g);route(g,1,0,0);o.start(t);o.stop(t+.06)}
+  function tamb(t,v){[0,.012,.026].forEach((d,i)=>nz(t+d,.14,"highpass",8800,1,(.07-.015*i)*v,.09,.06))}
+  function zap(t,v){const o=ac.createOscillator(),g=ac.createGain();o.type="sine";o.frequency.setValueAtTime(1300,t);o.frequency.exponentialRampToValueAtTime(130,t+.14);env(g,t,.002,.2*v,.16);o.connect(g);route(g,.9,.25,.2);o.start(t);o.stop(t+.2)}
+  function metal(t,v){[527,811,1129].forEach(fq=>{const o=ac.createOscillator(),f=ac.createBiquadFilter(),g=ac.createGain();o.type="square";o.frequency.value=fq;f.type="bandpass";f.frequency.value=2400;f.Q.value=2;env(g,t,.001,.06*v,.16);o.connect(f);f.connect(g);route(g,.9,.2,.3);o.start(t);o.stop(t+.2)});nz(t,.12,"bandpass",3200,2,.18*v,.08,.2)}
+  function bass(t,m,dur,type,acc,slideFrom){
+    const o=ac.createOscillator(),f=ac.createBiquadFilter(),g=ac.createGain();
+    o.type=type==="sub"?"sine":type==="square"?"square":"sawtooth";
+    if(slideFrom!=null){o.frequency.setValueAtTime(mf(slideFrom),t);o.frequency.exponentialRampToValueAtTime(mf(m),t+.06)}else o.frequency.setValueAtTime(mf(m),t);
+    f.type="lowpass";
+    if(type==="acid"){f.Q.value=13;const base=240+acc*260;f.frequency.setValueAtTime(base+1500*(.5+acc),t);f.frequency.exponentialRampToValueAtTime(base,t+.17)}
+    else if(type==="sub"){f.frequency.value=700;f.Q.value=.5}
+    else{f.Q.value=type==="dist"?4:6;f.frequency.setValueAtTime(type==="dist"?2400:1500,t);f.frequency.exponentialRampToValueAtTime(type==="dist"?520:260,t+Math.min(dur,.25))}
+    let node=f;if(type==="dist"){const ws=ac.createWaveShaper();ws.curve=DIST||(DIST=curve(16));f.connect(ws);node=ws}
+    const pk=type==="sub"?.4:type==="acid"?.22:type==="dist"?.16:.28;
+    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(pk,t+.006);g.gain.setValueAtTime(pk,t+dur*.7);g.gain.exponentialRampToValueAtTime(.0001,t+dur+.05);
+    o.connect(f);node.connect(g);route(g,1,0,.03);o.start(t);o.stop(t+dur+.08);
+  }
+  function lead(t,m,dur,type,v){
+    v=v||1;
+    if(type==="bell"){const c=ac.createOscillator(),mo=ac.createOscillator(),mg=ac.createGain(),g=ac.createGain();c.frequency.value=mf(m);mo.frequency.value=mf(m)*3.5;mg.gain.setValueAtTime(mf(m)*2,t);mg.gain.exponentialRampToValueAtTime(1,t+1.2);mo.connect(mg);mg.connect(c.frequency);env(g,t,.003,.11*v,1.4);c.connect(g);route(g,.8,.35,.35);c.start(t);mo.start(t);c.stop(t+1.6);mo.stop(t+1.6);return}
+    if(type==="blip"){const o=ac.createOscillator(),g=ac.createGain();o.type="sine";o.frequency.setValueAtTime(mf(m),t);o.frequency.exponentialRampToValueAtTime(mf(m)*.5,t+.25);env(g,t,.003,.12*v,.3);o.connect(g);route(g,.6,.65,.3);o.start(t);o.stop(t+.35);return}
+    const o=ac.createOscillator(),f=ac.createBiquadFilter(),g=ac.createGain();
+    o.type=type==="tri"?"triangle":(type==="saw"||type==="pluck"||type==="arp")?"sawtooth":"square";
+    o.frequency.value=mf(m);
+    f.type="lowpass";f.Q.value=type==="pluck"||type==="arp"?5:2;
+    const cut=type==="pluck"?3000:type==="arp"?2600:type==="tri"?2600:1800;
+    f.frequency.setValueAtTime(cut,t);f.frequency.exponentialRampToValueAtTime(type==="pluck"||type==="arp"?420:900,t+(type==="pluck"||type==="arp"?.16:Math.max(.05,dur)));
+    const pk=(type==="tri"?.15:type==="arp"?.07:type==="saw"?.075:.08)*v;
+    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(pk,t+.01);g.gain.setValueAtTime(pk,t+Math.max(.02,dur*.6));g.gain.exponentialRampToValueAtTime(.0001,t+dur+.12);
+    o.connect(f);f.connect(g);route(g,.8,.32,.22);o.start(t);o.stop(t+dur+.15);
+  }
+  function pad(t,notes,dur,type){
+    const cfg={dark:{w:"sawtooth",c:650,a:.8,v:.042,r:.5},strings:{w:"sawtooth",c:1700,a:.5,v:.036,r:.45},choir:{w:"triangle",c:2200,a:.7,v:.065,r:.5},brass:{w:"sawtooth",c:1300,a:.08,v:.04,r:.3},soul:{w:"triangle",c:1800,a:.3,v:.065,r:.4},bright:{w:"sawtooth",c:3000,a:.25,v:.03,r:.4},orch:{w:"sawtooth",c:2200,a:.4,v:.034,r:.5},lush:{w:"sawtooth",c:2000,a:.9,v:.032,r:.6}}[type];
+    if(!cfg)return;
+    const f=ac.createBiquadFilter();f.type="lowpass";f.frequency.setValueAtTime(cfg.c*.6,t);f.frequency.linearRampToValueAtTime(cfg.c,t+dur*.5);f.frequency.linearRampToValueAtTime(cfg.c*.7,t+dur);
+    const g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(cfg.v,t+cfg.a);g.gain.setValueAtTime(cfg.v,t+dur-.05);g.gain.linearRampToValueAtTime(.0001,t+dur+.9);
+    f.connect(g);route(g,.85,.1,cfg.r);
+    notes.forEach(m=>[-7,7].forEach(dt=>{const o=ac.createOscillator();o.type=cfg.w;o.frequency.value=mf(m);o.detune.value=dt;o.connect(f);o.start(t);o.stop(t+dur+1)}));
+  }
+  function chord(deg){const sc=MODES[P.mode];return [0,2,4].map(k=>{const d=deg+k;return P.key+sc[d%7]+12*Math.floor(d/7)})}
+  function mkBass(){const out=[];
+    for(let s=0;s<16;s++){let n={on:false,tone:0,oct:0,acc:0,slide:false,len:1};const bt=P.bs;
+      if(bt==="seq8"){n.on=s%2===0;n.tone=(s===6||s===14)&&R()<.6?2:0}
+      else if(bt==="seq16"||bt==="dist"){n.on=true;n.tone=s===0?0:(R()<.72?0:2);n.oct=s>0&&R()<.22?1:0}
+      else if(bt==="octave"){n.on=s%2===0;n.oct=s%4===2?1:0}
+      else if(bt==="pulse"){n.on=[0,3,6,8,11,14].includes(s);n.len=2}
+      else if(bt==="melodic"){n.on=s%2===0;n.tone=[0,1,2,1,2,1,0,2][(s/2)|0];n.oct=1;n.len=2}
+      else if(bt==="acid"){n.on=s===0||R()<.72;n.tone=R()<.6?0:(R()<.5?1:2);n.oct=R()<.2?1:0;n.acc=R()<.3?1:0;n.slide=R()<.22}
+      else if(bt==="sub"){n.on=s===0||s===10;n.len=s===0?6:4}
+      out.push(n)}
+    return out}
+  function mkMotif(){const m=[],slow=P.ld==="saw";
+    for(let s=0;s<64;s+=slow?4:2){const ph=s>>4;const dens=(slow?.55:.42)*(ph===3?.6:1);
+      if(R()<dens)m.push({s,tone:Math.floor(R()*3),up:R()<.2?12:0,len:slow?3+Math.floor(R()*2):1+Math.floor(R()*2)})}
+    for(let s=0;s<32;s++){const n=m.find(x=>x.s===s);if(n&&R()<.6&&!m.some(x=>x.s===s+32))m.push({...n,s:s+32})}
+    if(!m.length)m.push({s:0,tone:0,up:0,len:2});return m}
+  function build(seed){
+    R=rng(seed);
+    const progs=PROGS[P.mode==="maj"?"maj":"min"];const ia=Math.floor(R()*progs.length),ib=(ia+1+Math.floor(R()*(progs.length-1)))%progs.length;
+    const pa=P.pr&&P.pr.length===4?P.pr:progs[ia],pb=progs[ib];
+    progA=pa.concat([pa[0],pa[1],pa[2],pa[3]===4?5:4]);progB=pb.concat([pb[0],pb[1],pb[2],4]);
+    bassA=mkBass();bassB=mkBass();bassB.forEach((n,s)=>{if(n.on&&(s===6||s===11||s===14))n.oct=n.oct?0:1});
+    motA=mkMotif();motB=mkMotif();motA2=motA.map(n=>n.s>=32?{...n,tone:(n.tone+1)%3,up:R()<.3?12:n.up}:n);
+    const shapes=[[0,1,2,3],[0,1,2,3,2,1],[0,2,1,3],[3,2,1,0]];const ka=Math.floor(R()*shapes.length);arpA=shapes[ka];arpB=shapes[(ka+1+Math.floor(R()*3))%shapes.length];
+    stabA=R()<.5?[2,6,10,14]:[3,7,11];stabB=stabA.length===4?[3,6,11,14]:[2,7,10,13];
+    bellSteps=[0,6,10].concat(R()<.5?[13]:[]);
+    /* circa un minuto per giro: battute = 4 × arrotondamento(BPM/16) */
+    L=4*Math.max(4,Math.round(P.bpm/16));
+    if(P.f==="song"){const I=L>=28?4:2,aE=I+8,bE=aE+8,dE=bE+(L-bE>=8?4:2);FORM={I,aE,bE,dE}}else FORM=null;
+  }
+  /* «song»: intro · A (giro di 8) · B (secondo giro) · pausa · A variata.
+     «mantra»: un solo giro che si accende e si spegne per strati, con il filtro che si apre e si richiude. */
+  function sect(c){if(!FORM)return "M";const F=FORM;return c<F.I?"I":c<F.aE?"A":c<F.bE?"B":c<F.dE?"D":"A2"}
+  function degAt(c,sc){
+    if(sc==="M"){const pr=P.pr||progA.slice(0,4),hr=P.hr||2;return pr[Math.floor(c/hr)%pr.length]}
+    const F=FORM;return sc==="B"?progB[(c-F.aE)%8]:sc==="D"?progA[(c-F.bE)%8]:sc==="A2"?progA[(c-F.dE)%8]:progA[(c-(sc==="I"?0:F.I))%8]}
+  function arc(f){return f<.6?f/.6:f<.85?1:1-(f-.85)/.15*.85}
+  function playStep(s,t){
+    const sd=60/P.bpm/4,b=bar,c=b%L,f=c/L,sc=sect(c),mantra=sc==="M";
+    const ch=chord(degAt(c,sc));
+    if(s===0){
+      if(P.pd!=="none")pad(t,ch.map(m=>m+12),sd*16,P.pd);
+      if(P.bs==="drone"){pad(t,[ch[0],ch[0]+7],sd*16,"dark");bass(t,ch[0]-12,sd*15,"sub",0,null)}
+      if(SW){const sw=mantra?(P.sw||0):0,lo=Math.log(18000*(1-sw)+420*sw),hi=Math.log(18000),fq=Math.exp(lo+(hi-lo)*arc(((c+1)%L)/L));SW.frequency.setValueAtTime(SW.frequency.value,t);SW.frequency.linearRampToValueAtTime(fq,t+sd*16)}}
+    const D=DR[P.dr]||{},on=k=>k&&k[s]!==".";
+    let dK,dH,dS,dO,fill=false,soft=1;
+    if(mantra){dK=f>=1/8&&!(f>=5/8&&f<11/16);dH=f>=2/8;dS=f>=3/8&&f<7/8;dO=f>=4/8&&f<7/8;
+      if(P.dr==="dmx"&&c===Math.ceil(L/8)-1&&s>=8){kick(t,.35+.04*(s-8))}}
+    else{const F=FORM,inD=sc==="D";dK=dH=dS=dO=c>=2&&!inD;
+      if(inD&&c>=F.dE-2){dK=true;soft=.7}
+      fill=P.fl&&s>=12&&(c===F.aE-1||c===F.bE-1||c===L-1)&&!inD}
+    if(P.dr!=="none"){
+      if(dK&&on(D.k)&&!(P.dr==="break"&&b%8===7))kick(t,soft);
+      if(fill&&D.s)snare(t,.45+.12*(s-12),.15);
+      else if(dS){if(on(D.s))snare(t,.9,P.dr==="big"||P.dr==="rock"?.45:.15);if(on(D.c))clap(t,.8);if(on(D.m))metal(t,1);if(on(D.z))zap(t,.9)}
+      if(dH){if(on(D.h))hat(t,s%2?.5:1,false);if(on(D.r))rim(t,.9);if(on(D.t))tamb(t,1)}
+      if(dO&&on(D.o))hat(t,.8,true)}
+    const bassOn=mantra?true:(c>=1&&!(sc==="D"&&c<FORM.bE+(FORM.dE-FORM.bE)/2));
+    if(P.bs!=="drone"&&bassOn){const pat=sc==="B"?bassB:bassA;let n=pat[s];
+      if(fill&&P.bs!=="sub")n={on:true,tone:(s-12)%3,oct:1,acc:1,slide:false,len:1};
+      if(n.on){const m=ch[n.tone]+12*n.oct-12;const prev=pat[(s+15)%16];const typ=P.bs==="acid"?"acid":P.bs==="dist"?"dist":P.bs==="sub"?"sub":P.bs==="pulse"?"square":"saw";bass(t,m,sd*n.len*.92,typ,n.acc,n.slide&&prev.on?ch[prev.tone]+12*prev.oct-12:null)}}
+    const leadOn=mantra?(P.dr==="none"?f>=1/8&&f<15/16:f>=2/8&&f<7/8):c>=(FORM?FORM.I:4);
+    if(!leadOn)return;
+    const lv=sc==="D"?.7:1;
+    if(P.ld==="arp"){const every=P.a16?1:2;if(s%every===0){const sq=sc==="B"?arpB:arpA;const k=sq[((s/every)|0)%sq.length];const m=(k<3?ch[k]:ch[0]+12)+24;lead(t,m,sd*every*.8,"arp",(P.dr==="none"?.7:1)*lv)}}
+    else if(P.ld==="sq"||P.ld==="tri"||P.ld==="saw"){const mot=sc==="B"?motB:sc==="A2"?motA2:motA;const pos=(c%4)*16+s;mot.forEach(n=>{if(n.s===pos)lead(t,ch[n.tone]+24+n.up,sd*n.len,P.ld,lv)})}
+    else if(P.ld==="bell"){if(bellSteps.includes(s)||(sc==="B"&&s===3))lead(t,ch[(s+b)%3]+24+(sc==="A2"&&s===10?12:0),1,"bell",.9*lv)}
+    else if(P.ld==="stab"){if((sc==="B"?stabB:stabA).includes(s))ch.forEach(m=>lead(t,m+12,sd*.9,"pluck",.55*lv))}
+    else if(P.ld==="pluck"){if(R()<(sc==="B"?.4:.33))lead(t,ch[Math.floor(R()*3)]+24+(sc==="A2"&&R()<.25?12:0),sd,"pluck",.9)}
+    else if(P.ld==="blip"){if(R()<(P.dr==="none"?.09:.13)){const m2=MODES[P.mode];lead(t,P.key+36+m2[Math.floor(R()*7)],.2,"blip",1)}}
+  }
+  function tick(){const la=document.hidden?1.6:.16;while(nextT<ac.currentTime+la){playStep(step%16,nextT);const sd=60/P.bpm/4;nextT+=sd;step++;if(step%16===0)bar++}}
+  function set(id){pid=id;P=PATCH[id]||PATCH.t00;build(S.findIndex(e=>e.id===id)*7919+13);if(MUS._dl)MUS._dl.delayTime.value=Math.min(1.5,60/P.bpm*.75)}
+  function start(){nextT=ac.currentTime+.06;step=0;bar=0;if(SW){SW.frequency.cancelScheduledValues(0);SW.frequency.value=P.f==="mantra"&&P.sw?Math.exp(Math.log(18000*(1-P.sw)+420*P.sw)):18000}timer=setInterval(tick,25);tick()}
+  function fade(to,sec){const t=ac.currentTime;master.gain.cancelScheduledValues(t);master.gain.setValueAtTime(master.gain.value,t);master.gain.linearRampToValueAtTime(to,t+sec)}
+  return{
+    get playing(){return timer!==null},
+    async play(id){if(!ac)init();try{if(ac.state!=="running")await ac.resume()}catch(e){}
+      token++;if(timer){clearInterval(timer);timer=null}set(id);start();fade(.72*(P.vol||1),1.2)},
+    pause(){token++;if(!ac||!timer)return;fade(0,.35);clearInterval(timer);timer=null},
+    change(id){if(!timer||id===pid)return;const my=++token;fade(0,.55);setTimeout(()=>{if(my!==token||!timer)return;clearInterval(timer);timer=null;set(id);start();fade(.72*(P.vol||1),1.4)},600)},
+    wave(out){if(!an||!timer)return false;an.getFloatTimeDomainData(out);return true}
+  };
+})();
+const LIVE={on:false,buf:new Float32Array(2048),ti:0,pk:1};
+function grabLive(){LIVE.on=MUS.wave(LIVE.buf);if(!LIVE.on)return;const b=LIVE.buf;let ti=0;for(let i=1;i<900;i++){if(b[i-1]<0&&b[i]>=0){ti=i;break}}LIVE.ti=ti;let pk=0;for(let i=ti;i<ti+700;i++)pk=Math.max(pk,Math.abs(b[i]));LIVE.pk=Math.max(pk,.12)}
+function liveY(x){const b=LIVE.buf;return b[Math.min(b.length-1,LIVE.ti+Math.floor(x*700))]/LIVE.pk*.9}
+
+/* ---------- player ---------- */
+const ppBtn=document.getElementById("pp"),plT=document.getElementById("plT"),plS=document.getElementById("plS"),plCv=document.getElementById("plScope");
+async function togglePlay(){if(MUS.playing)MUS.pause();else{ytPause();await MUS.play(S[cur].id)}syncUI()}
+ppBtn.addEventListener("click",togglePlay);
+function syncUI(){
+  const on=MUS.playing,e=S[cur],p=PATCH[e.id];
+  ppBtn.setAttribute("aria-pressed",String(on));ppBtn.textContent=on?"❚❚":"▶";ppBtn.setAttribute("aria-label",on?"Metti in pausa la colonna sonora":"Avvia la colonna sonora");
+  plT.textContent=`${e.n} · ${p.n}`;plS.textContent=`${p.d} · ${p.bpm} BPM`;
+  document.querySelectorAll(".score").forEach(sc=>sc.classList.toggle("on",on));
+  document.querySelectorAll(".sc-state").forEach(x=>{x.textContent=on?"Segnale dal vivo":"Forma d’onda della colonna sonora"});
+  document.querySelectorAll(".score-b").forEach(b=>{b.textContent=on?"❚❚ Pausa":"▶ Suona";b.setAttribute("aria-pressed",String(on))});
+}
+function drawMini(){
+  const [w,h,d]=size(plCv),c=plCv.getContext("2d");c.clearRect(0,0,w,h);
+  c.strokeStyle="rgba(255,255,255,0.12)";c.lineWidth=d;c.beginPath();c.moveTo(0,h/2+.5);c.lineTo(w,h/2+.5);c.stroke();
+  if(LIVE.on)line(c,w,h,d,x=>h/2-liveY(x)*h*.42,C1,1.4*d,true);
+}
+
+/* ---------- oscilloscopi ---------- */
+const TAU=Math.PI*2;
+const W={
+  sine:x=>Math.sin(x),
+  pulse:x=>Math.tanh(4*Math.sin(x)),
+  saw:x=>{let p=(x/TAU)%1;if(p<0)p+=1;return 2*p-1},
+  rich:x=>(Math.sin(x)+.5*Math.sin(2*x+.6)+.33*Math.sin(3*x+1.3))/1.45
+};
+const ORDER=[W.sine,W.pulse,W.saw,W.rich];
+const ACTWAVE={p:W.sine,1:W.sine,2:W.pulse,3:W.saw,4:W.rich,e:W.rich};
+const hash=n=>{const s=Math.sin(n*127.1)*43758.5453;return s-Math.floor(s)};
+function size(cv){const r=cv.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1),w=Math.max(1,Math.round(r.width*d)),h=Math.max(1,Math.round(r.height*d));if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h}return [w,h,d]}
+function graticule(c,w,h,d,cols,rows,g){
+  c.lineWidth=d;c.strokeStyle=g||"rgba(255,255,255,0.065)";c.beginPath();
+  for(let i=1;i<cols;i++){const x=Math.round(w*i/cols)+.5;c.moveTo(x,0);c.lineTo(x,h)}
+  for(let j=1;j<rows;j++){const y=Math.round(h*j/rows)+.5;c.moveTo(0,y);c.lineTo(w,y)}
+  c.stroke();c.strokeStyle=g||"rgba(255,255,255,0.13)";c.lineWidth=g?1.6*d:d;c.beginPath();
+  const cy=Math.round(h/2)+.5;c.moveTo(0,cy);c.lineTo(w,cy);
+  for(let i=0;i<cols*5;i++){const x=Math.round(w*i/(cols*5))+.5;c.moveTo(x,cy-3*d);c.lineTo(x,cy+3*d)}
+  c.stroke();
+}
+function line(c,w,h,d,f,color,lw,glow){
+  c.beginPath();const step=2*d;
+  for(let px=0;px<=w+step;px+=step){const y=f(px/w);px===0?c.moveTo(px,y):c.lineTo(px,y)}
+  c.lineJoin="round";c.lineCap="round";
+  if(glow){c.globalAlpha=.2;c.strokeStyle=color;c.lineWidth=lw*5;c.stroke();c.globalAlpha=1}
+  c.strokeStyle=color;c.lineWidth=lw;c.stroke();
+}
+const C1="#FF3D96",C2="#8E8E97";
+const SC={c1:C1,c2:C2,grid:"rgba(255,255,255,.08)"};
+function readScope(){try{const cs=getComputedStyle(document.documentElement);const v=n=>cs.getPropertyValue(n).trim();SC.c1=v("--trace")||C1;SC.c2=v("--trace2")||C2;SC.grid=v("--scope-grid")||SC.grid}catch(e){}}
+function drawHero(cv,t){
+  const [w,h,d]=size(cv),c=cv.getContext("2d");c.clearRect(0,0,w,h);
+  graticule(c,w,h,d,w/d>700?12:8,8);
+  const s=(t/4200)%4,k=Math.floor(s),fr=s-k,ff=fr*fr*(3-2*fr),A=ORDER[k],B=ORDER[(k+1)%4],ph=t*.0011;
+  if(LIVE.on)line(c,w,h,d,x=>h*.6-liveY(x)*h*.2,C1,1.6*d,true);
+  else line(c,w,h,d,x=>h*.6-((1-ff)*A(x*TAU*3.2+ph)+ff*B(x*TAU*3.2+ph))*h*.15,C1,1.6*d,true);
+  line(c,w,h,d,x=>h*.86-(Math.sin(x*TAU*1.3+t*.00025)*.55+Math.sin(x*TAU*4.7-t*.0006)*.25+(hash(Math.floor(x*90)+Math.floor(t/140))-.5)*.35)*h*.04,C2,1.1*d,false);
+}
+function drawCard(cv,t){
+  const i=+cv.dataset.i,e=S[i],[w,h,d]=size(cv),c=cv.getContext("2d");c.clearRect(0,0,w,h);
+  graticule(c,w,h,d,Math.max(8,Math.round(w/d/90)),4,SC.grid);
+  const fn=ACTWAVE[e.act],cyc=2.2+(i%5)*.55,ph=t*.0013+i;
+  const turb=.25+hash(i+3)*.75;
+  const env=e.kind==="pro"?(x=>{const u=Math.min(1,Math.max(0,(x-.25)/.45));return u*u*(3-2*u)}):(()=>1);
+  const y0=cv.dataset.solo?.5:.4;
+  if(LIVE.on&&i===cur)line(c,w,h,d,x=>h*y0-liveY(x)*h*.3,SC.c1,1.5*d,true);
+  else line(c,w,h,d,x=>h*y0-fn(x*TAU*cyc+ph)*h*.2*env(x),SC.c1,1.5*d,true);
+  if(!cv.dataset.solo)line(c,w,h,d,x=>h*.74-(Math.sin(x*TAU*(1.1+turb)+t*.0004+i)*.6+(hash(Math.floor(x*70)+i*31+Math.floor(t/160))-.5)*turb*.7)*h*.08,SC.c2,1.1*d,false);
+}
+function drawCh2(cv,t){
+  const i=+cv.dataset.i,[w,h,d]=size(cv),c=cv.getContext("2d");c.clearRect(0,0,w,h);
+  graticule(c,w,h,d,Math.max(8,Math.round(w/d/90)),6,SC.grid);
+  const turb=.3+hash(i+3)*.7;
+  line(c,w,h,d,x=>h*.82-(Math.sin(x*TAU*1.4+t*.0003+i)*.6+Math.sin(x*TAU*5.1-t*.0007)*.2+(hash(Math.floor(x*80)+i*17+Math.floor(t/170))-.5)*turb*.6)*h*.07,SC.c2,1.2*d,false);
+}
+const heroCv=document.getElementById("heroScope");
+let heroVis=true;const vis=new Map();
+const io=("IntersectionObserver" in window)?new IntersectionObserver(es=>es.forEach(en=>{if(en.target===heroCv)heroVis=en.isIntersecting;else vis.set(en.target,en.isIntersecting)})):null;
+if(io)io.observe(heroCv);
+let live=[];
+function mountScopes(){
+  if(io)live.forEach(cv=>io.unobserve(cv));
+  live=[...app.querySelectorAll("canvas.cs,canvas.cs2")];
+  live.forEach(cv=>{vis.set(cv,true);if(io)io.observe(cv)});
+  drawAll(performance.now(),true);
+}
+function drawAll(t,force){
+  if(force||heroVis)drawHero(heroCv,t);
+  live.forEach(cv=>{if(!cv.isConnected)return;if(force||vis.get(cv)!==false)(cv.classList.contains("cs2")?drawCh2:drawCard)(cv,t)});
+}
+function loop(t){grabLive();if(!RM.matches&&!document.hidden){drawAll(t,false);drawMini()}requestAnimationFrame(loop)}
+addEventListener("resize",()=>{fitMast();drawAll(performance.now(),true)});
+
+/* ---------- testata: le due righe alla stessa larghezza ---------- */
+function fitMast(){
+  const m=document.querySelector(".mast");const W0=m.clientWidth;if(!W0)return;
+  m.querySelectorAll("span").forEach(s=>{s.style.fontSize="100px";const wd=s.getBoundingClientRect().width;if(wd>0)s.style.fontSize=(100*W0/wd*.995).toFixed(2)+"px"});
+}
+fitMast();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{fitMast();drawAll(performance.now(),true)});
+
+pending=location.hash?"anchor":"none";
+/* ---------- splash ---------- */
+(function splash(){
+  const sp=document.getElementById("splash");if(!sp)return;
+  let seen=false;try{seen=sessionStorage.getItem("sb-splash")==="1"}catch(e){}
+  const deep=(location.hash&&location.hash.length>1)||(typeof slugId==="function"&&slugId());
+  if(seen||deep||window.__noSplash)return;
+  sp.hidden=false;document.documentElement.style.overflow="hidden";
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* titolo a mosaico: font 5x7, ogni pixel è un blocco di televideo «separato» */
+  const F={S:["01111","10000","10000","01110","00001","00001","11110"],Y:["10001","10001","01010","00100","00100","00100","00100"],N:["10001","11001","10101","10011","10001","10001","10001"],T:["11111","00100","00100","00100","00100","00100","00100"],H:["10001","10001","10001","11111","10001","10001","10001"],B:["11110","10001","10001","11110","10001","10001","11110"],R:["11110","10001","10001","11110","10100","10010","10001"],I:["01110","00100","00100","00100","00100","00100","01110"],A:["01110","10001","10001","11111","10001","10001","10001"]};
+  const cv=document.getElementById("spCv"),cx=cv.getContext("2d");
+  const cols=["#FF2A2A","#FF2AE8","#FFF22A","#2AFF4F","#2AF4FF","#F4F4F4","#2AF4FF"];
+  const px=[];function word(w,ox,oy){[...w].forEach((ch,k)=>F[ch].forEach((row,y)=>[...row].forEach((b,x)=>{if(b==="1")px.push([ox+k*6+x,oy+y,y])})))}
+  const w1="SYNTH",w2="BRITANNIA",total=w2.length*6-1;word(w1,Math.round((total-(w1.length*6-1))/2),0);word(w2,0,9);
+  const U=2;cv.width=total*U;cv.height=16*U;
+  function cell(x,y,c){cx.fillStyle=c;cx.fillRect(x*U,y*U,U-.5,U-.5)}
+  const order=px.map((p,i)=>[Math.random(),i]).sort((a,b)=>a[0]-b[0]).map(a=>a[1]);
+  let k=0;function draw(){const n=reduce?order.length:Math.min(order.length,k+9);for(;k<n;k++){const p=px[order[k]];cell(p[0],p[1],cols[p[2]])}if(k<order.length)requestAnimationFrame(draw)}
+  setTimeout(draw,reduce?0:700);
+  /* sequencer a 16 passi */
+  const seq=document.getElementById("spSeq");const acc=[0,4,8,12];for(let i=0;i<16;i++){const b=document.createElement("i");if(acc.includes(i))b.className="acc";seq.appendChild(b)}
+  let st=0;const seqT=setInterval(()=>{const c=seq.children;for(let i=0;i<16;i++)c[i].classList.toggle("on",i===st);st=(st+1)%16},125);
+  /* intestazione: numero di pagina che scorre, data e orologio */
+  const pg=document.getElementById("spPg"),ck=document.getElementById("spCk"),dt=document.getElementById("spDt");
+  const days=["Dom","Lun","Mar","Mer","Gio","Ven","Sab"],mon=["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
+  function clock(){const d=new Date();ck.textContent=d.toTimeString().slice(0,8);dt.textContent=`${days[d.getDay()]} ${d.getDate()} ${mon[d.getMonth()]}`}clock();const ckT=setInterval(clock,1000);
+  let roll=reduce?0:14;const rollT=setInterval(()=>{if(roll-->0)pg.textContent=String(100+Math.floor(Math.random()*899));else{pg.textContent="100";clearInterval(rollT)}},70);
+  /* uscita: il televisore si spegne su una riga e poi su un punto */
+  let done=false;
+  function close(then){if(done)return;done=true;try{sessionStorage.setItem("sb-splash","1")}catch(e){}
+    clearInterval(seqT);clearInterval(ckT);clearInterval(rollT);removeEventListener("keydown",keys);
+    sp.classList.add("off");setTimeout(()=>{sp.hidden=true;document.documentElement.style.overflow="";if(then)then()},reduce?150:720)}
+  async function act(a){
+    if(a==="audio"){close();if(!MUS.playing){try{await MUS.play(S[cur].id)}catch(e){}syncUI()}}
+    else if(a==="quiet")close();
+    else if(a==="index")close(()=>toggleIndex(true));
+    else if(/^t\d\d$/.test(a))close(()=>go(a));
+  }
+  sp.addEventListener("click",ev=>{const b=ev.target.closest("[data-sp]");if(b){act(b.dataset.sp);return}if(ev.target.closest("#spGo"))act("audio")});
+  /* come al televideo: si digita il numero di pagina. 100 = prologo, 101–123 = tappe */
+  let typed="";
+  function keys(ev){
+    if(ev.key==="Enter"){ev.preventDefault();act("audio");return}
+    if(ev.key==="Escape"){act("quiet");return}
+    if(!/^[0-9]$/.test(ev.key))return;typed+=ev.key;pg.textContent=(typed+"___").slice(0,3);
+    if(typed.length===3){const n=+typed;typed="";const list=S.filter(e=>e.kind==="ep"||e.kind==="flash");
+      if(n===100)setTimeout(()=>act("audio"),300);
+      else if(n>100&&n-100<=list.length){const id=list[n-101].id;setTimeout(()=>close(()=>go(id)),300)}
+      else setTimeout(()=>{pg.textContent="100"},600)}}
+  addEventListener("keydown",keys);
+  setTimeout(()=>{try{document.getElementById("spGo").focus({preventScroll:true})}catch(e){}},reduce?0:800);
+})();
+route();
+requestAnimationFrame(loop);
+</script>
+</body></html>
