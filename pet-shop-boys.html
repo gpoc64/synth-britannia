@@ -1172,9 +1172,8 @@ pending=location.hash?"anchor":"none";
 /* ---------- splash ---------- */
 (function splash(){
   const sp=document.getElementById("splash");if(!sp)return;
-  let seen=false;try{seen=sessionStorage.getItem("sb-splash")==="1"}catch(e){}
   const deep=(location.hash&&location.hash.length>1)||(typeof slugId==="function"&&slugId());
-  if(seen||deep||window.__noSplash)return;
+  if(deep||window.__noSplash)return;
   sp.hidden=false;document.documentElement.style.overflow="hidden";
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
   const cv=document.getElementById("spCv"),cx=cv.getContext("2d");
@@ -1238,7 +1237,7 @@ pending=location.hash?"anchor":"none";
     raf=requestAnimationFrame(frame)}
   raf=requestAnimationFrame(frame);
   let done=false;
-  function close(then){if(done)return;done=true;try{sessionStorage.setItem("sb-splash","1")}catch(e){}
+  function close(then){if(done)return;done=true;
     removeEventListener("keydown",keys);exitT=performance.now();sp.classList.add("off");
     setTimeout(()=>{cancelAnimationFrame(raf);sp.hidden=true;document.documentElement.style.overflow="";if(then)then()},reduce?120:1000)}
   async function act(a){
