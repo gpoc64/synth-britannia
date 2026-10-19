@@ -3,6 +3,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cutive&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@75..112.5,300..700&display=swap">
 <style>
 /* Layout: oscilloscopio a doppia traccia. CH1 = la musica (l'unico segnale a colori), CH2 = il paese (grigio).
@@ -107,6 +108,7 @@ html:root[data-world="cold"]{--ground:#0A0B0D;--ink:#D3D7DB;--mute:#6A727A;--rul
 html:root[data-world="pop"]{--ground:#FFFFFF;--ink:#0A0A0A;--mute:#666666;--rule:#0A0A0A;--panel:#F3F3F3;--signal:#FF2D7A;--signal-ink:#FFFFFF;--accent2:#FFD60A;--accent3:#19C2FF;--grain:0;--d-wdth:125;--d-wght:900;--d-skew:-10deg;--rule-w:2px;--scope-bg:#0A0A0A;--scope-grid:rgba(255,255,255,.09);--trace:#FF2D7A;--trace2:#19C2FF;--f-label:var(--f-display);color-scheme:light}
 html:root[data-world="rave"]{--ground:#050505;--ink:#F2F2F2;--mute:#8A8A8A;--rule:#2A2A2A;--panel:#101010;--signal:#D4FF00;--signal-ink:#050505;--accent2:#FF2BD6;--accent3:#FF7A00;--grain:.22;--grain-img:var(--noise-light);--d-wdth:150;--d-wght:900;--scope-bg:#000000;--scope-grid:rgba(212,255,0,.13);--trace:#D4FF00;--trace2:#FF2BD6;color-scheme:dark}
 html:root[data-world="screen"]{--ground:#0D0E13;--ink:#F1F1F4;--mute:#8C8E98;--rule:rgba(255,255,255,.13);--panel:rgba(255,255,255,.055);--signal:#9D8CFF;--signal-ink:#0D0E13;--accent2:#4FE3FF;--grain:.05;--grain-img:var(--noise-light);--d-wdth:100;--d-wght:600;--d-track:-.02em;--radius:18px;--scope-bg:rgba(255,255,255,.04);--scope-grid:rgba(255,255,255,.07);--trace:#9D8CFF;--trace2:#4FE3FF;--f-label:var(--f-display);color-scheme:dark}
+html:root[data-world="book"]{--ground:#EDE4CF;--ink:#1D1A16;--mute:#6E6458;--rule:#1D1A16;--panel:#E4D9BF;--signal:#C4471B;--signal-ink:#FFFFFF;--accent2:#E3A126;--accent3:#2F5E5A;--grain:.18;--grain-img:var(--noise-dark);--d-wdth:150;--d-wght:900;--rule-w:2px;--scope-bg:#1D1A16;--scope-grid:rgba(237,228,207,.08);--trace:#E3A126;--trace2:#C4471B;--f-body:"Fraunces",Georgia,serif;--f-label:var(--f-mono);color-scheme:light}
 :root{--noise-dark:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");--noise-light:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
 body::after{content:"";position:fixed;inset:0;z-index:7;pointer-events:none;opacity:var(--grain,0);background-image:var(--grain-img,none);background-size:240px}
 body{transition:background-color .5s,color .5s}
@@ -164,6 +166,29 @@ body{transition:background-color .5s,color .5s}
 html[lang="en-GB"] .w-zine .cv-clip::before{content:"Meanwhile, outside"}
 .w-zine .cv-hint::before{content:"✂ "}
 .cv-ctl{min-height:46px}
+
+/* tascabile di fantascienza anni '70: la copertina diventa un libro */
+.w-book .cover{padding:clamp(16px,3.4vw,40px) 0 clamp(20px,4vw,48px)}
+.w-book .cv-in{position:relative;max-width:1080px;background:var(--accent2);color:var(--ink);padding:0 clamp(18px,3.4vw,44px) clamp(18px,3vw,34px) calc(clamp(18px,3.4vw,44px) + 30px);box-shadow:inset 0 0 0 9px var(--accent2),inset 0 0 0 11px var(--ink),10px 12px 0 rgba(29,26,22,.9);gap:clamp(18px,2.6vw,30px);animation:rise .6s cubic-bezier(.2,.7,.1,1) both}
+.w-book .cv-in::before{content:"SYNTH BRITANNIA · APPENDICI";position:absolute;left:0;top:0;bottom:0;width:30px;background:var(--ink);color:var(--accent2);writing-mode:vertical-rl;transform:rotate(180deg);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:10px;letter-spacing:.32em}
+.w-book .cv-in::after{content:"";position:absolute;right:clamp(18px,3.4vw,44px);bottom:clamp(18px,3vw,34px);width:42px;height:42px;border-radius:50%;background:conic-gradient(var(--signal) 0 25%,var(--ink) 0 50%,var(--signal) 0 75%,var(--ink) 0);opacity:.9;pointer-events:none}
+html[lang="en-GB"] .w-book .cv-in::before{content:"SYNTH BRITANNIA · APPENDICES"}
+.w-book .cv-top{margin:0;padding:18px 0 12px;border-bottom:2px solid var(--ink);color:var(--ink);font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.14em;font-size:11px}
+.w-book .cv-top::after{content:"Synth Britannia";margin-left:auto;font-family:var(--f-display);font-variation-settings:"wdth" 150,"wght" 900;letter-spacing:.04em;font-size:13px;color:var(--signal)}
+.w-book .cv-step{color:var(--signal)}
+@media (max-width:600px){.w-book .cv-top::after{display:none}}
+.w-book .cv-place::before{background:var(--ink)}
+.w-book .cv-txt{gap:clamp(12px,1.6vw,18px);animation:none}
+.w-book .cv-num{display:grid;place-items:center;width:clamp(64px,7vw,86px);height:clamp(64px,7vw,86px);border-radius:50%;background:var(--signal);color:var(--signal-ink);font-size:clamp(24px,2.8vw,34px);font-variation-settings:"wdth" 120,"wght" 800;letter-spacing:0;line-height:1;transform:rotate(-8deg);box-shadow:3px 3px 0 var(--ink)}
+.w-book .cv-who{font-size:clamp(44px,8.6vw,118px);line-height:.86;letter-spacing:-.005em;color:var(--ink)}
+.w-book .cv-line{font-family:"Fraunces",Georgia,serif;font-style:italic;font-variation-settings:"opsz" 96,"wght" 420;font-size:clamp(22px,2.7vw,34px);line-height:1.15;color:var(--ink);max-width:22ch}
+.w-book .cv-line::before{content:"";display:block;width:56px;height:5px;background:var(--signal);margin-bottom:14px}
+.w-book .cv-photo{max-width:min(100%,420px)}
+.w-book .ph{background:var(--ground);padding:9px;border:2px solid var(--ink);box-shadow:6px 6px 0 var(--signal)}
+.w-book .cv-cred{color:rgba(29,26,22,.72)}
+.w-book .cv-hint{color:var(--ink)}
+.w-book .cv-ctl{padding-right:58px}
+.w-book .story p.lead::first-letter{color:var(--signal)}
 
 /* freddo, industriale */
 .w-cold .cv-num{font-variation-settings:"wdth" 55,"wght" 200;letter-spacing:0;color:var(--mute)}
@@ -852,7 +877,7 @@ function nextLink(i){
   return `<a class="next" href="#t00"><small>Fine del viaggio · ricomincia</small><span>00 · ${esc(S[0].who)}</span></a>`;
 }
 
-const WORLD={p:"zine",1:"cold",2:"pop",3:"rave",4:"screen",e:"screen",a:"cold"};
+const WORLD={p:"zine",1:"cold",2:"pop",3:"rave",4:"screen",e:"screen",a:"book"};
 /* le lettere ritagliate stanno unite per parola: una parola non si spezza mai a metà */
 function ransom(str,seed){return str.split(" ").map((w,i)=>`<span class="rw">${ransom0(w,seed+i*101)}</span>`).join(" ")}
 function ransom0(str,seed){let k=0;return [...str].map(ch=>{if(ch===" ")return " ";k++;const r1=hash(seed*17+k*3),r2=hash(seed*29+k*7),r3=hash(seed*41+k*11),r4=hash(seed*53+k*13);const w=70+Math.floor(r1*60),g=600+Math.floor(r2*300),rot=(r3*5-2.5).toFixed(1),inv=r4<.18&&!/[Iil1]/.test(ch);return `<span class="rl${inv?" inv":""}" style="font-variation-settings:'wdth' ${w},'wght' ${g};transform:rotate(${rot}deg)">${esc(ch)}</span>`}).join("")}
