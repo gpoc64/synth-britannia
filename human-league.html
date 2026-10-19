@@ -333,6 +333,21 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .foot a{color:var(--ink)}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 
+/* ---------- condivisione ---------- */
+.share-b{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-family:var(--f-label);font-size:12.5px;letter-spacing:.06em;color:var(--ink);border:var(--rule-w,1px) solid var(--ink);padding:9px 14px;border-radius:var(--radius,0);transition:background .2s,color .2s}
+.share-b svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.share-b:hover,.share-b:focus-visible{background:var(--signal);border-color:var(--signal);color:var(--signal-ink)}
+.share-end{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;padding:22px 0;margin-bottom:18px;border-top:var(--rule-w,1px) solid var(--rule);border-bottom:var(--rule-w,1px) solid var(--rule);font-family:var(--f-label);font-size:14px;color:var(--mute)}
+.share-pop{position:fixed;z-index:9000;left:50%;bottom:max(96px,calc(env(safe-area-inset-bottom) + 96px));transform:translateX(-50%);width:min(420px,calc(100vw - 32px));background:var(--ground);color:var(--ink);border:2px solid var(--ink);box-shadow:8px 8px 0 var(--signal);padding:18px 18px 16px;display:grid;gap:12px;border-radius:var(--radius,0)}
+.share-pop[hidden]{display:none}
+.share-t{margin:0;font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:18px}
+.share-u{margin:0;font-family:var(--f-mono);font-size:12px;color:var(--mute);overflow-wrap:anywhere}
+.share-l{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.share-l a,.share-l button{all:unset;cursor:pointer;text-align:center;font-family:var(--f-label);font-size:12.5px;padding:10px 6px;border:1px solid var(--rule);color:var(--ink);border-radius:var(--radius,0)}
+.share-l a:hover,.share-l button:hover,.share-l a:focus-visible,.share-l button:focus-visible{background:var(--signal);color:var(--signal-ink);border-color:var(--signal)}
+.share-l .cp{grid-column:1/-1;background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.share-x{all:unset;cursor:pointer;position:absolute;top:8px;right:12px;font-size:22px;line-height:1;color:var(--mute)}
+
 /* ---------- splash: manifesto costruttivista, cuneo rosso e cerchio nero ---------- */
 .cs-sc{--cs-paper:#ECE4D2;--cs-ink:#141210;--cs-red:#D7261E;--cs-muted:#6E665A;position:fixed;inset:0;overflow:hidden;background:var(--cs-paper)}
 .cs-sc::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;mix-blend-mode:multiply;
@@ -461,6 +476,12 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
     </div>
   </nav>
   <div id="app"></div>
+  <div class="share-pop" id="sharePop" role="dialog" aria-modal="false" aria-labelledby="shareT" hidden>
+    <p class="share-t" id="shareT">Condividi</p>
+    <p class="share-u" id="shareU"></p>
+    <div class="share-l" id="shareL"></div>
+    <button class="share-x" type="button" id="shareX" aria-label="Chiudi">×</button>
+  </div>
 </main>
 
 <div class="player" id="player" role="region" aria-label="Colonna sonora">
@@ -831,7 +852,7 @@ function render(i){
       </div>
       ${photoBlock(e)}
       </div>
-      <div class="cv-ctl"><span class="cv-hint">Scorri per leggere ↓</span></div>
+      <div class="cv-ctl"><span class="cv-hint">Scorri per leggere ↓</span><button class="share-b" type="button" data-share><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>Condividi</button></div>
       </div>
     </section>
     <div class="wrap detail">
@@ -853,7 +874,7 @@ function render(i){
       </div>
       ${extra}
     </div>
-  </article><div class="wrap">${nextLink(i)}</div>`;
+  </article><div class="wrap"><div class="share-end"><span>Ti è piaciuta questa tappa?</span><button class="share-b" type="button" data-share><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>Condividi la tappa</button></div>${nextLink(i)}</div>`;
   const txt=`Synth Britannia · ${stepLabel(e)} · ${e.who}\n`+e.tracks.map(([a,t,y],k)=>`${k+1}. ${a} – ${t} (${y})`).join("\n");
   {const box=document.getElementById("ytBox");if(box)box.dataset.k=box.dataset.first;ytFrame=null;ytReady=false;setTimeout(ytPrefetch,0)}
   document.getElementById("copy").addEventListener("click",()=>{
@@ -1233,6 +1254,39 @@ fitMast();
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{fitMast();drawAll(performance.now(),true)});
 
 pending=location.hash?"anchor":"none";
+
+/* ---------- condivisione: menu del sistema sul telefono, pannello sul computer ---------- */
+const SHARE_BASE="https://synth-britannia.vercel.app/";
+function shareData(){const e=S[cur];const url=SHARE_BASE+(SLUG[e.id]||"");const step=e.kind==="ep"||e.kind==="flash"?`Tappa ${e.n} di ${NT}`:(e.id==="t00"?"Prologo":"Epilogo");
+  return {url,title:`${e.who} · Synth Britannia`,text:`${e.who}: ${e.tag}. ${step} di Synth Britannia, cinquant'anni di synth pop britannico.`}}
+const sharePop=document.getElementById("sharePop");
+function shareClose(){sharePop.hidden=true}
+function shareOpen(){const d=shareData(),u=encodeURIComponent(d.url),t=encodeURIComponent(d.text);
+  document.getElementById("shareU").textContent=d.url;
+  document.getElementById("shareL").innerHTML=
+    `<a href="https://wa.me/?text=${encodeURIComponent(d.text+" "+d.url)}" target="_blank" rel="noopener">WhatsApp</a>`+
+    `<a href="https://www.linkedin.com/sharing/share-offsite/?url=${u}" target="_blank" rel="noopener">LinkedIn</a>`+
+    `<a href="https://x.com/intent/post?text=${t}&url=${u}" target="_blank" rel="noopener">X</a>`+
+    `<a href="https://www.facebook.com/sharer/sharer.php?u=${u}" target="_blank" rel="noopener">Facebook</a>`+
+    `<a href="https://t.me/share/url?url=${u}&text=${t}" target="_blank" rel="noopener">Telegram</a>`+
+    `<a href="mailto:?subject=${encodeURIComponent(d.title)}&body=${encodeURIComponent(d.text+"\n\n"+d.url)}">Email</a>`+
+    `<button type="button" class="cp" id="shareCp">Copia link</button>`;
+  sharePop.hidden=false;setTimeout(()=>{try{sharePop.querySelector("a").focus()}catch(e){}},30)}
+async function doShare(){const d=shareData();
+  const touch=matchMedia("(pointer: coarse)").matches;
+  if(touch&&navigator.share){try{await navigator.share(d);return}catch(e){if(e&&e.name==="AbortError")return}}
+  shareOpen()}
+document.addEventListener("click",async ev=>{
+  if(ev.target.closest("[data-share]")){ev.preventDefault();doShare();return}
+  if(ev.target.closest("#shareX")){shareClose();return}
+  const cp=ev.target.closest("#shareCp");
+  if(cp){const url=shareData().url;let ok=false;try{await navigator.clipboard.writeText(url);ok=true}catch(e){}
+    if(!ok){const ta=document.createElement("textarea");ta.value=url;document.body.appendChild(ta);ta.select();try{ok=document.execCommand("copy")}catch(e){}ta.remove()}
+    cp.textContent=ok?"Link copiato ✓":"Copia non riuscita: tieni premuto sul link sopra";setTimeout(()=>{if(!sharePop.hidden)shareClose()},1400);return}
+  if(!sharePop.hidden&&!ev.target.closest("#sharePop"))shareClose()});
+addEventListener("keydown",ev=>{if(ev.key==="Escape"&&!sharePop.hidden)shareClose()});
+addEventListener("hashchange",shareClose);
+
 /* ---------- splash ---------- */
 (function splash(){
   const sp=document.getElementById("splash");if(!sp)return;
