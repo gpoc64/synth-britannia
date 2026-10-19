@@ -223,6 +223,7 @@ body{transition:background-color .5s,color .5s}
 .pl-foot{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;padding-top:20px}
 .copybox{width:100%;min-height:150px;font-family:var(--f-mono);font-size:12px;padding:12px;border:1px solid var(--ink);background:var(--panel);color:var(--ink)}
 .status{font-family:var(--f-mono);font-size:11.5px;color:var(--signal);letter-spacing:.06em}
+.doc-yt{max-width:880px}
 .extra{margin-top:44px;border-top:var(--rule-w) solid var(--rule);padding-top:20px;display:grid;gap:14px}
 .extra > p{margin:0;max-width:62ch;color:var(--mute);font-size:15px}
 .xl{list-style:none;margin:0;padding:0;columns:2 300px;column-gap:36px}
@@ -799,6 +800,13 @@ function scoreBlock(e){
   const p=PATCH[e.id],b=BG[e.id];if(!p)return "";
   return `<div class="score"><div class="scope" aria-hidden="true"><canvas class="cs" data-i="${idx(e.id)}" data-solo="1"></canvas><div class="scope-l"><span class="c1">CH1 · ${esc(p.n)}</span><span class="sc-state">Forma d’onda della colonna sonora</span><span>${p.bpm} BPM</span></div></div><div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="score-t"><small>Colonna sonora originale, generata dal vivo mentre leggi</small><b>${esc(p.n)}</b><span>${esc(p.d)}</span></div><button type="button" class="btn score-b" aria-pressed="false">▶ Suona</button>${b?`<a class="score-ref" href="${esc(b[3])}" target="_blank" rel="noopener">Il brano di riferimento: ${esc(b[0])} · ${esc(b[1])} ↗ Spotify</a>`:""}</div>`;
 }
+/* il documentario BBC Four del 2009 nel prologo: caricamento non ufficiale, con una copia di riserva */
+const DOC={v:"1lVljmH0yUw",fb:"JuQz8fHB7iw"};
+function docBlock(){const v=YTDEAD[DOC.v]?DOC.fb:DOC.v;return `<section class="extra doc" aria-labelledby="dh"><h3 class="sec" id="dh">Il documentario</h3>
+  <p>Synth Britannia, il documentario di BBC Four andato in onda nell’ottobre 2009 che dà il nome a questo viaggio: un’ora e mezza di interviste a Human League, OMD, Gary Numan, Depeche Mode, Soft Cell, Pet Shop Boys e altri.</p>
+  <figure class="yt doc-yt" id="docBox"><div class="yt-v" data-v="${v}"><img src="https://i.ytimg.com/vi/${v}/hqdefault.jpg" alt="" loading="lazy" onload="docCheck(this)" onerror="docCheck(this)"><button type="button" class="yt-go" aria-label="Guarda il documentario Synth Britannia"><span aria-hidden="true">▶</span></button></div>
+  <div class="yt-c"><span><b>Synth Britannia</b> · BBC Four, 2009</span><span>Documentario · caricamento non ufficiale · <a href="https://www.youtube.com/watch?v=${v}" target="_blank" rel="noopener">YouTube ↗</a></span></div></figure></section>`}
+function docCheck(img){if(img.naturalWidth>120||YTDEAD[DOC.v])return;YTDEAD[DOC.v]=1;const box=document.getElementById("docBox");if(box&&!box.querySelector("iframe")){const tmp=document.createElement("div");tmp.innerHTML=docBlock();box.replaceWith(tmp.querySelector("#docBox"))}}
 function nextLink(i){
   if(i<S.length-1){const n=S[i+1];return `<a class="next" href="#${n.id}"><small>Prossima tappa →</small><span>${esc(n.n)} · ${esc(n.who)}</span></a>`}
   return `<a class="next" href="#t00"><small>Fine del viaggio · ricomincia</small><span>00 · ${esc(S[0].who)}</span></a>`;
@@ -872,7 +880,7 @@ function render(i){
           <textarea class="copybox" id="copyBox" readonly hidden aria-label="Scaletta da copiare"></textarea>
         </aside>
       </div>
-      ${extra}
+      ${e.id==="t00"?docBlock():""}${extra}
     </div>
   </article><div class="wrap"><div class="share-end"><span>Ti è piaciuta questa tappa?</span><button class="share-b" type="button" data-share><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>Condividi la tappa</button></div>${nextLink(i)}</div>`;
   const txt=`Synth Britannia · ${stepLabel(e)} · ${e.who}\n`+e.tracks.map(([a,t,y],k)=>`${k+1}. ${a} – ${t} (${y})`).join("\n");
@@ -919,7 +927,7 @@ function ytShow(k,play){const box=document.getElementById("ytBox");if(!box)retur
     box.querySelector(".yt-v").dataset.v=Y.v;if(MUS.playing){MUS.pause();syncUI()}
     ytFrame.contentWindow.postMessage(JSON.stringify({event:"command",func:"loadVideoById",args:[Y.v]}),"*");return}
   box.innerHTML=ytFacade(...tr);if(play)ytPlay(box.querySelector(".yt-v"))}
-function ytPlay(v){if(!v)return;if(MUS.playing){MUS.pause();syncUI()}
+function ytPlay(v){if(!v)return;if(MUS.playing){MUS.pause();syncUI()}ytPause();
   const org=/^https?:/.test(location.protocol)?"&origin="+encodeURIComponent(location.origin):"";
   const f=document.createElement("iframe");f.src=`https://www.youtube-nocookie.com/embed/${v.dataset.v}?autoplay=1&rel=0&playsinline=1&enablejsapi=1${org}`;f.title="Video su YouTube";f.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";f.allowFullscreen=true;f.referrerPolicy="strict-origin-when-cross-origin";
   ytFrame=f;ytReady=false;ytState=-1;
