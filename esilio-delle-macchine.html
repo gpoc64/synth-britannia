@@ -486,6 +486,11 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .lab-k.bk.on{background:var(--signal)}
 @media (max-width:600px){.lab-cell{height:30px}.lab-cell.dr{height:24px}.lab-kb{height:108px}}
 @media (prefers-reduced-motion:reduce){.lab *{transition:none!important}}
+.xl-wrap{display:block}
+.xl-box{position:sticky;top:92px;z-index:6;width:min(100%,360px);margin:0 0 16px;padding:8px;background:var(--ground);border:var(--rule-w) solid var(--ink)}
+.xl-ph{display:grid;place-items:center;color:var(--mute);font-size:34px}
+.xl li.now a{color:var(--signal)}
+@media (max-width:600px){.xl-box{top:78px;width:min(100%,280px)}}
 </style>
 <div class="cs-sc sp" id="splash" role="dialog" aria-modal="true" aria-label="Synth Britannia, cinquant'anni di synth pop britannico" hidden>
   <div class="lang-sw cs-lang" role="group" aria-label="Lingua / Language"><button type="button" data-lang="it">IT</button><span aria-hidden="true">·</span><button type="button" data-lang="en">EN</button></div>
@@ -842,6 +847,11 @@ function ytCheck(img){const v=img.closest(".yt-v");if(!v)return;const id=v.datas
   const box=document.getElementById("ytBox");if(tr&&box)box.innerHTML=ytFacade(...tr)}
 const ytKind=k=>k==="video"?"Video ufficiale":k==="audio"?"Audio ufficiale":k==="topic"?"Audio":"Video";
 function ytFacade(a,t,y){const Y=ytOf(a,t);if(!Y)return "";return `<div class="yt-v" data-v="${Y.v}"><img src="https://i.ytimg.com/vi/${Y.v}/hqdefault.jpg" alt="" loading="lazy"${Y.fb?' onload="ytCheck(this)" onerror="ytCheck(this)"':""}><button type="button" class="yt-go" aria-label="Guarda ${esc(t)} di ${esc(a)}"><span aria-hidden="true">▶</span></button></div><div class="yt-c"><span><b>${esc(t)}</b> · ${esc(a)}, ${esc(y)}</span><span>${ytLabel(Y)} · <a href="https://www.youtube.com/watch?v=${Y.v}" target="_blank" rel="noopener">YouTube ↗</a></span></div>`}
+/* i brani del documentario si ascoltano nella pagina, con il lettore YouTube incorporato (resta visibile: lo richiedono le regole di YouTube) */
+function xlPlay(a,t){const Y=ytOf(a,t),box=document.getElementById("xlBox");if(!Y||!box)return;
+  box.innerHTML=`<div class="yt-v" data-v="${Y.v}"></div><div class="yt-c"><span><b>${esc(t)}</b> · ${esc(a)}</span><span>${ytLabel(Y)} · <a href="https://www.youtube.com/watch?v=${Y.v}" target="_blank" rel="noopener">YouTube ↗</a></span></div>`;
+  document.querySelectorAll(".xl li").forEach(li=>{const x=li.querySelector("a");li.classList.toggle("now",!!x&&x.dataset.a===a&&x.dataset.t===t)});
+  ytPlay(box.querySelector(".yt-v"))}
 /* colonna sonora del documentario: ogni brano si ascolta su YouTube (audio ufficiale dove c’è) */
 function xLink(a,t){const Y=ytOf(a,t);if(Y)return {href:"https://www.youtube.com/watch?v="+Y.v,direct:true,flag:Y.u?"Caricamento non ufficiale":(Y.k==="live"||Y.k==="tv")?(EN?"Live":"Dal vivo"):""};return {href:"https://www.youtube.com/results?search_query="+encodeURIComponent(a+" "+t),direct:false,flag:""}}
 function trackLink(a,t){const r=TR[a+"|"+t];if(r&&r[0])return {href:deep(r[0]),direct:true,flag:r[1]==="live"?"Versione dal vivo":r[1]==="remix"?"Remix":""};return {href:spot(a,t),direct:false,flag:r&&r[1]==="blocked"?"Non ascoltabile su Spotify in Italia":""}}
@@ -964,7 +974,7 @@ function render(i){
     if(Y)return `<li class="mt${k===first?" now":""}" data-k="${k}"><span class="mt-n">${String(k+1).padStart(2,"0")}</span><button type="button" class="mt-p" data-k="${k}"><span class="mt-t">${esc(t)}</span><span class="mt-a">${esc(a)}, ${esc(y)}</span><span class="mt-x">${esc(n)}</span></button><button type="button" class="mt-s" data-k="${k}" aria-label="Guarda ${esc(t)} di ${esc(a)} qui">▶</button></li>`;
     return `<li class="mt${L.direct?"":" off"}"><span class="mt-n">${String(k+1).padStart(2,"0")}</span><div class="mt-b"><span class="mt-t">${esc(t)}</span><span class="mt-a">${esc(a)}, ${esc(y)}</span><span class="mt-x">${esc(n)}</span><span class="mt-f">${L.direct?"Non su YouTube: si apre in Spotify":esc(L.flag||"Cerca su Spotify")}</span></div><a class="mt-s" href="${L.href}" target="_blank" rel="noopener" aria-label="${L.direct?"Ascolta":"Cerca"} ${esc(t)} di ${esc(a)} su Spotify">↗</a></li>`}).join("");
   const ytBox=first<0?"":`<figure class="yt" id="ytBox" data-first="${first}">${ytFacade(...e.tracks[first])}</figure>`;
-  const extra=e.extra?`<section class="extra" aria-labelledby="xh"><h3 class="sec" id="xh">${esc(e.extra.title)}</h3><p>${esc(e.extra.note)}</p><ol class="xl">${e.extra.list.map(([a,t],k)=>{const L=xLink(a,t);return `<li${L.direct?"":' class="off"'}><span>${String(k+1).padStart(2,"0")}</span><a href="${L.href}" target="_blank" rel="noopener">${esc(t)} <i>· ${esc(a)}</i>${L.flag?`<em>${esc(L.flag)}</em>`:""}</a></li>`}).join("")}</ol></section>`:"";
+  const extra=e.extra?`<section class="extra" aria-labelledby="xh"><h3 class="sec" id="xh">${esc(e.extra.title)}</h3><p>${esc(e.extra.note)}</p><p class="pl-note">Tocca un brano per ascoltarlo qui, senza uscire dalla pagina. La colonna sonora si ferma da sola.</p><div class="xl-wrap"><figure class="yt xl-box" id="xlBox"><div class="yt-v xl-ph" aria-hidden="true"><span>♪</span></div></figure><ol class="xl">${e.extra.list.map(([a,t],k)=>{const L=xLink(a,t);return `<li${L.direct?"":' class="off"'}><span>${String(k+1).padStart(2,"0")}</span><a href="${L.href}" target="_blank" rel="noopener" data-a="${esc(a)}" data-t="${esc(t)}">${esc(t)} <i>· ${esc(a)}</i>${L.flag?`<em>${esc(L.flag)}</em>`:""}</a></li>`}).join("")}</ol></div></section>`:"";
   const whoHTML=world==="zine"?ransom(e.who,i+1):`<span>${esc(e.who)}</span>`;
   const tile=world==="rave"?`<div class="cv-tile" aria-hidden="true">${(e.n+" ").repeat(90)}</div>`:"";
   app.innerHTML=`<article class="topic w-${world}" aria-labelledby="who">
@@ -1194,6 +1204,7 @@ window.addEventListener("message",ev=>{if(!ytFrame||ev.source!==ytFrame.contentW
   if(st===null||st===ytState)return;ytState=st;
   if(st===1&&MUS.playing){MUS.pause();syncUI()}});
 app.addEventListener("click",ev=>{
+  const xa=ev.target.closest(".xl a[data-a]");if(xa&&!ev.metaKey&&!ev.ctrlKey&&!ev.shiftKey&&ev.button===0&&ytOf(xa.dataset.a,xa.dataset.t)){ev.preventDefault();xlPlay(xa.dataset.a,xa.dataset.t);return}
   const go=ev.target.closest(".yt-go");if(go){ytPlay(go.closest(".yt-v"));return}
   const pk=ev.target.closest(".mt-p,button.mt-s");if(pk){ytShow(+pk.dataset.k,true);const v=document.getElementById("ytBox");if(v&&v.getBoundingClientRect().top<0)v.scrollIntoView({behavior:"smooth",block:"start"});return}
 });
@@ -1603,7 +1614,7 @@ const UI_EN=[
   [/^Guarda (.*) di (.*) qui$/,"Watch $1 by $2 here"],[/^Guarda (.*) di (.*)$/,"Watch $1 by $2"],
   ["Non su YouTube: si apre in Spotify","Not on YouTube: opens in Spotify"],["Cerca su Spotify","Search on Spotify"],["Non ascoltabile su Spotify in Italia","Search on Spotify"],
   [/^Ascolta (.*) di (.*) su Spotify$/,"Listen to $1 by $2 on Spotify"],[/^Cerca (.*) di (.*) su Spotify$/,"Search for $1 by $2 on Spotify"],
-  ["Versione dal vivo","Live version"],["Caricamento non ufficiale","Unofficial upload"],["Video su YouTube","YouTube video"],
+  ["Versione dal vivo","Live version"],["Caricamento non ufficiale","Unofficial upload"],["Tocca un brano per ascoltarlo qui, senza uscire dalla pagina. La colonna sonora si ferma da sola.","Tap a track to listen to it here without leaving the page. The soundtrack pauses on its own."],["Video su YouTube","YouTube video"],
     ["Video da YouTube e una playlist Spotify per ogni tappa · Foto da Wikimedia Commons, con licenza Creative Commons o di pubblico dominio: i crediti sono sotto ogni foto","YouTube videos and a Spotify playlist for every stop · Photos from Wikimedia Commons, under Creative Commons licences or in the public domain: credits beneath each photo"],
   /* splash */
   ["Accendi","Switch on"],["Entra senza audio","Enter without sound"],["23 tappe","23 stops"],["1975 — 2026 · in quattro atti","1975 — 2026 · in four acts"],["Cinquant'anni di synth pop britannico","Fifty years of British synth pop"],
