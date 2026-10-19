@@ -151,7 +151,7 @@ body{transition:background-color .5s,color .5s}
 .w-zine .cv-years{display:inline-block;border:2.5px solid var(--signal);color:var(--signal);padding:2px 9px;transform:rotate(-4deg);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .w-zine .cv-num{font-size:clamp(96px,22vw,210px);background:var(--ink);color:var(--ground);padding:.06em .1em .02em;transform:rotate(-2.5deg);margin-left:6px}
 .w-zine .cv-who{line-height:1.02;letter-spacing:.01em}
-.w-zine .rl{display:inline-block;transform-origin:center}
+.w-zine .rl{display:inline-block;transform-origin:center}.rw{display:inline-block;white-space:nowrap}
 .w-zine .rl.inv{background:var(--ink);color:var(--ground);padding:0 .06em}
 .w-zine .cv-line{font-style:normal;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px;text-decoration-skip-ink:none}
 .w-zine .cover{border-bottom:3px dashed var(--ink)}
@@ -784,7 +784,9 @@ function nextLink(i){
 }
 
 const WORLD={p:"zine",1:"cold",2:"pop",3:"rave",4:"screen",e:"screen"};
-function ransom(str,seed){let k=0;return [...str].map(ch=>{if(ch===" ")return " ";k++;const r1=hash(seed*17+k*3),r2=hash(seed*29+k*7),r3=hash(seed*41+k*11),r4=hash(seed*53+k*13);const w=70+Math.floor(r1*60),g=600+Math.floor(r2*300),rot=(r3*5-2.5).toFixed(1),inv=r4<.18&&!/[Iil1]/.test(ch);return `<span class="rl${inv?" inv":""}" style="font-variation-settings:'wdth' ${w},'wght' ${g};transform:rotate(${rot}deg)">${esc(ch)}</span>`}).join("")}
+/* le lettere ritagliate stanno unite per parola: una parola non si spezza mai a metà */
+function ransom(str,seed){return str.split(" ").map((w,i)=>`<span class="rw">${ransom0(w,seed+i*101)}</span>`).join(" ")}
+function ransom0(str,seed){let k=0;return [...str].map(ch=>{if(ch===" ")return " ";k++;const r1=hash(seed*17+k*3),r2=hash(seed*29+k*7),r3=hash(seed*41+k*11),r4=hash(seed*53+k*13);const w=70+Math.floor(r1*60),g=600+Math.floor(r2*300),rot=(r3*5-2.5).toFixed(1),inv=r4<.18&&!/[Iil1]/.test(ch);return `<span class="rl${inv?" inv":""}" style="font-variation-settings:'wdth' ${w},'wght' ${g};transform:rotate(${rot}deg)">${esc(ch)}</span>`}).join("")}
 function photoBlock(e){
   const p=PH[e.id];if(!p)return "";
   const page="https://commons.wikimedia.org/wiki/File:"+encodeURIComponent(p.file.replace(/ /g,"_"));
