@@ -1304,7 +1304,14 @@ document.addEventListener("click",async ev=>{
   if(igGo){const d=shareData(),slug=SLUG[S[cur].id]||"",img=SHARE_BASE+"stories/"+slug+".jpg";let ok=false;
     try{await navigator.clipboard.writeText(d.url);ok=true}catch(e){}
     if(!ok){const ta=document.createElement("textarea");ta.value=d.url;document.body.appendChild(ta);ta.select();try{ok=document.execCommand("copy")}catch(e){}ta.remove()}
-    const a=document.createElement("a");a.href=SITE?"/stories/"+slug+".jpg":img;a.download="synth-britannia-"+slug+".jpg";a.target="_blank";a.rel="noopener";a.hidden=true;sharePop.appendChild(a);a.click();a.remove();
+    const name="synth-britannia-"+slug+".jpg";let saved=false;
+    /* l'immagine si scarica in memoria e si salva da lì: la pagina non cambia e il pannello resta aperto */
+    if(SITE){try{const r=await fetch("/stories/"+slug+".jpg");if(r.ok){const blob=await r.blob();
+      const file=new File([blob],name,{type:"image/jpeg"});
+      if(matchMedia("(pointer: coarse)").matches&&navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file]});saved=true}catch(e){if(e&&e.name==="AbortError")saved=true}}
+      if(!saved){const u=URL.createObjectURL(blob);const a=document.createElement("a");a.href=u;a.download=name;a.hidden=true;sharePop.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);saved=true}}}catch(e){}}
+    if(!saved){window.open(img,"_blank","noopener")}
+    sharePop.hidden=false;
     igGo.textContent=ok?"Immagine scaricata · link copiato ✓":"Immagine scaricata · copia il link qui sopra";
     document.getElementById("shareU").textContent=d.url;return}
   if(!sharePop.hidden&&!ev.target.closest("#sharePop"))shareClose()});
