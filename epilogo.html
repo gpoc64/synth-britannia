@@ -347,6 +347,8 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .share-l a,.share-l button{all:unset;cursor:pointer;text-align:center;font-family:var(--f-label);font-size:12.5px;padding:10px 6px;border:1px solid var(--rule);color:var(--ink);border-radius:var(--radius,0)}
 .share-l a:hover,.share-l button:hover,.share-l a:focus-visible,.share-l button:focus-visible{background:var(--signal);color:var(--signal-ink);border-color:var(--signal)}
 .share-l .cp{grid-column:1/-1;background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.ig-steps{grid-column:1/-1;margin:0;padding-left:20px;display:grid;gap:8px;font-size:14px;line-height:1.45}
+.share-l .ig-back{grid-column:1/-1;border:0;color:var(--mute);padding:4px}
 .share-x{all:unset;cursor:pointer;position:absolute;top:8px;right:12px;font-size:22px;line-height:1;color:var(--mute)}
 
 /* ---------- splash: manifesto costruttivista, cuneo rosso e cerchio nero ---------- */
@@ -1269,7 +1271,7 @@ function shareData(){const e=S[cur];const url=SHARE_BASE+(SLUG[e.id]||"");const 
   return {url,title:`${e.who} · Synth Britannia`,text:`${e.who}: ${e.tag}. ${step} di Synth Britannia, cinquant'anni di synth pop britannico.`}}
 const sharePop=document.getElementById("sharePop");
 function shareClose(){sharePop.hidden=true}
-function shareOpen(){const d=shareData(),u=encodeURIComponent(d.url),t=encodeURIComponent(d.text);
+function shareOpen(){document.getElementById("shareT").textContent="Condividi";const d=shareData(),u=encodeURIComponent(d.url),t=encodeURIComponent(d.text);
   document.getElementById("shareU").textContent=d.url;
   document.getElementById("shareL").innerHTML=
     `<a href="https://wa.me/?text=${encodeURIComponent(d.text+" "+d.url)}" target="_blank" rel="noopener">WhatsApp</a>`+
@@ -1291,12 +1293,20 @@ document.addEventListener("click",async ev=>{
   if(cp){const url=shareData().url;let ok=false;try{await navigator.clipboard.writeText(url);ok=true}catch(e){}
     if(!ok){const ta=document.createElement("textarea");ta.value=url;document.body.appendChild(ta);ta.select();try{ok=document.execCommand("copy")}catch(e){}ta.remove()}
     cp.textContent=ok?"Link copiato ✓":"Copia non riuscita: tieni premuto sul link sopra";setTimeout(()=>{if(!sharePop.hidden)shareClose()},1400);return}
-  const ig=ev.target.closest("#shareIg");
-  if(ig){const d=shareData(),slug=SLUG[S[cur].id]||"",img=SHARE_BASE+"stories/"+slug+".jpg";let ok=false;
+  /* Instagram: prima le istruzioni, poi l'immagine verticale e il link */
+  if(ev.target.closest("#shareIg")){
+    document.getElementById("shareT").textContent="Condividi su Instagram";
+    document.getElementById("shareU").innerHTML="Instagram non accetta link dai siti: si passa da una storia.";
+    document.getElementById("shareL").innerHTML=`<ol class="ig-steps"><li>Tocca <b>Scarica l’immagine</b>: ricevi la copertina verticale della tappa e il link viene copiato.</li><li>Apri Instagram e crea una <b>storia</b> con l’immagine.</li><li>Aggiungi lo sticker <b>«Link»</b> e incolla il link copiato.</li></ol><button type="button" class="cp" id="shareIgGo">Scarica l’immagine e copia il link</button><button type="button" class="ig-back" id="shareBack">← Altri canali</button>`;
+    setTimeout(()=>{try{document.getElementById("shareIgGo").focus()}catch(e){}},30);return}
+  if(ev.target.closest("#shareBack")){document.getElementById("shareT").textContent="Condividi";shareOpen();return}
+  const igGo=ev.target.closest("#shareIgGo");
+  if(igGo){const d=shareData(),slug=SLUG[S[cur].id]||"",img=SHARE_BASE+"stories/"+slug+".jpg";let ok=false;
     try{await navigator.clipboard.writeText(d.url);ok=true}catch(e){}
     if(!ok){const ta=document.createElement("textarea");ta.value=d.url;document.body.appendChild(ta);ta.select();try{ok=document.execCommand("copy")}catch(e){}ta.remove()}
-    const a=document.createElement("a");a.href=SITE?"/stories/"+slug+".jpg":img;a.download="synth-britannia-"+slug+".jpg";a.target="_blank";a.rel="noopener";document.body.appendChild(a);a.click();a.remove();
-    document.getElementById("shareU").innerHTML=`<b>Per Instagram:</b> ${SITE?"ho scaricato":"si apre"} l’immagine verticale della tappa${ok?" e ho copiato il link":""}. In Instagram crea una storia con l’immagine e incolla il link con lo sticker «Link».`;return}
+    const a=document.createElement("a");a.href=SITE?"/stories/"+slug+".jpg":img;a.download="synth-britannia-"+slug+".jpg";a.target="_blank";a.rel="noopener";a.hidden=true;sharePop.appendChild(a);a.click();a.remove();
+    igGo.textContent=ok?"Immagine scaricata · link copiato ✓":"Immagine scaricata · copia il link qui sopra";
+    document.getElementById("shareU").textContent=d.url;return}
   if(!sharePop.hidden&&!ev.target.closest("#sharePop"))shareClose()});
 addEventListener("keydown",ev=>{if(ev.key==="Escape"&&!sharePop.hidden)shareClose()});
 addEventListener("hashchange",shareClose);
