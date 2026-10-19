@@ -1274,7 +1274,7 @@ function shareOpen(){const d=shareData(),u=encodeURIComponent(d.url),t=encodeURI
   document.getElementById("shareL").innerHTML=
     `<a href="https://wa.me/?text=${encodeURIComponent(d.text+" "+d.url)}" target="_blank" rel="noopener">WhatsApp</a>`+
     `<a href="https://www.linkedin.com/sharing/share-offsite/?url=${u}" target="_blank" rel="noopener">LinkedIn</a>`+
-    `<a href="https://x.com/intent/post?text=${t}&url=${u}" target="_blank" rel="noopener">X</a>`+
+    `<button type="button" id="shareIg">Instagram</button>`+
     `<a href="https://www.facebook.com/sharer/sharer.php?u=${u}" target="_blank" rel="noopener">Facebook</a>`+
     `<a href="https://t.me/share/url?url=${u}&text=${t}" target="_blank" rel="noopener">Telegram</a>`+
     `<a href="mailto:?subject=${encodeURIComponent(d.title)}&body=${encodeURIComponent(d.text+"\n\n"+d.url)}">Email</a>`+
@@ -1291,6 +1291,12 @@ document.addEventListener("click",async ev=>{
   if(cp){const url=shareData().url;let ok=false;try{await navigator.clipboard.writeText(url);ok=true}catch(e){}
     if(!ok){const ta=document.createElement("textarea");ta.value=url;document.body.appendChild(ta);ta.select();try{ok=document.execCommand("copy")}catch(e){}ta.remove()}
     cp.textContent=ok?"Link copiato ✓":"Copia non riuscita: tieni premuto sul link sopra";setTimeout(()=>{if(!sharePop.hidden)shareClose()},1400);return}
+  const ig=ev.target.closest("#shareIg");
+  if(ig){const d=shareData(),slug=SLUG[S[cur].id]||"",img=SHARE_BASE+"stories/"+slug+".jpg";let ok=false;
+    try{await navigator.clipboard.writeText(d.url);ok=true}catch(e){}
+    if(!ok){const ta=document.createElement("textarea");ta.value=d.url;document.body.appendChild(ta);ta.select();try{ok=document.execCommand("copy")}catch(e){}ta.remove()}
+    const a=document.createElement("a");a.href=SITE?"/stories/"+slug+".jpg":img;a.download="synth-britannia-"+slug+".jpg";a.target="_blank";a.rel="noopener";document.body.appendChild(a);a.click();a.remove();
+    document.getElementById("shareU").innerHTML=`<b>Per Instagram:</b> ${SITE?"ho scaricato":"si apre"} l’immagine verticale della tappa${ok?" e ho copiato il link":""}. In Instagram crea una storia con l’immagine e incolla il link con lo sticker «Link».`;return}
   if(!sharePop.hidden&&!ev.target.closest("#sharePop"))shareClose()});
 addEventListener("keydown",ev=>{if(ev.key==="Escape"&&!sharePop.hidden)shareClose()});
 addEventListener("hashchange",shareClose);
