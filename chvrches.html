@@ -333,35 +333,97 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .foot a{color:var(--ink)}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 
-/* ---------- splash: il fascio di un oscilloscopio vettoriale scrive il titolo nel buio ---------- */
-.sp{position:fixed;inset:0;z-index:9999;background:#020203;color:#e9f7ff;overflow:hidden;font-family:"Martian Mono",ui-monospace,monospace}
-.sp[hidden]{display:none}
-.sp canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.sp::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 85% 75% at 50% 46%,transparent 55%,rgba(0,0,0,.75) 100%),repeating-linear-gradient(to bottom,rgba(255,255,255,.018) 0 1px,transparent 1px 3px)}
-.sp-ui{position:absolute;left:0;right:0;bottom:max(26px,env(safe-area-inset-bottom));display:grid;justify-items:center;gap:18px;padding:0 20px;opacity:0;transform:translateY(10px);transition:opacity .9s ease,transform .9s ease;z-index:2}
-.sp.ready .sp-ui{opacity:1;transform:none}
-.sp-pw{all:unset;cursor:pointer;position:relative;width:92px;height:92px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 38%,#2a2f36,#0b0d10 70%);box-shadow:0 0 0 2px #3a414b,0 0 0 9px #0d0f12,0 0 0 10px #262b31,0 14px 40px rgba(0,0,0,.8),inset 0 2px 0 rgba(255,255,255,.08)}
-.sp-pw svg{width:38px;height:38px;stroke:#ff3d9a;stroke-width:2.4;fill:none;stroke-linecap:round;filter:drop-shadow(0 0 6px #ff3d9a) drop-shadow(0 0 14px rgba(255,61,154,.6));animation:pwglow 2.2s ease-in-out infinite}
-.sp-pw::after{content:"";position:absolute;inset:-16px;border-radius:50%;border:1px solid rgba(255,61,154,.35);animation:pwring 2.2s ease-out infinite}
-.sp-pw:focus-visible{outline:2px solid #6ff6e8;outline-offset:14px}
-.sp-pl{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#9aa6b2;text-align:center}
-.sp-pl b{color:#e9f7ff;font-weight:600}
-.sp-alt{display:flex;gap:22px;font-size:11px;letter-spacing:.18em;text-transform:uppercase}
-.sp-alt button{all:unset;cursor:pointer;color:#6d7883;border-bottom:1px solid #2b3138;padding-bottom:3px}
-.sp-alt button:hover,.sp-alt button:focus-visible{color:#e9f7ff;border-color:#e9f7ff}
-.sp.off{animation:spout .45s .55s ease forwards}
-.sp.off .sp-ui{opacity:0;transition:opacity .25s}
-@keyframes spout{to{opacity:0}}
-@keyframes pwglow{0%,100%{opacity:.75}50%{opacity:1}}
-@keyframes pwring{0%{transform:scale(.85);opacity:.9}100%{transform:scale(1.35);opacity:0}}
-@media (max-height:620px){.sp-pw{width:70px;height:70px}.sp-ui{gap:12px}}
+/* ---------- splash: manifesto costruttivista, cuneo rosso e cerchio nero ---------- */
+.cs-sc{--cs-paper:#ECE4D2;--cs-ink:#141210;--cs-red:#D7261E;--cs-muted:#6E665A;position:fixed;inset:0;overflow:hidden;background:var(--cs-paper)}
+.cs-sc::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .1  0 0 0 0 .08  0 0 0 0 .06  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+#splash svg.cs-geo{position:absolute;inset:0;width:100%;height:100%}
+/* --- forme --- */
+.cs-wedge{transform-box:fill-box;transform-origin:0% 50%;animation:cs-wedge .7s .25s cubic-bezier(.2,.9,.1,1) both}
+.cs-disc{transform-box:fill-box;transform-origin:50% 50%;animation:cs-disc .8s .55s cubic-bezier(.2,1.4,.3,1) both,cs-beat .5s 2.6s ease-out infinite}
+.cs-ring{transform-box:fill-box;transform-origin:50% 50%;animation:cs-disc .9s .7s cubic-bezier(.2,1.2,.3,1) both}
+.cs-rule{stroke-dasharray:1;stroke-dashoffset:1;animation:cs-draw .6s ease-out both}
+.cs-r1{animation-delay:.9s}.cs-r2{animation-delay:1.05s}.cs-r3{animation-delay:1.2s}
+.cs-bar{transform-box:fill-box;transform-origin:0 50%;animation:cs-bar .5s 1.3s cubic-bezier(.2,.9,.1,1) both}
+.cs-seq rect{opacity:.18;animation:cs-step 2s steps(1) infinite}
+@keyframes cs-wedge{from{transform:scaleX(0)}to{transform:none}}
+@keyframes cs-disc{from{transform:scale(0)}to{transform:none}}
+@keyframes cs-beat{0%{transform:scale(1.035)}100%{transform:scale(1)}}
+@keyframes cs-draw{to{stroke-dashoffset:0}}
+@keyframes cs-bar{from{transform:scaleX(0)}to{transform:none}}
+@keyframes cs-step{0%{opacity:1}6.25%{opacity:.18}}
+/* --- tipografia --- */
+.cs-type{position:absolute;inset:0;pointer-events:none}
+.cs-t-synth{position:absolute;left:6vw;top:13vh;display:flex;gap:.02em;font-family:"Anybody",Impact,sans-serif;font-variation-settings:"wdth" 52,"wght" 900;font-size:min(27vw,40vh);line-height:.8;color:var(--cs-ink);transform:rotate(-9deg);transform-origin:0 100%}
+.cs-t-synth span{display:inline-block;animation:cs-drop .38s cubic-bezier(.3,1.6,.4,1) both}
+.cs-t-synth span:nth-child(1){animation-delay:1.2s}.cs-t-synth span:nth-child(2){animation-delay:1.45s}.cs-t-synth span:nth-child(3){animation-delay:1.7s}.cs-t-synth span:nth-child(4){animation-delay:1.95s}.cs-t-synth span:nth-child(5){animation-delay:2.2s}
+.cs-t-brit{position:absolute;left:0;right:0;top:56vh;transform:rotate(-9deg);transform-origin:50% 50%}
+.cs-t-brit b{display:inline-block;margin-left:4vw;background:var(--cs-red);color:var(--cs-paper);font-family:"Anybody",Impact,sans-serif;font-variation-settings:"wdth" 150,"wght" 800;font-size:min(8.6vw,11vh);line-height:1;padding:.12em .35em .1em;letter-spacing:.02em;animation:cs-slide .6s 2.45s cubic-bezier(.2,.9,.1,1) both}
+.cs-stamp{position:absolute;z-index:3;font-size:12px;letter-spacing:.16em;text-transform:uppercase;line-height:1.5;background:var(--cs-paper);padding:8px 12px;box-shadow:0 0 0 1px rgba(20,18,16,.12);animation:cs-fade .5s both}
+.cs-s1{right:5vw;top:5vh;text-align:right;animation-delay:2.7s}
+.cs-s2{left:6vw;bottom:5vh;animation-delay:2.85s;color:var(--cs-ink);display:grid;gap:4px}.cs-s2 b{font-family:"Anybody",Impact,sans-serif;font-variation-settings:"wdth" 60,"wght" 800;font-size:40px;line-height:1;letter-spacing:0}.cs-s2 span:last-child{color:var(--cs-muted)}
+.cs-s1 b{display:block;font-family:"Anybody",sans-serif;font-variation-settings:"wdth" 60,"wght" 800;font-size:34px;letter-spacing:0;color:var(--cs-ink)}
+@keyframes cs-drop{0%{transform:translateY(-120vh) rotate(8deg)}100%{transform:none}}
+@keyframes cs-slide{from{transform:translateX(-110vw)}to{transform:none}}
+@keyframes cs-fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* --- comandi --- */
+.cs-go{position:absolute;z-index:3;right:6vw;bottom:calc(5vh + 52px);display:grid;justify-items:end;gap:14px;animation:cs-fade .5s 3s both}
+.cs-btn{all:unset;cursor:pointer;display:flex;align-items:center;gap:14px;background:var(--cs-ink);color:var(--cs-paper);padding:18px 26px 18px 22px;font-family:"Anybody",sans-serif;font-variation-settings:"wdth" 120,"wght" 800;font-size:20px;letter-spacing:.06em;text-transform:uppercase;box-shadow:8px 8px 0 var(--cs-red);transition:transform .15s,box-shadow .15s}
+.cs-btn:hover,.cs-btn:focus-visible{transform:translate(-3px,-3px);box-shadow:11px 11px 0 var(--cs-red)}
+.cs-btn i{display:block;width:0;height:0;border-left:16px solid var(--cs-red);border-top:10px solid transparent;border-bottom:10px solid transparent}
+.cs-alt{all:unset;cursor:pointer;background:var(--cs-paper);padding:4px 8px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cs-muted);border-bottom:1px solid currentColor;padding-bottom:2px}
+.cs-hseq{display:grid;gap:8px;justify-items:end;margin-bottom:6px}
+.cs-hbar{display:block;background:var(--cs-ink);color:var(--cs-paper);font-size:11px;letter-spacing:.2em;padding:5px 10px;transform-origin:100% 50%;animation:cs-bar .5s 1.3s cubic-bezier(.2,.9,.1,1) both}
+.cs-hsq{display:flex;gap:5px}.cs-hsq i{display:block;width:12px;height:12px;background:var(--cs-ink);opacity:.18;animation:cs-step 2s steps(1) infinite}.cs-hsq i.r{background:var(--cs-red)}
+/* --- uscita: il cerchio nero si espande e copre tutto --- */
+.cs-sc.cs-out .cs-disc{animation:cs-cover .7s cubic-bezier(.7,0,.3,1) forwards}
+.cs-sc.cs-out .cs-type,.cs-sc.cs-out .cs-go,.cs-sc.cs-out .cs-wedge,.cs-sc.cs-out .cs-bar,.cs-sc.cs-out .cs-rule{transition:opacity .25s;opacity:0}
+@keyframes cs-cover{to{transform:scale(9)}}
+/* --- telefono --- */
+.cs-geo-p{display:none}
+@media (max-aspect-ratio:4/5){
+  .cs-geo-l{display:none}.cs-geo-p{display:block}.cs-hseq{display:none}
+  .cs-t-synth{font-size:min(34vw,24vh);top:24vh;left:5vw}
+  .cs-t-brit{top:51vh}.cs-t-brit b{font-size:9.2vw;margin-left:3vw}
+  .cs-go{left:6vw;right:6vw;bottom:5vh;justify-items:stretch}.cs-btn{justify-content:center}.cs-alt{justify-self:center}
+  .cs-s2{left:auto;right:6vw;bottom:auto;top:4vh;text-align:right;justify-items:end}.cs-s2 b{font-size:32px}
+}
+.cs-alts{display:flex;gap:14px}
+#splash[hidden]{display:none}
+#splash{z-index:9999;font-family:"Martian Mono",ui-monospace,monospace;color:var(--cs-ink);transition:opacity .45s}
+#splash.cs-gone{opacity:0}
+#splash.cs-out .cs-go,#splash.cs-out .cs-stamp,#splash.cs-out .cs-type,#splash.cs-out .cs-wedge,#splash.cs-out .cs-rule,#splash.cs-out .cs-ring{animation:none!important;opacity:0;transition:opacity .2s}
+@media (max-aspect-ratio:4/5){.cs-alts{justify-content:center}}
 </style>
-<div class="sp" id="splash" role="dialog" aria-modal="true" aria-label="Synth Britannia, cinquant'anni di synth pop britannico" hidden>
-  <canvas id="spCv" aria-hidden="true"></canvas>
-  <div class="sp-ui">
-    <button class="sp-pw" id="spGo" type="button" aria-label="Accendi: entra con la colonna sonora"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v8"/><path d="M6.3 6.6a8 8 0 1 0 11.4 0"/></svg></button>
-    <div class="sp-pl"><b>Accendi</b> · con la colonna sonora</div>
-    <div class="sp-alt"><button type="button" data-sp="quiet">Entra senza audio</button><button type="button" data-sp="index">Indice</button></div>
+<div class="cs-sc sp" id="splash" role="dialog" aria-modal="true" aria-label="Synth Britannia, cinquant'anni di synth pop britannico" hidden>
+  <svg class="cs-geo cs-geo-l" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <polygon class="cs-wedge" points="-40,760 1180,330 -40,940" fill="#D7261E"/>
+    <circle class="cs-ring" cx="1180" cy="330" r="300" fill="none" stroke="#141210" stroke-width="3"/>
+    <g class="cs-disc"><circle cx="1180" cy="330" r="230" fill="#141210"/></g>
+    
+    <line class="cs-rule cs-r1" pathLength="1" x1="-20" y1="980" x2="1620" y2="430" stroke="#141210" stroke-width="2"/>
+    <line class="cs-rule cs-r2" pathLength="1" x1="-20" y1="1010" x2="1620" y2="460" stroke="#141210" stroke-width="6"/>
+    <line class="cs-rule cs-r3" pathLength="1" x1="760" y1="-20" x2="1010" y2="1020" stroke="#141210" stroke-width="2"/>
+  </svg>
+  <svg class="cs-geo cs-geo-p" viewBox="0 0 900 1600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <polygon class="cs-wedge" points="-40,980 820,700 -40,1130" fill="#D7261E"/>
+    <circle class="cs-ring" cx="610" cy="1010" r="290" fill="none" stroke="#141210" stroke-width="3"/>
+    <g class="cs-disc"><circle cx="610" cy="1010" r="215" fill="#141210"/></g>
+    
+    <line class="cs-rule cs-r1" pathLength="1" x1="-20" y1="1420" x2="920" y2="1110" stroke="#141210" stroke-width="2"/>
+    <line class="cs-rule cs-r2" pathLength="1" x1="-20" y1="1450" x2="920" y2="1140" stroke="#141210" stroke-width="6"/>
+    <line class="cs-rule cs-r3" pathLength="1" x1="300" y1="-20" x2="520" y2="1620" stroke="#141210" stroke-width="2"/>
+  </svg>
+  <div class="cs-type">
+    <div class="cs-t-synth" aria-hidden="true"><span>S</span><span>Y</span><span>N</span><span>T</span><span>H</span></div>
+    <div class="cs-t-brit" aria-hidden="true"><b>BRITANNIA</b></div>
+    <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Synth Britannia</h1>
+  </div>
+  <div class="cs-stamp cs-s2"><b>23 tappe</b><span>1975 — 2026 · in quattro atti</span><span>Cinquant'anni di synth pop britannico</span></div>
+  <div class="cs-go">
+    <div class="cs-hseq" aria-hidden="true"><span class="cs-hbar">SEQUENCER · 120 BPM</span><span class="cs-hsq"><i class="r" style="animation-delay:3.0s"></i><i class="" style="animation-delay:3.125s"></i><i class="" style="animation-delay:3.25s"></i><i class="" style="animation-delay:3.375s"></i><i class="r" style="animation-delay:3.5s"></i><i class="" style="animation-delay:3.625s"></i><i class="" style="animation-delay:3.75s"></i><i class="" style="animation-delay:3.875s"></i><i class="r" style="animation-delay:4.0s"></i><i class="" style="animation-delay:4.125s"></i><i class="" style="animation-delay:4.25s"></i><i class="" style="animation-delay:4.375s"></i><i class="r" style="animation-delay:4.5s"></i><i class="" style="animation-delay:4.625s"></i><i class="" style="animation-delay:4.75s"></i><i class="" style="animation-delay:4.875s"></i></span></div>
+    <button class="cs-btn" id="spGo" type="button"><i aria-hidden="true"></i>Accendi</button>
+    <span class="cs-alts"><button class="cs-alt" data-sp="quiet" type="button">Entra senza audio</button><button class="cs-alt" data-sp="index" type="button">Indice</button></span>
   </div>
 </div>
 <header class="hero" id="hero">
@@ -1176,70 +1238,12 @@ pending=location.hash?"anchor":"none";
   if(deep||window.__noSplash)return;
   sp.hidden=false;document.documentElement.style.overflow="hidden";
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const cv=document.getElementById("spCv"),cx=cv.getContext("2d");
-  let W=0,H=0,D=1;
-  function size(){D=Math.min(2,devicePixelRatio||1);W=innerWidth;H=innerHeight;cv.width=W*D;cv.height=H*D;cx.setTransform(D,0,0,D,0,0);cx.fillStyle="#020203";cx.fillRect(0,0,W,H)}
-  size();addEventListener("resize",size);
-  /* carattere vettoriale a tratto singolo, come gli schermi a fascio della fine degli anni '70 (griglia 4×6) */
-  const G={S:[[[4,1],[3,0],[1,0],[0,1],[0,2],[1,3],[3,3],[4,4],[4,5],[3,6],[1,6],[0,5]]],Y:[[[0,0],[2,3],[4,0]],[[2,3],[2,6]]],N:[[[0,6],[0,0],[4,6],[4,0]]],T:[[[0,0],[4,0]],[[2,0],[2,6]]],H:[[[0,0],[0,6]],[[4,0],[4,6]],[[0,3],[4,3]]],
-    B:[[[0,6],[0,0],[3,0],[4,1],[4,2],[3,3],[0,3]],[[3,3],[4,4],[4,5],[3,6],[0,6]]],R:[[[0,6],[0,0],[3,0],[4,1],[4,2],[3,3],[0,3]],[[2,3],[4,6]]],I:[[[1,0],[3,0]],[[2,0],[2,6]],[[1,6],[3,6]]],A:[[[0,6],[0,2],[2,0],[4,2],[4,6]],[[0,4],[4,4]]]};
-  let strokes=[],totalLen=0;
-  function layout(){
-    strokes=[];totalLen=0;const portrait=W<H*1.05;
-    const lines=portrait?["SYNTH","BRITANNIA"]:["SYNTH BRITANNIA"];
-    const maxChars=Math.max(...lines.map(l=>l.length));const adv=6;
-    const u=Math.min((W*.84)/(maxChars*adv-2),(H*(portrait?.15:.2))/6);
-    const lineH=u*9.5;const top=H*.4-(lines.length*lineH-u*3.5)/2;
-    lines.forEach((ln,li)=>{const x0=(W-(ln.length*adv-2)*u)/2,y0=top+li*lineH;
-      [...ln].forEach((ch,ci)=>{(G[ch]||[]).forEach(pl=>{const pts=pl.map(([x,y])=>[x0+(ci*adv+x)*u,y0+y*u]);let len=0;for(let i=1;i<pts.length;i++)len+=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);strokes.push({pts,len,line:li,start:totalLen});totalLen+=len})})});
-    return u}
-  let U=layout();addEventListener("resize",()=>{U=layout()});
-  /* display fluorescente a 7 segmenti per gli anni */
-  const SEG={0:"abcdef",1:"bc",2:"abged",3:"abgcd",4:"fgbc",5:"afgcd",6:"afgedc",7:"abc",8:"abcdefg",9:"abcfgd"};
-  function digit(x,y,s,d,on){const w=s*.6,h=s,t=s*.11;const P={a:[x+t,y,w-2*t,t],b:[x+w-t,y+t,t,h/2-1.5*t],c:[x+w-t,y+h/2+t/2,t,h/2-1.5*t],d:[x+t,y+h-t,w-2*t,t],e:[x,y+h/2+t/2,t,h/2-1.5*t],f:[x,y+t,t,h/2-1.5*t],g:[x+t,y+h/2-t/2,w-2*t,t]};
-    for(const k in P){const lit=SEG[d].includes(k);cx.fillStyle=lit?on:"rgba(111,246,232,.06)";cx.fillRect(...P[k])}}
-  const t0=performance.now();let ready=false,exitT=0,raf=0;
-  const WRITE=reduce?1:3200,START=reduce?0:900;
-  const C1="#ff3d9a",C2="#6ff6e8";
-  function frame(now){
-    const t=now-t0;
-    cx.globalCompositeOperation="source-over";cx.fillStyle=exitT?"rgba(2,2,3,.35)":"rgba(2,2,3,.22)";cx.fillRect(0,0,W,H);
-    cx.globalCompositeOperation="lighter";
-    const cxm=W/2,cym=H*.42;
-    /* il titolo: il fascio percorre i tratti uno dopo l'altro */
-    let k=reduce?1:Math.max(0,Math.min(1,(t-START)/WRITE));if(exitT)k=1;
-    const ease=k<1?1-Math.pow(1-k,1.6):1,drawn=ease*totalLen;let head=null;
-    const col=(s)=>s.line===0&&strokes.some(x=>x.line===1)?C1:(s.line===1?C2:(s.start<totalLen*.33?C1:C2));
-    let shrink=0;if(exitT){shrink=Math.min(1,(now-exitT)/520);shrink=shrink*shrink}
-    const jit=()=>(Math.random()-.5)*.6;
-    for(const s of strokes){if(s.start>drawn)break;const lim=Math.min(s.len,drawn-s.start);let acc=0;cx.beginPath();
-      for(let i=0;i<s.pts.length;i++){let [x,y]=s.pts[i];
-        if(i>0){const [px,py]=s.pts[i-1];const seg=Math.hypot(x-px,y-py);if(acc+seg>lim){const f=(lim-acc)/seg;x=px+(x-px)*f;y=py+(y-py)*f;acc=lim}else acc+=seg}
-        if(shrink){x+=(cxm-x)*shrink;y+=(cym-y)*shrink}
-        x+=jit();y+=jit();i?cx.lineTo(x,y):cx.moveTo(x,y);head=[x,y];if(acc>=lim&&i>0)break}
-      const c=col(s);const fl=.85+Math.random()*.15;
-      cx.strokeStyle=c;cx.globalAlpha=.07*fl;cx.lineWidth=U*1.1;cx.stroke();cx.globalAlpha=.16*fl;cx.lineWidth=U*.55;cx.lineCap="round";cx.lineJoin="round";cx.stroke();
-      cx.globalAlpha=.55*fl;cx.lineWidth=U*.2;cx.stroke();
-      cx.globalAlpha=fl;cx.strokeStyle="#ffffff";cx.lineWidth=Math.max(1,U*.06);cx.stroke();cx.globalAlpha=1}
-    /* il punto del fascio */
-    if(head&&(k<1||exitT)){const g=cx.createRadialGradient(head[0],head[1],0,head[0],head[1],U*1.4);g.addColorStop(0,"rgba(255,255,255,.95)");g.addColorStop(.25,"rgba(255,160,220,.45)");g.addColorStop(1,"rgba(255,61,154,0)");cx.fillStyle=g;cx.beginPath();cx.arc(head[0],head[1],U*1.4,0,Math.PI*2);cx.fill()}
-    if(t<START&&!exitT){const p=.5+.5*Math.sin(t/90);const g=cx.createRadialGradient(cxm,cym,0,cxm,cym,8+p*6);g.addColorStop(0,"#fff");g.addColorStop(1,"rgba(255,61,154,0)");cx.fillStyle=g;cx.beginPath();cx.arc(cxm,cym,14,0,Math.PI*2);cx.fill()}
-    /* display: gli anni scorrono dal 1975 al 2026 */
-    cx.globalCompositeOperation="source-over";
-    const yk=reduce?1:Math.max(0,Math.min(1,(t-START-WRITE*.35)/(WRITE*.9)));const year=Math.round(1975+(2026-1975)*(1-Math.pow(1-yk,2)));
-    const ds=Math.max(26,Math.min(46,W*.06)),dy=strokes.length?Math.max(...strokes.flatMap(s=>s.pts.map(p=>p[1])))+U*4:H*.6;
-    if(t>START&&!exitT){const s=String(year),gw=ds*.6+ds*.18,x0=W/2-(gw*4-ds*.18)/2;cx.shadowColor=C2;cx.shadowBlur=14;
-      for(let i=0;i<4;i++)digit(x0+i*gw,dy,ds,s[i],C2);cx.shadowBlur=0;
-      cx.font=`500 ${Math.max(10,ds*.28)}px "Martian Mono",monospace`;cx.textAlign="center";cx.fillStyle=yk>=1?"rgba(233,247,255,.75)":"rgba(233,247,255,.25)";
-      if(W<600){cx.fillText("CINQUANT’ANNI DI SYNTH POP",W/2,dy+ds+ds*.75);cx.fillText("BRITANNICO · 23 TAPPE",W/2,dy+ds+ds*1.25)}else cx.fillText("CINQUANT’ANNI DI SYNTH POP BRITANNICO · 23 TAPPE",W/2,dy+ds+ds*.75)}
-    if(exitT){const f=Math.min(1,(now-exitT)/520);if(f>.85){cx.fillStyle=`rgba(255,255,255,${(f-.85)/.15*.9})`;cx.fillRect(0,0,W,H)}}
-    if(!ready&&(k>=1||t>START+WRITE*.6)){ready=true;sp.classList.add("ready")}
-    raf=requestAnimationFrame(frame)}
-  raf=requestAnimationFrame(frame);
   let done=false;
-  function close(then){if(done)return;done=true;
-    removeEventListener("keydown",keys);exitT=performance.now();sp.classList.add("off");
-    setTimeout(()=>{cancelAnimationFrame(raf);sp.hidden=true;document.documentElement.style.overflow="";if(then)then()},reduce?120:1000)}
+  /* uscita: il cerchio nero si espande fino a coprire lo schermo, poi la scena svanisce sul sito */
+  function close(then){if(done)return;done=true;removeEventListener("keydown",keys);
+    sp.classList.add("cs-out");
+    setTimeout(()=>{sp.classList.add("cs-gone");document.documentElement.style.overflow="";if(then)then()},reduce?50:680);
+    setTimeout(()=>{sp.hidden=true},reduce?300:1150)}
   async function act(a){
     if(a==="audio"){close();if(!MUS.playing){try{await MUS.play(S[cur].id)}catch(e){}syncUI()}}
     else if(a==="quiet")close();
@@ -1248,7 +1252,7 @@ pending=location.hash?"anchor":"none";
   sp.addEventListener("click",ev=>{const b=ev.target.closest("[data-sp]");if(b){act(b.dataset.sp);return}if(ev.target.closest("#spGo"))act("audio")});
   function keys(ev){if(ev.key==="Enter"){ev.preventDefault();act("audio")}else if(ev.key==="Escape")act("quiet")}
   addEventListener("keydown",keys);
-  setTimeout(()=>{try{document.getElementById("spGo").focus({preventScroll:true})}catch(e){}},reduce?0:1800);
+  setTimeout(()=>{try{document.getElementById("spGo").focus({preventScroll:true})}catch(e){}},reduce?0:3100);
 })();
 route();
 requestAnimationFrame(loop);
