@@ -1289,6 +1289,8 @@ async function doShare(){const d=shareData();
 document.addEventListener("click",async ev=>{
   if(ev.target.closest("[data-share]")){ev.preventDefault();doShare();return}
   if(ev.target.closest("#shareX")){shareClose();return}
+  /* dopo aver scelto un canale il pannello si chiude */
+  if(ev.target.closest("#shareL a")){setTimeout(shareClose,250);return}
   const cp=ev.target.closest("#shareCp");
   if(cp){const url=shareData().url;let ok=false;try{await navigator.clipboard.writeText(url);ok=true}catch(e){}
     if(!ok){const ta=document.createElement("textarea");ta.value=url;document.body.appendChild(ta);ta.select();try{ok=document.execCommand("copy")}catch(e){}ta.remove()}
@@ -1311,8 +1313,8 @@ document.addEventListener("click",async ev=>{
       if(matchMedia("(pointer: coarse)").matches&&navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file]});saved=true}catch(e){if(e&&e.name==="AbortError")saved=true}}
       if(!saved){const u=URL.createObjectURL(blob);const a=document.createElement("a");a.href=u;a.download=name;a.hidden=true;sharePop.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);saved=true}}}catch(e){}}
     if(!saved){window.open(img,"_blank","noopener")}
-    sharePop.hidden=false;
     igGo.textContent=ok?"Immagine scaricata · link copiato ✓":"Immagine scaricata · copia il link qui sopra";
+    setTimeout(shareClose,1200);
     document.getElementById("shareU").textContent=d.url;return}
   if(!sharePop.hidden&&!ev.target.closest("#sharePop"))shareClose()});
 addEventListener("keydown",ev=>{if(ev.key==="Escape"&&!sharePop.hidden)shareClose()});
