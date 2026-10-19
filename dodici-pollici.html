@@ -849,8 +849,15 @@ const ytKind=k=>k==="video"?"Video ufficiale":k==="audio"?"Audio ufficiale":k===
 function ytFacade(a,t,y){const Y=ytOf(a,t);if(!Y)return "";return `<div class="yt-v" data-v="${Y.v}"><img src="https://i.ytimg.com/vi/${Y.v}/hqdefault.jpg" alt="" loading="lazy"${Y.fb?' onload="ytCheck(this)" onerror="ytCheck(this)"':""}><button type="button" class="yt-go" aria-label="Guarda ${esc(t)} di ${esc(a)}"><span aria-hidden="true">▶</span></button></div><div class="yt-c"><span><b>${esc(t)}</b> · ${esc(a)}, ${esc(y)}</span><span>${ytLabel(Y)} · <a href="https://www.youtube.com/watch?v=${Y.v}" target="_blank" rel="noopener">YouTube ↗</a></span></div>`}
 /* i brani del documentario si ascoltano nella pagina, con il lettore YouTube incorporato (resta visibile: lo richiedono le regole di YouTube) */
 function xlPlay(a,t){const Y=ytOf(a,t),box=document.getElementById("xlBox");if(!Y||!box)return;
-  box.innerHTML=`<div class="yt-v" data-v="${Y.v}"></div><div class="yt-c"><span><b>${esc(t)}</b> · ${esc(a)}</span><span>${ytLabel(Y)} · <a href="https://www.youtube.com/watch?v=${Y.v}" target="_blank" rel="noopener">YouTube ↗</a></span></div>`;
+  const cap=`<div class="yt-c"><span><b>${esc(t)}</b> · ${esc(a)}</span><span>${ytLabel(Y)} · <a href="https://www.youtube.com/watch?v=${Y.v}" target="_blank" rel="noopener">YouTube ↗</a></span></div>`;
   document.querySelectorAll(".xl li").forEach(li=>{const x=li.querySelector("a");li.classList.toggle("now",!!x&&x.dataset.a===a&&x.dataset.t===t)});
+  /* il lettore c’è già e ha già suonato: si cambia solo il brano, e parte subito */
+  if(ytFrame&&ytReady&&box.contains(ytFrame)){
+    if(MUS.playing){MUS.pause();syncUI()}
+    box.querySelector(".yt-c").outerHTML=cap;
+    const go=()=>{try{ytFrame.contentWindow.postMessage(JSON.stringify({event:"command",func:"loadVideoById",args:[Y.v]}),"*")}catch(e){}};
+    go();return}
+  box.innerHTML=`<div class="yt-v" data-v="${Y.v}"></div>`+cap;
   ytPlay(box.querySelector(".yt-v"))}
 /* colonna sonora del documentario: ogni brano si ascolta su YouTube (audio ufficiale dove c’è) */
 function xLink(a,t){const Y=ytOf(a,t);if(Y)return {href:"https://www.youtube.com/watch?v="+Y.v,direct:true,flag:Y.u?"Caricamento non ufficiale":(Y.k==="live"||Y.k==="tv")?(EN?"Live":"Dal vivo"):""};return {href:"https://www.youtube.com/results?search_query="+encodeURIComponent(a+" "+t),direct:false,flag:""}}
@@ -1197,7 +1204,7 @@ function ytPlay(v){if(!v)return;if(MUS.playing){MUS.pause();syncUI()}ytPause();
   const org=/^https?:/.test(location.protocol)?"&origin="+encodeURIComponent(location.origin):"";
   const f=document.createElement("iframe");f.src=`https://www.youtube-nocookie.com/embed/${v.dataset.v}?autoplay=1&rel=0&playsinline=1&enablejsapi=1${org}`;f.title="Video su YouTube";f.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";f.allowFullscreen=true;f.referrerPolicy="strict-origin-when-cross-origin";
   ytFrame=f;ytReady=false;ytState=-1;
-  f.addEventListener("load",()=>{const hi=()=>{try{f.contentWindow.postMessage(JSON.stringify({event:"listening",id:"sb",channel:"widget"}),"*")}catch(e){}};hi();setTimeout(hi,800);setTimeout(hi,2500)});
+  f.addEventListener("load",()=>{const hi=()=>{try{f.contentWindow.postMessage(JSON.stringify({event:"listening",id:"sb",channel:"widget"}),"*")}catch(e){}};const pl=()=>{try{if(ytState!==1)f.contentWindow.postMessage(JSON.stringify({event:"command",func:"playVideo",args:[]}),"*")}catch(e){}};hi();setTimeout(()=>{hi();pl()},600);setTimeout(()=>{hi();pl()},1500);setTimeout(pl,3000)});
   v.innerHTML="";v.appendChild(f)}
 window.addEventListener("message",ev=>{if(!ytFrame||ev.source!==ytFrame.contentWindow)return;let d;try{d=typeof ev.data==="string"?JSON.parse(ev.data):ev.data}catch(e){return}if(!d)return;
   ytReady=true;let st=null;if(d.event==="onStateChange")st=d.info;else if(d.event==="infoDelivery"&&d.info&&typeof d.info.playerState==="number")st=d.info.playerState;
