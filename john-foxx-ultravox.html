@@ -1209,7 +1209,9 @@ function ytPlay(v){if(!v)return;if(MUS.playing){MUS.pause();syncUI()}ytPause();
 window.addEventListener("message",ev=>{if(!ytFrame||ev.source!==ytFrame.contentWindow)return;let d;try{d=typeof ev.data==="string"?JSON.parse(ev.data):ev.data}catch(e){return}if(!d)return;
   ytReady=true;let st=null;if(d.event==="onStateChange")st=d.info;else if(d.event==="infoDelivery"&&d.info&&typeof d.info.playerState==="number")st=d.info.playerState;
   if(st===null||st===ytState)return;ytState=st;
-  if(st===1&&MUS.playing){MUS.pause();syncUI()}});
+  if(st===1&&MUS.playing){MUS.pause();syncUI()}
+  /* finito il brano, il lettore si ferma: niente proposte né brano successivo, lo sceglie chi ascolta */
+  if(st===0&&ytFrame.closest&&ytFrame.closest("#xlBox")){try{ytFrame.contentWindow.postMessage(JSON.stringify({event:"command",func:"stopVideo",args:[]}),"*")}catch(e){}}});
 app.addEventListener("click",ev=>{
   const xa=ev.target.closest(".xl a[data-a]");if(xa&&!ev.metaKey&&!ev.ctrlKey&&!ev.shiftKey&&ev.button===0&&ytOf(xa.dataset.a,xa.dataset.t)){ev.preventDefault();xlPlay(xa.dataset.a,xa.dataset.t);return}
   const go=ev.target.closest(".yt-go");if(go){ytPlay(go.closest(".yt-v"));return}
