@@ -838,6 +838,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 const spot=(a,t)=>"https://open.spotify.com/search/"+encodeURIComponent((a+" "+t).replace(/[“”"()&]/g," ").replace(/\s+/g," ").trim());
 const RM=matchMedia("(prefers-reduced-motion: reduce)");
 const deep=id=>`https://open.spotify.com/track/${id}?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1`;
+const XS={"Depeche Mode|New Life": "5yAcJtUiOFTdvePkHb4hs8", "Kraftwerk|Autobahn": "31uidLEHAcF8Cw1cX1VCS8", "The Clash|White Riot": "0brrVj6VnvrG70SjRTnEJA", "The Normal|T.V.O.D.": "1brzpF7BFrZOZcMmpP3ATG", "The Normal|Warm Leatherette": "6Jyr3xy2MXnssSCGv1CHRe", "The Future|4 JG": "2uqAA02x8xKy5mWRJ0jxdW", "The Human League|Being Boiled": "2yMjKoqxWE5DLnaC9BUAdu", "Donna Summer|I Feel Love": "1vCBk33l9HaWp5FOnhSGxk", "Cabaret Voltaire|Seconds Too Late": "6YkpDyIILiyMdlFlz4PxQ6", "Cabaret Voltaire|Nag Nag Nag": "3c8Rz42E8L7VznYOEXpIyU", "OMD|Messages": "6o286fNuSe7RgcdaT6aWTx", "OMD|Enola Gay": "7bJSbd2Upa4iYVHlbRKEJm", "Joy Division|Atmosphere": "0NBgmP6Yg5xZYsnIZ0pGdo", "John Foxx|Underpass": "4YQfX5QoyL1weIUpLQY4Bx", "Throbbing Gristle|Still Walking": "15qCWh5IvH1FJbxBOW4jRL", "Throbbing Gristle|Hot on the Heels of Love": "7cgZ2Wwqfh98q8ViBAJjp5", "Fad Gadget|Back to Nature": "088nawO9gAPXfeD4fy2SNz", "Silicon Teens|Memphis Tennessee": "36aFqPZ53tblYcZXi9dbqj", "Tubeway Army|Are “Friends” Electric?": "3xfOF1wyjUZocifZ5WLeFx", "Gary Numan|Cars": "4QQEzkxcONBthDLfzqIh9S", "Visage|Fade to Grey": "3yobQNuKVJ62WDU7h725Fu", "The Flying Lizards|Money": "1mHx2EsLJlImS6tENOt22o", "Depeche Mode|Just Can’t Get Enough": "0qi4b1l0eT3jpzeNHeFXDT", "The Human League|Don’t You Want Me": "3AIEEEIDJFnqv8rozNVCRZ", "Heaven 17|Penthouse and Pavement": "2tF2jiTsI5guFN9NqO6gGN", "Cabaret Voltaire|Landslide": "202uV3BScQKsVhyZKse82W", "Soft Cell|Tainted Love": "0cGG2EouYCEEC3xfa0tDFV", "Yazoo|Only You": "4GNilkZKILsug3l5pdLoxo", "Yazoo|Don’t Go": "098JUtp63d1Hsge11VuoD2", "OMD|Maid of Orleans": "5KGPz0EcptGsUt3mziN0T4", "Eurythmics|Sweet Dreams (Are Made of This)": "1TfqLAPs4K3s2rJMoCokcS", "Ultravox|Vienna": "2LXjhNee4iPRVemx9NSZQ3", "Kraftwerk|The Model": "1FL9DHDSED6lxNMDJUJQvB", "Depeche Mode|Everything Counts": "1R1vbkHj40yexphG1i7x27", "Depeche Mode|Master and Servant": "7wYEKgq90YmyR5NnVsO4tm", "Pet Shop Boys|West End Girls": "5Dqik1P9toCJTLj5rEm78s", "New Order|Ceremony": "5CRPGdCSOfstyTVK9Ja5EQ", "New Order|Blue Monday": "6hHc7Pks7wtBIW8Z6A0iFq", "Philip Oakey & Giorgio Moroder|Together in Electric Dreams": "0Ytxje4D5iXTHN3MOCC5jS"};
 const ytOf=(a,t)=>{const r=YT[a+"|"+t];if(!r||!r[0])return null;if(r[4]&&YTDEAD[r[0]])return {v:r[4],k:"topic",w:"",y:"",fb:"",u:0};return {v:r[0],k:r[1],w:r[2]||"",y:r[3]||"",fb:r[4]||"",u:r[5]||0}};
 const YTDEAD={};
 function ytLabel(Y){const where=Y.w||Y.y?" · "+esc([Y.w,Y.y].filter(Boolean).join(", ")):"";
@@ -848,20 +849,8 @@ function ytCheck(img){const v=img.closest(".yt-v");if(!v)return;const id=v.datas
   const box=document.getElementById("ytBox");if(tr&&box)box.innerHTML=ytFacade(...tr)}
 const ytKind=k=>k==="video"?"Video ufficiale":k==="audio"?"Audio ufficiale":k==="topic"?"Audio":"Video";
 function ytFacade(a,t,y){const Y=ytOf(a,t);if(!Y)return "";return `<div class="yt-v" data-v="${Y.v}"><img src="https://i.ytimg.com/vi/${Y.v}/hqdefault.jpg" alt="" loading="lazy"${Y.fb?' onload="ytCheck(this)" onerror="ytCheck(this)"':""}><button type="button" class="yt-go" aria-label="Guarda ${esc(t)} di ${esc(a)}"><span aria-hidden="true">▶</span></button></div><div class="yt-c"><span><b>${esc(t)}</b> · ${esc(a)}, ${esc(y)}</span><span>${ytLabel(Y)} · <a href="https://www.youtube.com/watch?v=${Y.v}" target="_blank" rel="noopener">YouTube ↗</a></span></div>`}
-/* i brani del documentario si ascoltano nella pagina, con il lettore YouTube incorporato (resta visibile: lo richiedono le regole di YouTube) */
-function xlPlay(a,t){const Y=ytOf(a,t),box=document.getElementById("xlBox");if(!Y||!box)return;
-  const cap=`<div class="yt-c"><span><b>${esc(t)}</b> · ${esc(a)}</span><span>${ytLabel(Y)} · <a href="https://www.youtube.com/watch?v=${Y.v}" target="_blank" rel="noopener">YouTube ↗</a></span></div>`;
-  document.querySelectorAll(".xl li").forEach(li=>{const x=li.querySelector("a");li.classList.toggle("now",!!x&&x.dataset.a===a&&x.dataset.t===t)});
-  /* il lettore c’è già e ha già suonato: si cambia solo il brano, e parte subito */
-  if(ytFrame&&ytReady&&box.contains(ytFrame)){
-    if(MUS.playing){MUS.pause();syncUI()}
-    box.querySelector(".yt-c").outerHTML=cap;
-    const go=()=>{try{ytFrame.contentWindow.postMessage(JSON.stringify({event:"command",func:"loadVideoById",args:[Y.v]}),"*")}catch(e){}};
-    go();return}
-  box.innerHTML=`<div class="yt-v" data-v="${Y.v}"></div>`+cap;
-  ytPlay(box.querySelector(".yt-v"))}
-/* colonna sonora del documentario: ogni brano si ascolta su YouTube (audio ufficiale dove c’è) */
-function xLink(a,t){const Y=ytOf(a,t);if(Y)return {href:"https://www.youtube.com/watch?v="+Y.v,direct:true,flag:Y.u?"Caricamento non ufficiale":(Y.k==="live"||Y.k==="tv")?(EN?"Live":"Dal vivo"):""};return {href:"https://www.youtube.com/results?search_query="+encodeURIComponent(a+" "+t),direct:false,flag:""}}
+/* colonna sonora del documentario: link ai brani su Spotify */
+function xLink(a,t){const id=XS[a+"|"+t];return id?{href:deep(id),direct:true,flag:""}:{href:spot(a,t),direct:false,flag:""}}
 function trackLink(a,t){const r=TR[a+"|"+t];if(r&&r[0])return {href:deep(r[0]),direct:true,flag:r[1]==="live"?"Versione dal vivo":r[1]==="remix"?"Remix":""};return {href:spot(a,t),direct:false,flag:r&&r[1]==="blocked"?"Non ascoltabile su Spotify in Italia":""}}
 const NT=S.filter(e=>e.kind==="ep"||e.kind==="flash").length;let epN=0,flN=0;S.forEach(e=>{if(e.kind==="ep")e.ord=++epN;if(e.kind==="flash")e.ord=++flN});
 const kindLabel=e=>e.kind==="pro"?"Prologo":e.kind==="epi"?"Epilogo":e.kind==="app"?"Appendice":e.kind==="flash"?`Flash ${String(e.ord).padStart(2,"0")} di 03`:`Episodio ${String(e.ord).padStart(2,"0")} di ${epN}`;
@@ -982,7 +971,7 @@ function render(i){
     if(Y)return `<li class="mt${k===first?" now":""}" data-k="${k}"><span class="mt-n">${String(k+1).padStart(2,"0")}</span><button type="button" class="mt-p" data-k="${k}"><span class="mt-t">${esc(t)}</span><span class="mt-a">${esc(a)}, ${esc(y)}</span><span class="mt-x">${esc(n)}</span></button><button type="button" class="mt-s" data-k="${k}" aria-label="Guarda ${esc(t)} di ${esc(a)} qui">▶</button></li>`;
     return `<li class="mt${L.direct?"":" off"}"><span class="mt-n">${String(k+1).padStart(2,"0")}</span><div class="mt-b"><span class="mt-t">${esc(t)}</span><span class="mt-a">${esc(a)}, ${esc(y)}</span><span class="mt-x">${esc(n)}</span><span class="mt-f">${L.direct?"Non su YouTube: si apre in Spotify":esc(L.flag||"Cerca su Spotify")}</span></div><a class="mt-s" href="${L.href}" target="_blank" rel="noopener" aria-label="${L.direct?"Ascolta":"Cerca"} ${esc(t)} di ${esc(a)} su Spotify">↗</a></li>`}).join("");
   const ytBox=first<0?"":`<figure class="yt" id="ytBox" data-first="${first}">${ytFacade(...e.tracks[first])}</figure>`;
-  const extra=e.extra?`<section class="extra" aria-labelledby="xh"><h3 class="sec" id="xh">${esc(e.extra.title)}</h3><p>${esc(e.extra.note)}</p><p class="pl-note">Tocca un brano per ascoltarlo qui, senza uscire dalla pagina. La colonna sonora si ferma da sola.</p><p class="xl-pl"><a class="btn" href="https://open.spotify.com/playlist/5dya9OG9Hd7VwaAoK1sVQQ?utm_source=anthropic&utm_medium=claude&go=1&nap_web=1&request_id=36ddf2bc-e480-4c09-b942-0a9a11eee981" target="_blank" rel="noopener">Playlist su Spotify ↗</a></p><div class="xl-wrap"><figure class="yt xl-box" id="xlBox"><div class="yt-v xl-ph" aria-hidden="true"><span>♪</span></div></figure><ol class="xl">${e.extra.list.map(([a,t],k)=>{const L=xLink(a,t);return `<li${L.direct?"":' class="off"'}><span>${String(k+1).padStart(2,"0")}</span><a href="${L.href}" target="_blank" rel="noopener" data-a="${esc(a)}" data-t="${esc(t)}">${esc(t)} <i>· ${esc(a)}</i>${L.flag?`<em>${esc(L.flag)}</em>`:""}</a></li>`}).join("")}</ol></div></section>`:"";
+  const extra=e.extra?`<section class="extra" aria-labelledby="xh"><h3 class="sec" id="xh">${esc(e.extra.title)}</h3><p>${esc(e.extra.note)}</p><p class="pl-note">Ogni brano si apre su Spotify; dove non c’è, il link porta alla ricerca.</p><ol class="xl">${e.extra.list.map(([a,t],k)=>{const L=xLink(a,t);return `<li${L.direct?"":' class="off"'}><span>${String(k+1).padStart(2,"0")}</span><a href="${L.href}" target="_blank" rel="noopener">${esc(t)} <i>· ${esc(a)}</i></a></li>`}).join("")}</ol></section>`:"";
   const whoHTML=world==="zine"?ransom(e.who,i+1):`<span>${esc(e.who)}</span>`;
   const tile=world==="rave"?`<div class="cv-tile" aria-hidden="true">${(e.n+" ").repeat(90)}</div>`:"";
   app.innerHTML=`<article class="topic w-${world}" aria-labelledby="who">
@@ -1210,11 +1199,8 @@ function ytPlay(v){if(!v)return;if(MUS.playing){MUS.pause();syncUI()}ytPause();
 window.addEventListener("message",ev=>{if(!ytFrame||ev.source!==ytFrame.contentWindow)return;let d;try{d=typeof ev.data==="string"?JSON.parse(ev.data):ev.data}catch(e){return}if(!d)return;
   ytReady=true;let st=null;if(d.event==="onStateChange")st=d.info;else if(d.event==="infoDelivery"&&d.info&&typeof d.info.playerState==="number")st=d.info.playerState;
   if(st===null||st===ytState)return;ytState=st;
-  if(st===1&&MUS.playing){MUS.pause();syncUI()}
-  /* finito il brano, il lettore si ferma: niente proposte né brano successivo, lo sceglie chi ascolta */
-  if(st===0&&ytFrame.closest&&ytFrame.closest("#xlBox")){try{ytFrame.contentWindow.postMessage(JSON.stringify({event:"command",func:"stopVideo",args:[]}),"*")}catch(e){}}});
+  if(st===1&&MUS.playing){MUS.pause();syncUI()}});
 app.addEventListener("click",ev=>{
-  const xa=ev.target.closest(".xl a[data-a]");if(xa&&!ev.metaKey&&!ev.ctrlKey&&!ev.shiftKey&&ev.button===0&&ytOf(xa.dataset.a,xa.dataset.t)){ev.preventDefault();xlPlay(xa.dataset.a,xa.dataset.t);return}
   const go=ev.target.closest(".yt-go");if(go){ytPlay(go.closest(".yt-v"));return}
   const pk=ev.target.closest(".mt-p,button.mt-s");if(pk){ytShow(+pk.dataset.k,true);const v=document.getElementById("ytBox");if(v&&v.getBoundingClientRect().top<0)v.scrollIntoView({behavior:"smooth",block:"start"});return}
 });
@@ -1624,7 +1610,7 @@ const UI_EN=[
   [/^Guarda (.*) di (.*) qui$/,"Watch $1 by $2 here"],[/^Guarda (.*) di (.*)$/,"Watch $1 by $2"],
   ["Non su YouTube: si apre in Spotify","Not on YouTube: opens in Spotify"],["Cerca su Spotify","Search on Spotify"],["Non ascoltabile su Spotify in Italia","Search on Spotify"],
   [/^Ascolta (.*) di (.*) su Spotify$/,"Listen to $1 by $2 on Spotify"],[/^Cerca (.*) di (.*) su Spotify$/,"Search for $1 by $2 on Spotify"],
-  ["Versione dal vivo","Live version"],["Caricamento non ufficiale","Unofficial upload"],["Tocca un brano per ascoltarlo qui, senza uscire dalla pagina. La colonna sonora si ferma da sola.","Tap a track to listen to it here without leaving the page. The soundtrack pauses on its own."],["Video su YouTube","YouTube video"],
+  ["Versione dal vivo","Live version"],["Caricamento non ufficiale","Unofficial upload"],["Ogni brano si apre su Spotify; dove non c’è, il link porta alla ricerca.","Each track opens on Spotify; where it isn’t there, the link goes to a search."],["Video su YouTube","YouTube video"],
     ["Video da YouTube e una playlist Spotify per ogni tappa · Foto da Wikimedia Commons, con licenza Creative Commons o di pubblico dominio: i crediti sono sotto ogni foto","YouTube videos and a Spotify playlist for every stop · Photos from Wikimedia Commons, under Creative Commons licences or in the public domain: credits beneath each photo"],
   /* splash */
   ["Accendi","Switch on"],["Entra senza audio","Enter without sound"],["23 tappe","23 stops"],["1975 — 2026 · in quattro atti","1975 — 2026 · in four acts"],["Cinquant'anni di synth pop britannico","Fifty years of British synth pop"],
